@@ -1,0 +1,551 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-9.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-8.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 9 <small class="ml-3 text-primary">格式化输出</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-9-1.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 9 <small class="ml-3 text-primary">格式化输出</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <p class="card-text">C语言最常见的格式化输出函数是 <b>printf</b></p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+        
+    int main() {
+        int a = 1000000000;
+        unsigned int b = 1000000000;
+        long c = 1000000000;
+        long long d = 1000000000000000000;
+        unsigned long long e = 1000000000000000000;
+    
+        printf("int a                = %20d;\n", a);
+        printf("unsigned b           = %20u;\n", b);
+        printf("long c               = %20ld;\n", c);
+        printf("long long d          = %20lld;\n", d);
+        printf("unsigned long long e = %20llu;\n", e);
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre class="mb-0">int a                =           1000000000;
+unsigned b           =           1000000000;
+long c               =           1000000000;
+long long d          =  1000000000000000000;
+unsigned long long e =  1000000000000000000;
+
+--------------------------------
+Process exited after 0.008365 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <p class="card-text"><b>printf</b> 函数也可用于格式化输出浮点数，字符，以及字符串：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        float a = 3.141592653;
+        double b = 3.141592653;
+        long double c = 3.141592653;
+        char hashTag = '#';
+        char str[] = "I am a string";
+    
+        printf("float a       = %f;\n", a);
+        printf("double b      = %lf;\n", b);
+        printf("long double c = %Lf;\n", c);
+        printf("char hashTag  = \'%c\';\n", hashTag);
+        printf("char str[]    = \"%s\";\n", str);
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre class="mb-0">float a       = 3.141593;
+double b      = 3.141593;
+long double c = 3.141593;
+char hashTag  = '#';
+char str[]    = "I am a string";
+
+--------------------------------
+Process exited after 0.009784 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+            <p class="mb-0 px-3 py-2 alert-primary text-center border border-top-0 border-secondary">
+                <button class="btn btn-sm btn-outline-primary" data-toggle="collapse" data-target="#comment-area-1" 
+                onclick="if($(this).html()=='显示评论'){$(this).html('隐藏评论')}else{$(this).html('显示评论')}">显示评论</button>
+            </p>
+    
+            <div class="collapse" id="comment-area-1">
+    
+                <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+                    <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-cgc186.jpg">
+                    <span class="badge badge-light">cgc186</span>
+                    <br>
+                    <span class="comment-bubble alert-info">
+                        <b>printf</b> 输出的字符串的结尾一定要加 <b>\n</b> 吗？
+                    </span>
+                </div>
+            
+                <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                    <span class="badge badge-primary">yhn</span>
+                    <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+                    <br>
+                    <span class="comment-bubble alert-primary text-left">
+                        <b>\n</b> 加在 <b>printf</b> 输出的字符串的结尾可以换行。
+                        <wbr>但不是必须加的。
+                        <wbr>如下：
+                        <pre class="mt-1 d-inline-block w-100 mb-0 prettyprint bg-white">
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        printf("1\n");
+        printf("2\n");
+        printf("3\n");
+        return 0;
+    }</pre>
+                        <div class="d-inline-block w-100 alert mb-1 border-top-0 border-secondary rounded-0 console">
+                            <pre>1
+2
+3
+                            </pre>
+                        </div>
+                        不加 <b>\n</b> 的代码如下：
+                        <pre class="mt-1 d-inline-block w-100 mb-0 prettyprint bg-white">
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        printf("1");
+        printf("2");
+        printf("3");
+        return 0;
+    }</pre>
+                        <div class="d-inline-block w-100 alert mb-0 border-top-0 border-secondary rounded-0 console">
+                            <pre>123</pre>
+                        </div>
+                    </span>
+                </div>
+    
+                <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                    <p class="card-text text-dark text-center">
+                        <small>powered by <a target="_blank" href="http://www.impte.com/chatroom/">ChatRoom</a></small>
+                    </p>
+                </div>
+            </div>
+
+
+
+            <p class="p-3 mb-0"><span>表一 转换说明符及作为结果的打印输出</span></p>
+            <table class="table table-sm">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="w-25">
+                            <span>转换说明</span>
+                        </th>
+                        <th>
+                            <span>输 出</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            %a
+                        </td>
+                        <td>
+                            <span>浮点数、十六进制数字和</span>p-<span>记数法&nbsp;</span>(C99)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %A
+                        </td>
+                        <td>
+                            <span>浮点数、十六进制数字和</span>P-<span>记数法&nbsp;</span>(C99)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %c
+                        </td>
+                        <td>
+                            <span>一个字符</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %d
+                        </td>
+                        <td>
+                            <span>有符号十进制整数</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %e
+                        </td>
+                        <td>
+                            <span>浮点数、</span>e-<span>记数法</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %E
+                        </td>
+                        <td>
+                            <span>浮点数、</span>E-<span>记数法</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %f
+                        </td>
+                        <td>
+                            <span>浮点数，十进制记数法</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %g
+                        </td>
+                        <td>
+                            <span>根据数值不同自动选择</span>%f<span>或者</span>%e<span>。</span>%e<span>&#26684;式在指数小于</span>-4<span>或者大于等于精度时使用</span>
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %G
+                        </td>
+                        <td>
+                            <span>根据数值不同自动选择</span>%f<span>或者</span>%E<span>。</span>%E<span>&#26684;式在指数小于</span>-4<span>或者大于等于精度时使用</span>
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %i
+                        </td>
+                        <td>
+                            <span>有符号十进制整数&nbsp;</span>(<span>与</span>%d<span>相同</span>)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %o
+                        </td>
+                        <td>
+                            <span>无符号八进制整数</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %p
+                        </td>
+                        <td>
+                            <span>指针</span>(<span>就是指地址</span>)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %s
+                        </td>
+                        <td>
+                            <span>字符串</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %u
+                        </td>
+                        <td>
+                            <span>无符号十进制整数</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %x
+                        </td>
+                        <td>
+                            <span>使用十六进制数字</span>0f&nbsp;<span>的无符号十六进制整数</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %X
+                        </td>
+                        <td>
+                            <span>使用十六进制数字</span>0F<span>的无符号十六进制整数</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>%%</span>
+                        </td>
+                        <td>
+                            <span>打印一个百分号</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="p-3 mb-0"><span>表二 </span><b>printf()</b><span> 修饰符</span></p>
+            <table class="table table-sm">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="w-25">
+                            <span>修饰符</span>
+                        </th>
+                        <th>
+                            <span>意 义</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span>标志</span>
+                        </td>
+                        <td>
+                            <span>五种标志&nbsp;</span>(-<span>、</span>&#43;<span>、空&#26684;、</span>#&nbsp;<span>和</span>0)&nbsp;<span>都将在表三中描述，可以使用零个或多个标志</span>
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span><em>digit(s)</em></span>
+                        </td>
+                        <td>
+                            <span>字段宽度的最小值。如果该字段不能容纳要打印的数或者字符串，系统会使用更宽的字段。示例：“</span>%4d”
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span><em><strong>.</strong>digit(s)</em></span>
+                        </td>
+                        <td>
+                            <span>精度。对于</span>%e<span>、</span>%E<span>和</span>%f<span>转换，是将要在小数点的右边打印的数字的位数。对于</span>%g<span>和</span>%G<span>转换，是有效数字的最大位数。对于</span>%s<span>转换，是将要打印的字符的最大数目。对于整数转换，是将要打印的数字的最小位数；如果必要，要使用前导零来达到这个位数。只使用“</span><strong>.</strong>”<span>表示其后跟随一个零，所以</span>%.f<span>与</span>%.0f<span>相同。示例：“</span>%5.2f”<span>打印一个浮点数，他的字段宽度为</span>5<span>个字符，小数点后有两个数字。</span>
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            h
+                        </td>
+                        <td>
+                            <span>和整数转换说明符一起使用，表示一个</span><strong><span>short int&nbsp;</span></strong><span>或者&nbsp;</span><strong><span>unsigned short int</span></strong>&nbsp;<span>类型数值。</span>
+                           
+                            <span>示例：“</span>%hu”<span>、“</span>%hx”<span>和“</span>%6.4hd”
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            hh
+                        </td>
+                        <td>
+                            <span>和整数转换说明符一起使用，表示一个</span><strong><span>signed char</span></strong>&nbsp;<span>或者</span><strong><span>unsigned char</span></strong><span>类型数值。</span>
+                           
+                            <span>示例：“</span>%hhu”<span>、“</span>%hhx”<span>和“</span>%6.4hhd”
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            j
+                        </td>
+                        <td>
+                            <span>和整数转换说明符一起使用，表示一个</span>intmax_t<span>或</span>uintmax_t<span>值。</span>
+                            <span>示例：“</span>%jd”<span>和“</span>%8jX”
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            l
+                        </td>
+                        <td>
+                            <span>和整数说明符一起使用，表示一个</span><strong><span>long int</span></strong>&nbsp;<span>或者</span><strong><span>unsigned long int</span></strong>&nbsp;<span>类型值。</span>
+                           
+                            <span>示例：“</span>%ld”<span>和“</span>%8lu”
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ll
+                        </td>
+                        <td>
+                            <span>和整数说明符一起使用，表示一个</span><strong><span>long long int</span></strong><span>或&nbsp;</span><strong><span>unsigned long long int</span></strong>&nbsp;<span>类型值&nbsp;</span>(C99)<span>。</span>
+                           
+                            <span>示例：“</span>%lld”<span>和“</span>%8llu”
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            L
+                        </td>
+                        <td>
+                            <span>和浮点转换说明符一起使用，表示一个</span><strong><span>long double</span></strong><span>值。</span>
+                           
+                            <span>示例：“</span>%Lf”<span>和“</span>%10.4Le”
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            t
+                        </td>
+                        <td>
+                            <span>和整数转换说明符一起使用，表示一个</span>ptrdiff_t<span>值</span>(<span>与两个指针之间的差相对应的类型</span>) (C99)
+                           
+                            <span>示例：“</span><span>%td”</span><span>和“</span><span>%12ti”</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            z
+                        </td>
+                        <td>
+                            <span>和整数转换说明符一起使用，表示一个</span><span><strong>size_t</strong></span><span>值</span><span>(sizeof</span><span>返回的类型</span><span>) (C99)</span><span>。</span>
+                           
+                            <span>示例：“</span><span>%zd”</span><span>和“</span><span>%12zx”</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="p-3 mb-0"><span>表三 </span><b>printf()</b> <span>的标志</span></p>
+            <table class="table table-sm">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="w-25">
+                            <span>修饰符</span>
+                        </th>
+                        <th>
+                            <span>意 义</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span>-</span>
+                        </td>
+                        <td>
+                            <span>项目是左对齐的</span>，也就是说，会把项目打印在字段的左侧开始处。示例：“%-20s”
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>+</span>
+                        </td>
+                        <td>
+                            <span><span>有符号的值若为正，则显示带加号的符号；若为负，则带减号的符号。</span>示例：“</span>%+6.2f”
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>(空格)</span>
+                        </td>
+                        <td>
+                            <span>有符号的值若为正，则显示时带前导空格</span>(<span>但是不显示符号</span>)<span>；若为负，则带减号符号。</span>+<span>标志会覆盖空格标志。示例：“</span>% 6.2f”
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            #
+                        </td>
+                        <td>
+                            <span>使用转换说明的可选形式。若为</span>%o<span>&#26684;式，则以</span>0<span>开始；若为</span>%x<span>和</span>%X<span>&#26684;式，则以</span>0x<span>或</span>0X<span>开始，对于所有的浮点形式，</span>#<span>保证了即使不限任何数字，也打印一个小数点字符。对于</span>%g<span>和</span>%G<span>&#26684;式，它防止尾随零被删除。示例：“</span>%#o”<span>、“</span>%#8.0f”<span>和“</span>%&#43;#10.3E”
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            <span>对于所有的数字&#26684;式，用前导零而不是用空&#26684;填充字段宽度。如果出现</span>-<span>标志或者指定了精度</span>(<span>对于整数</span>)<span>则忽略该标志。示例：“</span>%010d”<span>和“</span>%08.3f”
+                           
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <blockquote>
+                <footer class="blockquote-footer text-right pr-3">摘自 <cite title="C Primer Plus">[(美) Stephen Prata] C Primer Plus (第五版)</cite></footer>
+            </blockquote>
+            <div class="bg-dark text-white pt-3 pl-3 pb-3">
+                <span class="badge badge-warning">Tips</span>
+                <small>
+                    <b>stdio.h</b> 提供的输出函数除了 <b>printf</b> 之外，还有 <b>sprintf</b> 和 <b>fprintf</b> 等。
+                </small>
+            </div>
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-8.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-9-1.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

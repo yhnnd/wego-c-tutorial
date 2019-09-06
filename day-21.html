@@ -1,0 +1,219 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center">
+        <b class="text-dark">C</b> Language Tutorial
+    </h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-21.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-20.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 21 <small class="ml-3 text-primary">指针</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-21-1.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 21 <small class="ml-3 text-primary">指针</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-3">什么是指针？</h4>
+                <p class="card-text">指针是一个变量，其值为另一个变量的内存地址。</p>
+                <p class="card-text">就像其他变量或常量一样，您必须在使用指针存储其他变量地址之前，对其进行声明。</p>
+                <p class="card-text">指针变量声明的一般形式为：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    
+    type * ptr;
+            </pre>
+            <p class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> 
+                <small>一个指针存储一个变量的地址，我们也可以称该指针指向一个变量。</small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small><b>type</b> 是指针指向的变量的类型，就像我们称某个变量为 <b>type</b> 类型变量一样，我们也可以称这个指针为 <b>type</b> 类型指针。</small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small><b>ptr</b> 是指针变量的名称。用来声明指针的星号 <b>*</b> 与乘法中使用的星号是相同的。</small>
+            </p>
+
+
+            <div class="card-body">
+                <p class="card-text">以下是有效的指针声明：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    
+    char   * ptr_to_char;     /* 一个字符型的指针 */
+    int    * ptr_to_int;      /* 一个整型的指针 */
+    float  * ptr_to_float;    /* 一个单精度浮点型的指针 */
+    double * ptr_to_double;   /* 一个双精度浮点型的指针 */
+            </pre>
+
+
+            <div class="card-body">
+                <h4 class="card-text mb-3"><b>&amp;</b> 取地址符</h4>
+                <p class="card-text">以上的指针都没有被初始化，这意味着它们的值是不确定的。要想给一个指针赋值，就需要用的取地址符 <b>&amp;</b>。</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    
+    int a = 1;
+    int * ptr = &amp;a;
+            </pre>
+
+
+            <div class="card-body">
+                <p class="card-text"><b>NULL 指针</b></p>
+                <p class="card-text">在变量声明的时候，如果没有确切的地址可以赋值，为指针变量赋一个 <b>NULL</b> 值是一个良好的编程习惯。赋为 <b>NULL</b> 值的指针被称为空指针。</p>
+                <p class="card-text"><b>NULL</b> 是一个定义在标准库中的值为零的常量。</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    int main () {
+        int  *ptr = NULL;
+        printf("ptr 的值是 %p\n", ptr);
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-4">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-4">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+<pre>ptr 的值是 0000000000000000
+
+--------------------------------
+Process exited after 0.008026 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            <div class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> 
+                <small>
+                    <b>NULL</b> 必须是大写。在 <b>stdio.h</b> 中，<b>NULL</b> 是这样被定义的：
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint">#define NULL ((void *)0)</pre>
+                </small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small>
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint">%p</pre> 用于输出指针的值
+                </small>
+            </div>
+
+            
+            <div class="card-body">
+                <h4 class="card-text mb-3"><b>*</b> 解引用符</h4>
+                <p class="card-text">指针的值不是它指向的变量的值，而是它指向的变量的地址。要想通过指针获得它指向的变量的值，就需要用的解引用符 <b>*</b>。</p>
+                <p class="card-text"><b>*</b> 运算符加在指针之前，可以返回该指针指向的变量的值。</p>
+                <p class="card-text">
+                    设 <b>ptr</b> 是一个指向变量 <b>a</b> 的指针，
+                    修改 <b>ptr</b> 的值只会修改它所指向的变量（也就是让 <b>ptr</b> 不再指向 <b>a</b>），不会修改 <b>a</b> 的值。
+                    但是修改 <b>* ptr</b> 的值（等同于修改 <b>ptr</b> 所指向的变量的值），就是修改 <b>a</b> 的值。
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    int main () {
+        int n = 1024;
+        /* 整型变量的声明 */
+        int *ptr;
+        /* 指针变量的声明 */
+        ptr = &amp;n;
+        /* 设指针变量的值为 n 的地址 */
+        printf("address of variable n: %p\n", &amp;n);
+        /* 变量的地址 */
+        printf("address of variable n which pointer ptr points to: %p\n", ptr);
+        /* 指针所指向的变量的地址 */
+        printf("value of variable n which pointer ptr points to: %d\n", *ptr);
+        /* 指针所指向的变量的值 */
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-5">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-5">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+<pre>address of variable n: 000000000061FE44
+address of variable n which pointer ptr points to: 000000000061FE44
+value of variable n which pointer ptr points to: 1024
+
+--------------------------------
+Process exited after 0.006051 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <h4 class="card-text mb-3">空指针和 <b>void *</b> 类型指针</h4>
+                <p class="card-text">
+                    空指针（<b>NULL</b> 指针）是未指向任何变量的指针。
+                    将暂时用不到的指针定义成空指针，可以防止一些程序错误（比如由野指针所导致的内存泄漏等错误）。
+                </p>
+                <p class="card-text">
+                    <b>void *</b> 类型的指针是有指向的指针，但它的指向的数据的类型暂时不确定。
+                    有些情况下，使用该类型指针时需要强制转换。
+                </p>
+            </div>
+            
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 
+                我们在本文介绍了指针，
+                在<span class="text-primary" onclick="loadPage('day-21-1.html')">下一篇</span>中，
+                我们将介绍<span class="text-primary" onclick="loadPage('day-21-1.html')">数组指针</span>。
+            </p>
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-20.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-21-1.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/sprintf.js"></script>
+<script src="js/page_init.js"></script>

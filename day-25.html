@@ -1,0 +1,356 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-25.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-24-2.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 25 <small class="ml-3 text-primary"><b>union</b> (联合体)</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-26.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 25 <small class="ml-3 text-primary"><b>union</b> (联合体)</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body py-3">
+                <p class="card-text mb-2">
+                    <b>union</b> (联合体) 是一种特殊的数据类型，允许我们在相同的内存位置存储不同的数据类型。
+                    我们可以定义一个带有多成员的联合体，但是任何时刻只有一个成员值是有效的。
+                </p>
+                <p class="card-text mb-2">
+                    <span>一个联合体在内存中的某一个位置可以存储多个不同类型的数据。</span>
+                    <span>联合体所占的内存大小取决于该联合体中<span class="text-danger">最大的成员</span>。</span>
+                </p>
+                <blockquote>
+                    <footer class="blockquote-footer text-right pr-3">摘自 <a href="http://www.runoob.com/cprogramming/c-unions.html" target="_blank"><cite class="text-muted" title="C 共用体 | 菜鸟教程">菜鸟教程</cite></a></footer>
+                </blockquote>
+                <hr>
+                <p class="card-text mb-2">
+                    联合体的作用在于：
+                </p>
+                <ul class="card-text mb-2 pl-4" style="list-style-type: circle;">
+                    <li>节省存储空间。如果存在多个变量，在同一时刻我们只需要使用其中的一个，那么可以将它们存储在共同体中，以节省内存。</li>
+                    <li>C 语言规定，一个数组中的所有元素的数据类型必须相同。使用联合体可以弥补这个缺陷，让同一个数组存放不同类型的数据成为可能。</li>
+                </ul>
+                <hr>
+                <p class="card-text">
+                    在下面的样例代码中，我们使用 <b>union</b> 表示一个人员类型，该类型可以是学生，也可以是教师。所以我们给该联合体类型起名为 <code>studentOrTeacher</code>。
+                </p>
+                <p class="card-text">
+                    <span>我们又用一个<b>结构体</b> <code>person</code> 将 <code>studentOrTeacher sot</code> 包装起来。</span>
+                    <span>并在 <code>person</code> 中加入一个<b>枚举</b>类型的属性 <code>job</code>，</span>
+                    <span>当 <code>job</code> 的值取为 <var>student</var> 时，表示 <code>sot</code> 中存放的是 <code>struct student</code>，</span>
+                    <span>当 <code>job</code> 的值取为 <var>teacher</var> 时，表示 <code>sot</code> 中存放的是 <code>struct teacher</code>。</span>
+                </p>
+                <p class="card-text">
+                    <span>我们定义了一个 <code>person</code> 类型的数组 <code>persons</code>，在 <code>persons</code> 的每个元素中，可以存放一个学生的信息，也可以存放一个老师的信息。</span>
+                    <span>学过更高级的面向对象语言的人可能会联想到类的<b>多态</b>的概念。</span>
+                </p>
+                <hr>
+                <p class="card-text">
+                    <span>上面说的内容可能有些抽象，大家可能有些迷惑。</span>
+                    <span>这不仅仅是讲解不够清晰导致的，代码设计得复杂也有一定的原因，犹如：源代码中 <code>enum jobType</code> 有两个取值 <code>student</code> 和 <code>teacher</code>，</span>
+                    <span>而又有两个结构体 <code>struct student</code> 和 <code>struct teacher</code>。</span>
+                    <span>如果遇到代码中的 <code>student</code> 或者 <code>teacher</code> 时，请注意区分它们到底是<b>结构体</b>类型的名称，还是 <code>enum jobType</code> 的值。</span>
+                    <span>另外，代码中出现了 <code>enum</code> 和 <code>typedef</code> 关键字，我们会在之后介绍它们的用法。</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    typedef char string [64];
+
+    struct student {
+        int studentNumber;
+        string studentName;
+        char gender;
+    };
+
+    struct teacher {
+        int workerNumber;
+        string teacherName;
+        string department;
+    };
+
+    union studentOrTeacher {
+        struct student stu;
+        struct teacher tch;
+    };
+
+    enum jobType {student, teacher};
+
+    struct person {
+        enum jobType job;
+        union studentOrTeacher sot;
+    };
+
+    int main() {
+        struct person persons[] = {
+            {
+                job: student,
+                sot: {
+                    stu: {
+                        studentNumber: 10001,
+                        studentName: "Tom Hanks",
+                        gender: 'M'
+                    }
+                }
+            },
+            {
+                job: teacher,
+                sot: {
+                    tch: {
+                        workerNumber: 101,
+                        teacherName: "Nick Cave",
+                        department: "Institute Of Foreign Language"
+                    }
+                }
+            }
+        };
+        struct person * ptr = NULL;
+        const int personLength = sizeof(persons) / sizeof(persons[0]);
+        for (int i = 0; i &lt; personLength; ++i) {
+            ptr = &amp;persons[i];
+            if (ptr->job == student) {
+                printf("persons[%d].job = student\n", i);
+                printf("persons[%d].sot.stu.studentNumber = %d\n", i, ptr->sot.stu.studentNumber);
+                printf("persons[%d].sot.stu.studentName = %s\n", i, ptr->sot.stu.studentName);
+                printf("persons[%d].sot.stu.gender = %c\n", i, ptr->sot.stu.gender);
+            } else if (ptr->job == teacher) {
+                printf("persons[%d].job = teacher\n", i);
+                printf("persons[%d].sot.tch.workerNumber = %d\n", i, ptr->sot.tch.workerNumber);
+                printf("persons[%d].sot.tch.teacherName = %s\n", i, ptr->sot.tch.teacherName);
+                printf("persons[%d].sot.tch.department = %s\n", i, ptr->sot.tch.department);
+            }
+            if (i + 1 &lt; personLength) {
+                printf("\n");
+            }
+        }
+        ptr = NULL;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" data-min-height="10rem">
+                    <pre>
+persons[0].job = student
+persons[0].sot.stu.studentNumber = 10001
+persons[0].sot.stu.studentName = Tom Hanks
+persons[0].sot.stu.gender = M
+
+persons[1].job = teacher
+persons[1].sot.tch.workerNumber = 101
+persons[1].sot.tch.teacherName = Nick Cave
+persons[1].sot.tch.department = Institute Of Foreign Language
+
+--------------------------------
+Process exited after 0.004182 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <span>看过上面的代码后，有人可能会问：既然 <code>person</code> 可以存放一个 <code>struct student</code> <var>(stu)</var> 的信息或一个 <code>struct teacher</code> <var>(tch)</var> 的信息。</span>
+                    <span>那 <var>sot</var> 是什么鬼？能不能去掉 <var>sot</var>？</span>
+                </p>
+                <p class="card-text">
+                    下面要讲的内容就是关于这个问题：如何去掉不必要的联合体名称，使其成为内联的 <var>(inline)</var> 匿名 <var>(anonymous)</var> 联合体。
+                </p>
+                <h4 class="card-text">
+                    <i class="fa fa-hashtag"></i>
+                    <b>Anonymous union</b> <code>(C11)</code>
+                </h4>
+                <p class="card-text mb-2">
+                    我们可以在 <b>struct</b> <small>(结构体)</small> 或 <b>union</b> <small>(联合体)</small> 中声明<var>匿名的</var> <b>union</b> <small>(联合体)</small>。
+                </p>
+                <p class="card-text">
+                    之前的代码被改写成如下：
+                </p>
+            </div>
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    typedef char string [64];
+
+    struct student {
+        int studentNumber;
+        string studentName;
+        char gender;
+    };
+
+    struct teacher {
+        int workerNumber;
+        string teacherName;
+        string department;
+    };
+
+    enum jobType {student, teacher};
+
+    struct person {
+        enum jobType job;
+        union {
+            struct student stu;
+            struct teacher tch;
+        };
+    };
+
+    int main() {
+        struct person persons[] = {
+            {
+                job: student,
+                stu: {
+                    studentNumber: 10001,
+                    studentName: "Tom Hanks",
+                    gender: 'M'
+                }
+            },
+            {
+                job: teacher,
+                tch: {
+                    workerNumber: 101,
+                    teacherName: "Nick Cave",
+                    department: "Institute Of Foreign Language"
+                }
+            }
+        };
+        struct person * ptr = NULL;
+        const int personLength = sizeof(persons) / sizeof(persons[0]);
+        for (int i = 0; i &lt; personLength; ++i) {
+            ptr = &amp;persons[i];
+            if (ptr->job == student) {
+                printf("persons[%d].job = student\n", i);
+                printf("persons[%d].stu.studentNumber = %d\n", i, ptr->stu.studentNumber);
+                printf("persons[%d].stu.studentName = %s\n", i, ptr->stu.studentName);
+                printf("persons[%d].stu.gender = %c\n", i, ptr->stu.gender);
+            } else if (ptr->job == teacher) {
+                printf("persons[%d].job = teacher\n", i);
+                printf("persons[%d].tch.workerNumber = %d\n", i, ptr->tch.workerNumber);
+                printf("persons[%d].tch.teacherName = %s\n", i, ptr->tch.teacherName);
+                printf("persons[%d].tch.department = %s\n", i, ptr->tch.department);
+            }
+            if (i + 1 &lt; personLength) {
+                printf("\n");
+            }
+        }
+        ptr = NULL;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>persons[0].job = student
+persons[0].stu.studentNumber = 10001
+persons[0].stu.studentName = Tom Hanks
+persons[0].stu.gender = M
+
+persons[1].job = teacher
+persons[1].tch.workerNumber = 101
+persons[1].tch.teacherName = Nick Cave
+persons[1].tch.department = Institute Of Foreign Language
+
+--------------------------------
+Process exited after 0.003661 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    将 <code>union studentOrTeacher</code> 去掉名称并内联到 <code>struct person</code> 中之后，结构体 <code>person</code> 的声明变成了这样：
+                </p>
+                <pre class="prettyprint" style="border-color: #eeeeee;">
+    struct person {
+        enum jobType job;
+        union {
+            struct student stu;
+            struct teacher tch;
+        };
+    };</pre>
+                <p class="card-text mb-1">
+                    由此我们得到的实际效益是：
+                </p>
+                <pre class="prettyprint mb-2" style="border-color: #eeeeee;">    ptr->sot.tch.teacherName</pre>
+                <p class="card-text mb-1">
+                    可以被简化成
+                </p>
+                <pre class="prettyprint" style="border-color: #eeeeee;">    ptr->tch.teacherName</pre>
+
+                <p class="card-text">
+                    即：不用通过访问 <code>person</code> <small class="text-muted">类型的对象 <small>(结构体)</small></small> 的 <code>sot</code> <small class="text-muted">属性 <small>(成员)</small></small> 去访问 <code>stu</code> 或 <code>tch</code> <small class="text-muted">属性 <small>(成员)</small></small> 了。
+                </p>
+            </div>
+
+            <blockquote class="mt-3">
+                <footer class="blockquote-footer text-right pr-3 pr-lg-4">
+                    <span class="text-dark">2018年5月26日发布</span>
+                </footer>
+            </blockquote>
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-24-2.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-26.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>
+<script src="js/sprintf.js"></script>
+<script>
+</script>

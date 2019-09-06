@@ -1,0 +1,255 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center">
+        <b class="text-dark">C</b> Language Tutorial
+    </h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-21-3.html');">
+            目录
+            <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-21-2.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 21 Page 3
+                <small class="ml-3 text-primary">向函数传递指针</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-21-4.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 21
+        <small class="ml-3 text-primary">向函数传递指针</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-2">
+                    <i class="fa fa-hashtag"></i>
+                    两种传参方式
+                </h4>
+                <span class="d-inline-block w-100 mb-2 mb-sm-0">
+                    <small class="float-right text-dark">2018年3月26日</small>
+                </span>
+                <p class="card-text">在
+                    <b>C</b> 语言中，向函数传递参数的方式有两种。</p>
+                <p class="card-text">
+                    <span>第一种方式是将参数的值传递给函数，这种传递方式就产生了两个概念，形参和实参。形参</span>
+                    <em>formal parameters</em>
+                    <span>是指函数定义时使用的参数，实参</span>
+                    <em>actual parameters</em>
+                    <span>是指函数被调用时实际用到的参数。</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0"> 
+    int func(int a) {
+        a = 10;
+    }
+
+    int main() {
+        int n = 1;
+        func(n);
+        printf("%d\n", n);
+        return 0;
+    }
+            </pre>
+            <div class="card-body">
+                <p class="card-text">
+                    上面的函数
+                    <b>func</b> 被调用后，
+                    <b>n</b> 的值是多少？程序会输出什么？
+                </p>
+            </div>
+            <pre class="prettyprint mb-0"> 
+    int func(int a, int b) {
+        a = 10;
+        b = 20;
+    }
+
+    int main() {
+        int n = 1;
+        func(n, n);
+        printf("%d\n", n);
+        return 0;
+    }
+            </pre>
+            <div class="card-body">
+                <p class="card-text">
+                    上面的函数
+                    <b>func</b> 被调用后，
+                    <b>n</b> 的值是多少？程序会输出什么？
+                </p>
+                <p class="card-text">
+                    <span>经过实际运行，我们发现按值传递参数给函数，函数被调用后，参数的值不会改变（传递数组和结构体等复杂变量除外）。 </span>
+                </p>
+                <p class="card-text">
+                    <span>如果我们想让函数改变参数的值，并且在函数外部也有效，我们该怎么做呢？</span>
+                </p>
+                <p class="card-text">
+                    <b>C</b> 语言提供了两种传参方式，除了传值的方式之外，我们还可以传递地址给函数。
+                    <span>这种函数在声明和定义时，要指明参数是指针类型。 </span>
+                </p>
+            </div>
+
+            <hr class="m-0">
+
+            <div class="card-body">
+                <h4 class="card-text mb-3">
+                    <i class="fa fa-hashtag"></i>
+                    向函数传递指针参数
+                </h4>
+                <p class="card-text">
+                    <span>下面的函数</span>
+                    <b>func</b>
+                    <span>接受一个参数，该参数</span>
+                    <b>ptr</b> 为指针。函数
+                    <b>func</b> 将
+                    <b>ptr</b> 指向的整型变量的值加 10，因为在函数内外，指针的内容（也就是指针存储的变量的地址）是不变的，所以函数执行时所改变的，在函数外也有效。
+                </p>
+            </div>
+            <pre class="prettyprint mb-0"> 
+    #include &lt;stdio.h&gt;
+
+    void func(int * ptr) {
+        *ptr = *ptr + 10;
+    }
+
+    int main() {
+        int a = 10;
+        func(&amp;a);
+        printf("%d\n", a);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>20
+
+--------------------------------
+Process exited after 0.003012 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <p class="card-text">
+                    下面的代码中，函数
+                    <b>func</b>
+                    的作用是交换两个变量的值。
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    void swap(int * a, int * b) {
+        int t = *a;
+        *a = *b;
+        *b = t;
+    }
+
+    int main() {
+        int a = 10, b = 20;
+        swap(&amp;a, &amp;b);
+        printf("a = %d, b = %d\n", a, b);
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>a = 20, b = 10
+
+--------------------------------
+Process exited after 0.005417 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+            <div class="card-block">
+                <div class="bg-dark text-white pt-3 pl-3">
+                    <span class="badge badge-warning">Tips</span>
+                    <small>
+                        <b title="definition of swap">swap</b>
+                        <span class="mr-1">:</span>
+                        <em>To trade something for something else whether it be another object, money or something else.</em>
+                        <var class="d-inline-block">- urban dictionary</var>
+                    </small>
+                </div>
+                <div class="bg-dark text-white pt-1 pl-3 pb-3">
+                    <span class="badge badge-primary">Question</span>
+                    <small>
+                        <span>一个函数的传参方式只能是按值传递或是按地址传递中的一种吗？可不可以有多个参数，两种传参方式都使用？</span>
+                        <var>- yhn</var>
+                    </small>
+                </div>
+            </div>
+
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span>
+                我们在本文介绍了如何向函数传递指针， 在
+                <span class="text-primary" onclick="loadPage('day-21-4.html')">下一篇</span>中， 我们将介绍
+                <span class="text-primary" onclick="loadPage('day-21-4.html')">向函数传递数组指针</span>。
+            </p>
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-21-2.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-21-4.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++
+                    <small>(Windows)</small>
+                </a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++
+                    <small>(Windows)</small>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/sprintf.js"></script>
+<script src="js/page_init.js"></script>

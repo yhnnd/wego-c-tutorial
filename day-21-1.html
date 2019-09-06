@@ -1,0 +1,323 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center">
+        <b class="text-dark">C</b> Language Tutorial
+    </h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-21-1.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-21.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 21 Page 1<small class="ml-3 text-primary">指向数组的指针</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-21-2.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 21 <small class="ml-3 text-primary">指向数组的指针</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-3">
+                    <i class="fa fa-hashtag"></i>
+                    数组，数组首元素的地址
+                </h4>
+                <p class="card-text">我们知道，指针可以指向变量。那么如何声明指向数组的指针呢？</p>
+                <p class="card-text"><b>C</b> 语言中，数组名就是数组首元素的地址。我们可以声明一个指针，使该指针指向数组名（也就是数组首元素的地址）。</p>
+            </div>
+            <pre class="prettyprint mb-0"> 
+    int ia[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int (*p)[10] = &amp;ia; 
+            </pre>
+            <div class="card-body">
+                <p class="card-text">指向数组的指针本质上是指向数组首元素的地址的指针，对它进行一次解引用后得到数组首元素的地址，对它进行两次解引用后得到数组的首元素。</p>
+                <p class="card-text">如下图：</p>
+            </div>
+            <img src="img/day-21-1-pic-1.jpg" class="img-fluid">
+            <p class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> 
+                <small>数组名是指向数组首元素的指针，数组的存储方式是连续的，所以可以通过指针的偏移来访问数组的其他元素。</small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small>对数组名解引用就能得到数组元素。对数组名直接解引用可以得到数组首元素，将数组名偏移之后解引用就能得到数组其他元素。注意：偏移量不能超过数组的长度减 <b>1</b>。</small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small>设数组名是 <b>p</b>，偏移量是 <b>i</b>，对指针 <b>p + i</b> 解引用有两种方式：第一种是 <b>*(p + i)</b>，第二种是 <b>p[i]</b>（中括号中的偏移量 <b>i</b> 也被称作下标）。</small>
+            </p>
+
+
+            <div class="card-body">
+                <h4 class="card-text mb-3">
+                    <i class="fa fa-hashtag"></i>
+                    指向整个数组的指针
+                </h4>
+                <p class="card-text">利用指向数组的指针循环输出数组所有元素。</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int ia[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int (*p)[10] = &amp;ia;
+        int i;
+        for (i = 0; i &lt; sizeof(ia) / sizeof(ia[0]); ++i) {
+            printf("%d ", (*p)[i]);
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>0 1 2 3 4 5 6 7 8 9
+--------------------------------
+Process exited after 0.008136 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+            <div class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> 
+                <small>
+                    <b>p</b> 的类型是 <b>int (*)[10]</b>。意为一个指向长度为 <b>10</b> 的数组的指针。
+                </small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small>
+                    想得到数组的元素，需要先对 <b>p</b> 指针解引用得到数组首元素地址，再对数组首元素地址解引用得到数组中的元素。
+                </small>
+            </div>
+
+
+            <div class="card-body">
+                <p class="card-text">将上面代码中的 <b>(*p)</b> 替换为 <b>p[0]</b>，同样可以实现。</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int ia[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int (*p)[10] = &amp;ia;
+        int i;
+        for (i = 0; i &lt; sizeof(ia) / sizeof(ia[0]); ++i) {
+            printf("%d ", p[0][i]);
+        }
+        return 0;
+    }
+            </pre>
+            <div class="card-body bg-dark text-white">
+                <div class="card-text mb-2">
+                    <span class="fa fa-lg fa-flag mr-1"></span>
+                    事实上，示例一的代码中的
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint"><b>(*p)[i]</b></pre>
+                    不仅可以改成
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint"><b>p[0][i]</b></pre>
+                    ，也可以改成
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint"><b>*(*p+i)</b></pre>
+                    或者
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint"><b>*(p[0]+i)</b></pre>
+                    。
+                </div>
+                <div class="card-text">
+                    <span class="fa fa-lg fa-question ml-1 mr-2"></span>
+                    思考一下为什么这四种不同的解引用方式都能达到相同的目的。
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <h4 class="card-text mb-3">
+                    <i class="fa fa-hashtag"></i>
+                    指向数组首元素的指针
+                </h4>
+                <p class="card-text">指向数组首元素的指针不同于指向数组的指针。主要有一下两处不同：</p>
+                <p class="card-text">它的声明方式和指向数组的指针的声明方式不同。</p>
+                <p class="card-text">它和数组名一样，只需要解引用一次就能访问数组元素。而指向数组的指针需要解引用两次才能访问数组元素。</p>
+                <p class="card-text">请看如下代码：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int ia[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int *p = ia;
+        int i;
+        for (i = 0; i &lt; sizeof(ia) / sizeof(ia[0]); ++i) {
+            printf("%d ", *(p + i));
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-5">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-5">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>0 1 2 3 4 5 6 7 8 9
+--------------------------------
+Process exited after 0.01339 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+            <div class="card-body bg-dark text-white d-flex flex-wrap align-items-center">
+                <div class="card-text mr-auto col-12 col-md-9 col-lg-10">
+                    <span class="fa fa-lg fa-flag mr-1"></span>
+                    上面代码中的
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint"><b>int *p = ia;</b></pre>
+                    可以改成
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint"><b>int *p = &amp;ia[0];</b></pre>
+                    吗？请解释为什么？
+                </div>
+                <div class="col-12 col-md-3 col-lg-2 text-center">
+                    <button class="btn btn-sm btn-primary mt-2 mt-md-0" data-toggle="collapse" data-target="#answer-5-1">HINTS</button>
+                </div>
+            </div>
+
+
+
+            <div class="collapse p-3 alert-primary" id="answer-5-1">
+                <div class="mb-2">
+                    因为数组名既能表示整个数组，又能表示数组首元素的地址。
+                </div>
+                <div class="mb-2">
+                    所以
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint"><b>int *p = ia;</b></pre>
+                    中的 <b>ia</b> 表示数组首元素的地址，
+                </div>
+                <div class="mb-2">
+                    而在
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint"><b>int *p = &amp;ia[0];</b></pre>
+                    中由于 <b>ia</b> 表示整个数组，于是
+                    <pre class="d-inline p-1 mb-0 border-0 bg-white text-dark prettyprint"><b>&amp;ia[0]</b></pre>
+                    也表示数组首元素的地址。
+                </div>
+                <div class="mb-0">
+                    因此两种方式都可行。
+                </div>
+            </div>
+
+
+
+            <div class="card-body">
+                <h4 class="card-text mb-3">
+                    <i class="fa fa-hashtag"></i>
+                    数组名的意义
+                </h4>
+                <p class="card-text">观察以下的代码，有没有发现数组名 <b>ia</b> 和指向数组首元素的指针 <b>p</b> 在使用上的相似之处？</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int ia[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int *p = ia;
+        int i;
+        for (i = 0; i &lt; sizeof(ia) / sizeof(ia[0]); ++i) {
+            printf("%d ", p[i]);
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-7">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-7">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>0 1 2 3 4 5 6 7 8 9
+--------------------------------
+Process exited after 0.006453 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <h4 class="card-text mb-3">
+                    <i class="fa fa-hashtag"></i>
+                    数组名 <b>a</b> 和 <b>&amp;a</b> 有什么不同？
+                </h4>
+                <p class="card-text">
+                    当用 <b>sizeof</b> 求 <b>a</b> 的内存长度时，所求的是整个数组的长度；<br>
+                    当用 <b>sizeof</b> 求 <b>&amp;a</b> 的内存长度时，所求的是数组地址（也就是数组首元素的地址）的长度。
+                </p>
+                <p class="card-text">
+                    <b>&amp;a + 1</b> 的地址与 <b>&amp;a</b> 的地址相差的是整个数组的长度；<br>
+                    而 <b>a + 1</b> 的地址与 <b>a</b> 的地址相差的是一个数组元素的长度。
+                </p>
+            </div>
+            
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 
+                我们在本文介绍了数组指针，
+                在<span class="text-primary" onclick="loadPage('day-21-2.html')">下一篇</span>中，
+                我们将介绍<span class="text-primary" onclick="loadPage('day-21-2.html')">函数指针</span>。
+            </p>
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-21.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-21-2.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/sprintf.js"></script>
+<script src="js/page_init.js"></script>

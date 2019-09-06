@@ -1,0 +1,274 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-16-1.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-16.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 16 <small class="ml-3 text-primary">判断与循环的组合</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-17.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 16 <small class="ml-3 text-primary">判断与循环的组合</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-3">在循环中嵌套判断语句</h4>
+                <p class="card-text">循环体中可以有循环语句和<a href="#tips-1">判断语句</a>。组合使用循环和<a href="#tips-1">分支</a>可以解决复杂的问题。</p>
+                <p class="card-text">
+                    在密码学中有一种仿射加密算法(<var>affine cipher</var>)，该算法有两个密匙，设其中一个密匙为 <b>a</b>。
+                    要求 <b>a</b> 是 <b>1</b> 到 <b>26</b> 中的某个整数，并且在 <b>1</b> 到 <b>26</b> 中能找到一个数 <b>b</b>，
+                    使得 <b>a</b> 乘 <b>b</b> 除 <b>26</b> 的余数为 <b>1</b>。这时，我们称 <b>b</b> 为 <b>a</b> 在 <b>26</b> 下的逆。
+                </p>
+                <p class="card-text">设计一个程序，找出 <b>1</b> 到 <b>26</b> 中所有能选作密匙 <b>a</b> 的数字。</p>
+                <p class="card-text">程序源代码如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int a, b;
+        for (a = 1; a &lt; 26; ++a) {
+            for (b = 1; b &lt; 26; ++b) {
+                if (a * b % 26 == 1) {
+                    printf("%2d 的逆为 %2d，\t%2d 可以被选作密匙。\n", a, b, a);
+                }
+            }
+        }
+        return 0;
+    }</pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+<pre> 1 的逆为  1，   1 可以被选作密匙。
+ 3 的逆为  9，   3 可以被选作密匙。
+ 5 的逆为 21，   5 可以被选作密匙。
+ 7 的逆为 15，   7 可以被选作密匙。
+ 9 的逆为  3，   9 可以被选作密匙。
+11 的逆为 19，  11 可以被选作密匙。
+15 的逆为  7，  15 可以被选作密匙。
+17 的逆为 23，  17 可以被选作密匙。
+19 的逆为 11，  19 可以被选作密匙。
+21 的逆为  5，  21 可以被选作密匙。
+23 的逆为 17，  23 可以被选作密匙。
+25 的逆为 25，  25 可以被选作密匙。
+
+--------------------------------
+Process exited after 0.00728 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            <p class="p-3 mb-0 bg-dark text-white">
+                <a name="tips-1">
+                    <span class="badge badge-warning">Tips</span> 
+                    <small>条件判断属于程序三大结构中的选择结构，又称分支结构。<b>C</b>语言中和分支结构有关的关键词有 <b>if</b> <b>else</b> 和 <b>switch</b> <b>case</b>。</small>
+                </a>
+            </p>
+
+
+            <div class="card-body">
+                <p class="card-text">
+                    自幂数 (<var>pluperfect digital invariant</var>) 
+                    <small class="text-secondary">或称阿姆斯特朗数 (<var>Armstrong number</var>) </small>
+                    是指一个 n 位数，它的每个位上的数字的 n 次幂之和等于它本身。
+                    例如，当 n 为 3 时，有 1^3 + 5^3 + 3^3 = 153，153 即是 n 为 3 时的一个自幂数。
+                    n 为 3 时的自幂数又称水仙花数 (<var>Narcissistic number</var>)。
+                </p>
+                <p class="card-text">设计程序，找出所有的水仙花数。</p>
+                <p class="card-text">程序源代码如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    #define cube(a) ((a) * (a) * (a))
+        
+    int main() {
+        int n, a, b, c;
+        for (n = 100; n &lt; 1000; ++n) {
+            a = n / 100;
+            b = n % 100 / 10;
+            c = n % 10;
+            if (cube(a) + cube(b) + cube(c) == n) {
+                printf("%d\n", n);
+            }
+        }
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+<pre>153
+370
+371
+407
+
+--------------------------------
+Process exited after 0.01138 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <p class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> 
+                <small><b>#define cube(a) ((a) * (a) * (a))</b> 是<span class="text-primary" onclick="loadPage('day-8.html')">宏定义</span>，</small>
+                <small>在其之后出现的 <b>cube(...)</b> 都会被替换为 <b>((...) * (...) * (...))</b>。</small>
+                <small>代码中的 <b>cube(a) + cube(b) + cube(c)</b> 会被预处理器替换为 <b>((a) * (a) * (a)) + ((b) * (b) * (b)) + ((c) * (c) * (c))</b>。</small>
+                <small>即对 <b>a</b>，<b>b</b>，<b>c</b> 分别求立方，再求和。</small>
+            </p>
+
+
+            <div class="card-body">
+                <p class="card-text">将数字的前后顺序颠倒后，数值不变的数，称为回文数(<var>palindrome number</var>)。设计程序，找出 <b>1</b> 到 <b>1000</b> 中的所有的回文数。</p>
+                <p class="card-text">程序源代码如下：</p>
+            </div>
+
+
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+        
+    int main() {
+        int i, j = 0, k = 0;
+        for (i = 1; i &lt;= 1000; ++i) {
+            if (i &lt; 10) {
+                printf("%4d", i);
+                ++j;
+            } else if (i &lt; 100) {
+                if (i / 10 == i % 10) {
+                    printf("%4d", i);
+                    ++j;
+                }
+            } else if (i / 100 == i % 10) {
+                printf("%4d", i);
+                ++j;
+            }
+            if(j % 10 == 0 &amp;&amp; j != k) {
+                printf("\n");
+                k = j;
+            }
+        }
+        printf("\n\nthere are %d palindrome numbers between %d and %d.\n", j, 1, 1000);
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-3">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-3">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+<pre>   1   2   3   4   5   6   7   8   9  11
+  22  33  44  55  66  77  88  99 101 111
+ 121 131 141 151 161 171 181 191 202 212
+ 222 232 242 252 262 272 282 292 303 313
+ 323 333 343 353 363 373 383 393 404 414
+ 424 434 444 454 464 474 484 494 505 515
+ 525 535 545 555 565 575 585 595 606 616
+ 626 636 646 656 666 676 686 696 707 717
+ 727 737 747 757 767 777 787 797 808 818
+ 828 838 848 858 868 878 888 898 909 919
+ 929 939 949 959 969 979 989 999
+
+there are 108 palindrome numbers between 1 and 1000.
+
+--------------------------------
+Process exited after 0.01511 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+            <p class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> 
+                <small>循环体中可以嵌套循环。条件判断的分支中也可以嵌套条件判断。</small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small>循环体中可以嵌套条件判断。条件判断的分支中也可以嵌套循环。</small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small>合理运用格式化输出，可以让不同位数的数字上下对齐。</small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small>每输出一个数据时，更新当前行输出的数据数量，在行满的时候，及时换行。</small>
+            </p>
+
+
+
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 
+                我们在本文介绍了如何组合使用判断与循环，
+                在下一篇<span class="text-primary" onclick="loadPage('day-17.html')">循环控制</span>中，
+                我们会介绍 <b>break</b> 和 <b>continue</b>。
+            </p>
+
+
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-16.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-17.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

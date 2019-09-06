@@ -1,0 +1,245 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center">
+        <b class="text-dark">C</b> Language Tutorial
+    </h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-21-2.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-21-1.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 21 Page 2 <small class="ml-3 text-primary">指向函数的指针</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-21-3.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 21 <small class="ml-3 text-primary">指向函数的指针</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-2">
+                    <i class="fa fa-hashtag"></i>
+                    函数名: 函数的首地址
+                </h4>
+                <span class="d-inline-block w-100 mb-2 mb-sm-0">
+                    <small class="float-right text-dark">2018年1月8日发布 / 2018年1月9日更新</small>
+                </span>
+                <p class="card-text">在 <b>C</b> 语言中，函数名就是函数的首地址（函数第一条指令的地址）。</p>
+                <p class="card-text">我们可以声明一个函数指针，使它指向函数名，就能通过它调用函数。</p>
+            </div>
+            <pre class="prettyprint mb-0"> 
+    int max(int a, int b) {
+        return a &gt; b ? a : b;
+    }
+            </pre>
+            <div class="card-body">
+                <p class="card-text">
+                    上面的函数的函数名是 <b>max</b>，函数的返回值类型是 <b>int</b>。
+                    我们如何声明一个指向 <b>max</b> 函数的指针呢？
+                </p>
+                <p class="card-text">
+                    首先我们需要知道函数指针的类型。<b>max</b> 函数的类型是 <b>int () (int, int)</b>。<br>
+                    我们知道，指向 <b>int</b> 类型变量的指针的类型为 <b>int *</b>。
+                    由此可知指向 <b>max</b> 函数的指针的类型为 <b>int (*) (int, int)</b>。
+                </p>
+                <div class="card-text">
+                    那么，我们如何声明指向 <b>max</b> 函数的指针呢？<br>
+                    我们知道函数 <b>max</b> 的声明方式为
+                    <pre class="d-inline prettyprint mx-1 px-2">int (max) (int, int)</pre>
+                    <br>
+                    类似函数的声明，函数指针的声明只是多了一个符号 <b>*</b>
+                    <br>
+                    例如，如果我们要声明一个指向 <b>max</b> 函数的指针 <b>fptr</b>，可以使用下面的代码：
+                </div>
+            </div>
+            <pre class="prettyprint mb-0"> 
+    int (* fptr) (int, int) = max;
+            </pre>
+            <div class="card-body">
+                <div class="card-text">
+                    上面的代码是 <pre class="prettyprint d-inline mx-1 px-2">int (* fptr) (int, int) = NULL;</pre>
+                    和 <pre class="prettyprint d-inline mx-1 px-2">fptr = max;</pre> 的简写。
+                </div>
+            </div>
+
+            <hr class="mb-0">
+
+            <div class="card-body">
+                <h4 class="card-text mb-3">
+                    <i class="fa fa-hashtag"></i>
+                    通过函数指针调用函数
+                </h4>
+                <div class="card-text">
+                    下面的代码声明了两个函数 <b>max</b> 和 <b>min</b>。
+                    之后又声明了两个函数指针 <b>ptr1</b> 和 <b>ptr2</b>，分别指向 <b>max</b> 和 <b>min</b>。
+                    在主函数中通过函数指针调用对应函数，输出两个数的最大值和最小值。
+                </div>
+            </div>
+            <pre class="prettyprint mb-0"> 
+    #include &lt;stdio.h&gt;
+
+    int max (int a, int b) {
+        return a &gt; b ? a : b;
+    }
+
+    int min (int a, int b) {
+        return a &lt; b ? a : b;
+    }
+
+    int (* ptr1) (int, int) = max;
+    int (* ptr2) (int, int) = min;
+
+    int main() {
+        int a = 48, b = 96;
+        printf("max(%d, %d) is %d\n", a, b, ptr1(a, b));
+        printf("min(%d, %d) is %d\n", a, b, ptr2(a, b));
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>max(48, 96) is 96
+min(48, 96) is 48
+
+--------------------------------
+Process exited after 0.02664 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h4 class="card-text mb-3">
+                    <i class="fa fa-hashtag"></i>
+                    通过 <b>typedef</b> 定义数据类型的别名
+                </h4>
+                <p class="card-text">
+                    <b>typedef</b> 意为 <em>type define</em>。
+                    它不能定义新的数据类型，但它可以为已有的数据类型创建别名。
+                </p>
+                <div class="card-text mb-3">
+                    例如，在 <pre class="d-inline prettyprint mx-1 px-2">typedef int Integer;</pre> 之后，
+                    代码 <pre class="d-inline prettyprint mx-1 px-2">Integer a = 3;</pre>
+                    和 <pre class="d-inline prettyprint mx-1 px-2">int a = 3;</pre> 是等效的。
+                </div>
+                <div class="card-text mb-3">
+                    <div class="row">
+                        <div class="col col-12 col-sm-12 col-md-6 col-lg-4 mb-2 mb-md-0 d-md-flex align-items-center">
+                            <div class="d-inline-block" dir="rtl">
+                                利用 <b>typedef</b>，我们可以简化上方代码中的
+                            </div>
+                        </div>
+                        <div class="col col-12 col-sm-12 col-md-6 col-lg-8 d-md-flex align-items-center">
+                            <pre class="d-inline-block mb-0 prettyprint mx-1 px-2">int (* ptr1) (int, int) = max;
+int (* ptr2) (int, int) = min;</pre>
+                        </div>
+                    </div>
+                </div>
+                <p class="card-text">使用 <b>typedef</b> 改写后，全部代码如下</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    int max (int a, int b) {
+        return a &gt; b ? a : b;
+    }
+
+    int min (int a, int b) {
+        return a &lt; b ? a : b;
+    }
+
+    typedef int (* FUNC_OF_TWO_INT) (int, int);
+
+    FUNC_OF_TWO_INT ptr1 = max, ptr2 = min;
+
+    int main() {
+        int a = 48, b = 96;
+        printf("max(%d, %d) is %d\n", a, b, ptr1(a, b));
+        printf("min(%d, %d) is %d\n", a, b, ptr2(a, b));
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>max(48, 96) is 96
+min(48, 96) is 48
+
+--------------------------------
+Process exited after 0.02176 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <p class="card-text">
+                    更多关于 <b>typedef</b> 的内容，请参见
+                    <span class="text-primary" onclick="loadPage('day-28.html')">Day 28</span>
+                </p>
+            </div>
+            
+            
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 
+                我们在本文介绍了函数指针，
+                在<span class="text-primary" onclick="loadPage('day-21-3.html')">下一篇</span>中，
+                我们将介绍<span class="text-primary" onclick="loadPage('day-21-3.html')">向函数传指针</span>。
+            </p>
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-21-1.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-21-3.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/sprintf.js"></script>
+<script src="js/page_init.js"></script>

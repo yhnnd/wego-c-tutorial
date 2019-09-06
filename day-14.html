@@ -1,0 +1,137 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-14.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-13.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 14 <small class="ml-3 text-primary">while 循环</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-14-1.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 14 <small class="ml-3 text-primary">while 循环</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-3">while 循环</h4>
+                <p class="card-text">在指定条件为真时，<b>while</b> 循环会重复执行一个代码块。</p>
+                <p class="card-text">语法如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    while (expression) {
+        statement(s);
+    }</pre>
+            <p class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-primary">expression</span> <small><var>expression</var> 是循环执行的条件(<var>condition</var>)。</small><br>
+                <span class="badge badge-primary">statement(s)</span> <small><var>statement(s)</var> 是循环重复执行的代码块。</small><br>
+                <span class="badge badge-primary">代码块</span> <small><b>代码块</b>是一对大括号 <b>{}</b> 内的代码片段。</small>
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int n = 1;
+        while (n &lt;= 10) {
+            printf("%2d 只青蛙 %2d 张嘴, %2d 只眼睛 %2d 条腿。\n", n, n, n * 2, n * 4);
+            n++;
+        }
+        return 0;
+    }</pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre> 1 只青蛙  1 张嘴,  2 只眼睛  4 条腿。
+ 2 只青蛙  2 张嘴,  4 只眼睛  8 条腿。
+ 3 只青蛙  3 张嘴,  6 只眼睛 12 条腿。
+ 4 只青蛙  4 张嘴,  8 只眼睛 16 条腿。
+ 5 只青蛙  5 张嘴, 10 只眼睛 20 条腿。
+ 6 只青蛙  6 张嘴, 12 只眼睛 24 条腿。
+ 7 只青蛙  7 张嘴, 14 只眼睛 28 条腿。
+ 8 只青蛙  8 张嘴, 16 只眼睛 32 条腿。
+ 9 只青蛙  9 张嘴, 18 只眼睛 36 条腿。
+10 只青蛙 10 张嘴, 20 只眼睛 40 条腿。
+
+--------------------------------
+Process exited after 0.01154 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+
+
+
+            <p class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> 
+                <small>
+                    <var>expression</var> 可以是任意的表达式。当条件为 <b>true</b> (任意非零值) 时执行循环。
+                    <wbr>当条件为 <b>false</b> 时，退出循环，继续执行紧接着循环的下一条语句。
+                </small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small><b>while</b> 循环可能一次都不会执行。当条件为 <b>false</b> 时，会跳过循环体，直接执行紧接着循环的下一条语句。</small>
+                <br>
+                <span class="badge badge-warning">Tips</span> <small><var>statement(s)</var> 可以是几个语句组成的代码块，也可以是一个单独的语句。</small>
+            </p>
+
+
+
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 我们在本文介绍了<b>while</b> 循环，之后我们会介绍 <b>do while</b> 循环和 <b>for</b> 循环。
+            </p>
+
+
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-13.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-14-1.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

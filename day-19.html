@@ -1,0 +1,184 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center">
+        <b class="text-dark">C</b> Language Tutorial
+    </h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-19.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-18.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 19 <small class="ml-3 text-primary">函数的声明，定义与调用</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-19-1.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 19 <small class="ml-3 text-primary">函数的声明，定义与调用</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-3">函数的声明</h4>
+                <p class="card-text">函数的类型即函数的返回值类型，函数的类型可以为空 (<b>void</b>)。函数的参数也可以为空。</p>
+                <p class="card-text">语法如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    返回值 函数名 (参数类型 参数名 [,参数类型 参数名]);
+            </pre>
+            <div class="card-body">
+                <p class="card-text">例如：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    int max (int a, int b);
+            </pre>
+            <div class="card-body">
+                <h4 class="card-text mb-3">函数的定义</h4>
+                <p class="card-text">语法如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    返回值 函数名 (参数列表) {
+        函数内容
+    }
+            </pre>
+            <div class="card-body">
+                <p class="card-text">例如：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    int max (int a, int b) {
+        int c = a;
+        if (b > c) c = b;
+        return c;
+    }
+            </pre>
+            <div class="card-body">
+                <p class="card-text">上面的代码可用<a target="_blank" href="https://baike.baidu.com/item/条件运算符">条件运算符</a>改写成：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    int max (int a, int b) {
+        return a > b ? a : b;
+    }
+            </pre>
+            <div class="card-body">
+                <h4 class="card-text mb-3">函数的调用</h4>
+                <p class="card-text">函数的调用方法如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int max (int a, int b) {
+        return a > b ? a : b;
+    }
+
+    int main() {
+        int a = 4202, b = 4024, n;
+        n = max(a, b);
+        printf("%d\n", n);
+        return 0;
+    }
+            </pre>
+            <div class="card-body">
+                <p class="card-text">函数也可以直接作为其他函数的参数，例如：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    
+    int max (int a, int b) {
+        return a > b ? a : b;
+    }
+
+    int main() {
+        printf("%d\n", max(4202, 4024));
+        return 0;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" data-min-height="10rem">
+<pre></pre>
+                </div>
+                <div class="px-3 py-1 alert-dark text-center">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" id="result-1-input" class="d-inline" style="opacity: 0;">
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-1',program_1)">运行程序</button>
+                        </div>
+                        <div class="col-4 d-flex align-items-center" id="result-1-input-status">
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 
+                我们在本文介绍了函数的声明，定义和调用，
+                在<span class="text-primary" onclick="loadPage('day-19-1.html')">下一篇</span>中，
+                我们会介绍函数的<span class="text-primary" onclick="loadPage('day-19-1.html')">递归</span>调用。
+            </p>
+
+
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-18.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-19-1.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>
+
+<script>
+    function program_1(input, printf) {
+        function max (a, b) {
+            return a > b ? a : b;
+        }
+        printf(max(4202, 4024) + "\n");
+        return 0;
+    }
+</script>

@@ -1,0 +1,166 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-7.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-6.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 7 <small class="ml-3 text-primary">C 语言变量(variables) 2</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-8.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 7 <small class="ml-3 text-primary">C 语言变量(variables) 2</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <blockquote class="mb-0">
+                <p class="p-3 mb-0">
+                    在C语言中，所有变量都必须先声明后使用。声明通常放在函数起始处，在任何可执行语句之前。声明用于说明变量的属性，它有一个类型名和一个变量表组成，例如：
+                </p>
+            </blockquote>
+            <pre class="prettyprint mb-0">
+    
+    int fahr, celsius;
+    int lower, upper, step;
+            </pre>
+            <blockquote>
+                <p class="p-3 mb-0">
+                    其中，类型 <b>int</b> 表示其后所列变量为整数，与之相对应的，<b>float</b> 表示所列变量为浮点数（即可以带有小数部分的数）。<wbr>
+                    <b>int</b> 和 <b>float</b> 类型的取值范围取决于具体的机器。
+                </p>
+                <footer class="blockquote-footer text-right pr-3">摘自 <cite title="The C Programming Language (Second Edition)">[(美) B.W.K &amp; D.M.R] C 程序设计语言（第二版）</cite></footer>
+            </blockquote>
+            <p class="p-3 mb-0">在 64 位的操作系统上，各类型数据的存储大小和值范围如下：</p>
+            <p class="text-center">整数类型</p>
+            <table class="table table-sm">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="w-25">类型</th>
+                        <th class="w-25">存储大小</th>
+                        <th class="w-50">值范围</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>char</td>
+                        <td>1 字节</td>
+                        <td>-128 到 127 或 0 到 255</td>
+                    </tr>
+                    <tr>
+                        <td>unsigned char</td>
+                        <td>1 字节</td>
+                        <td>0 到 255</td>
+                    </tr>
+                    <tr>
+                        <td>signed char</td>
+                        <td>1 字节</td>
+                        <td>-128 到 127</td>
+                    </tr>
+                    <tr>
+                        <td>int</td>
+                        <td>4 字节</td>
+                        <td>-32,768 到 32,767 或 -2,147,483,648 到 2,147,483,647</td>
+                    </tr>
+                    <tr>
+                        <td>unsigned int</td>
+                        <td>4 字节</td>
+                        <td>0 到 65,535 或 0 到 4,294,967,295</td>
+                    </tr>
+                    <tr>
+                        <td>short</td>
+                        <td>2 字节</td>
+                        <td>-32,768 到 32,767</td>
+                    </tr>
+                    <tr>
+                        <td>unsigned short</td>
+                        <td>2 字节</td>
+                        <td>0 到 65,535</td>
+                    </tr>
+                    <tr>
+                        <td>long</td>
+                        <td>4 字节</td>
+                        <td>-2,147,483,648 到 2,147,483,647</td>
+                    </tr>
+                    <tr>
+                        <td>unsigned long</td>
+                        <td>4 字节</td>
+                        <td>0 到 4,294,967,295</td>
+                    </tr>
+                    <tr>
+                        <td>long long</td>
+                        <td>8 字节</td>
+                        <td>-9223372036854775808 到 9223372036854775807</td>
+                    </tr>
+                    <tr>
+                        <td>unsigned long long</td>
+                        <td>8 字节</td>
+                        <td>0 到 18446744073709551615</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-center">浮点数类型</p>
+            <table class="table table-sm">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="w-25">类型</th>
+                        <th class="w-25">存储大小</th>
+                        <th class="w-25">值范围</th>
+                        <th class="w-25">精度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>float</td>
+                        <td>4 字节</td>
+                        <td>1.2E-38 到 3.4E+38</td>
+                        <td>6 位小数</td>
+                    </tr>
+                    <tr>
+                        <td>double</td>
+                        <td>8 字节</td>
+                        <td>2.3E-308 到 1.7E+308</td>
+                        <td>15 位小数</td>
+                    </tr>
+                    <tr>
+                        <td>long double</td>
+                        <td>16 字节</td>
+                        <td>3.4E-4932 到 1.1E+4932</td>
+                        <td>19 位小数</td>
+                    </tr>
+            </table>
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-6.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-8.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

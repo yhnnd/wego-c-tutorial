@@ -1,0 +1,258 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center">
+        <b class="text-dark">C</b> Language Tutorial
+    </h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-21-5.html');">
+            目录
+            <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-21-4.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 21 Page 5
+                <small class="ml-3 text-primary">向函数传递函数指针</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-22.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 21
+        <small class="ml-3 text-primary">向函数传递函数指针</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-2">
+                    <i class="fa fa-hashtag"></i>
+                    什么时候会用到函数指针？
+                </h4>
+                <span class="d-inline-block w-100 mb-2 mb-sm-0">
+                    <small class="float-right text-dark">2018年3月29日</small>
+                </span>
+                <p class="card-text">
+                    在
+                    <span class="text-primary" onclick="loadPage('day-21-2.html')">之前</span>,
+                    <span>我们讲过</span>
+                    <b>C</b> 语言中声明和定义函数指针的方法。
+                </p>
+                <p class="card-text">
+                    <span>但是大家可能不理解为什么我们要使用函数指针这种奇怪的东西。</span>
+                    <span>这一篇我们就要介绍在什么情况我们要用到函数指针。</span>
+                </p>
+                <p class="card-text">
+                    <span>首先我们看下面的代码，输出数组的长度，没有直接调用函数，而是声明了一个函数指针，让它指向
+                        <code>printLength</code> 函数，然后调用函数指针指向的函数。</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    void printLength(int n) {
+        printf("数组长度是 %d\n", n);
+    }
+
+    int main() {
+        int a[3] = {0, 0, 0};
+        void (* p) (int) = printLength;
+        p(sizeof(a) / sizeof(a[0]));
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>数组长度是 3
+
+--------------------------------
+Process exited after 0.004647 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <p class="card-text">
+                    <span>我们完全可以直接在主函数中调用
+                        <code>printLength</code> 函数，为什么要用函数指针呢？
+                    </span>
+                    <span>这样做的意义可能不大，但是请考虑这一种情况：</span>
+                </p>
+                <p class="card-text px-lg-4">
+                    <span>
+                        <var>Peter</var> 负责写主函数，
+                        <var>John</var> 负责写
+                        <code>func</code> 函数。
+                        <code>func</code> 的参数是一个数组，输出数组中最大和最小的数。
+                    </span>
+                    <span>而
+                        <var>Jim</var> 之前写好了
+                        <code>getMinMax</code> 函数。
+                    </span>
+                    <span>该函数的作用是将数组中最大和最小的数存入指针参数
+                        <code>max</code> 和
+                        <code>min</code> 所指向的变量中。
+                    </span>
+                    <span>这时，
+                        <var>Peter</var> 告诉
+                        <var>John</var>：没必要从头写求最大数和最小数的代码，当主函数调用
+                        <code>func</code> 函数时，
+                    </span>
+                    <span>
+                        除了传递数组之外，也传递指向
+                        <code>getMinMax</code> 函数的指针，
+                        <code>func</code> 函数使用该函数指针就行了。
+                    </span>
+                    <span>
+                        而且如果将来要改变调用的函数时，只需要在主函数中改动，
+                        <code>func</code> 函数无需改变。
+                    </span>
+                </p>
+            </div>
+
+            <hr class="m-0">
+
+            <div class="card-body">
+                <p class="card-text">
+                    <var>Jim</var> 的代码
+                    <i class="fa fa-caret-down text-muted ml-1"></i>
+                </p>
+            </div>
+
+            <pre class="prettyprint mb-0"> 
+    void getMinMax(int a[], int length, int ** min, int ** max) {
+        *min = a, *max = a;
+        int i = 0;
+        for(i = 1; i &lt; length; ++i) {
+            if(a[i] > **max) {
+                *max = a + i;
+            } else if (a[i] &lt; **min) {
+                *min = a + i;
+            }
+        }
+    }
+            </pre>
+
+            <div class="card-body">
+                <p class="card-text">
+                    <var>John</var> 的代码
+                    <i class="fa fa-caret-down text-muted ml-1"></i>
+                </p>
+            </div>
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    void func(int a[], int length, void (* p) (int[], int, int **, int **)) {
+        int * min = NULL, * max = NULL;
+        p(a, length, &amp;min, &amp;max);
+        printf("min is %d\n", *min);
+        printf("max is %d\n", *max);
+    }
+            </pre>
+
+            <div class="card-body">
+                <p class="card-text">
+                    <var>Peter</var> 的代码
+                    <i class="fa fa-caret-down text-muted ml-1"></i>
+                </p>
+            </div>
+
+            <pre class="prettyprint mb-0"> 
+    int main() {
+        int a[] = {2, 4, 1, 3};
+        func(a, sizeof(a) / sizeof(a[0]), getMinMax);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>min is 1
+max is 4
+
+--------------------------------
+Process exited after 0.003239 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <p class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span>
+                <small>
+                    如果函数
+                    <b>func</b> 直接调用
+                    <b>getMinMax</b>，那么就不需要函数指针。但是如果这样，假如我们要修改
+                    <b>func</b> 所调用的函数，只能修改
+                    <b>func</b> 中的代码。
+                </small>
+            </p>
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span>
+                我们在本文介绍了向函数传递函数指针， 在
+                <span class="text-primary" onclick="loadPage('day-22.html')">下一篇</span>中， 我们将介绍
+                <span class="text-primary" onclick="loadPage('day-22.html')">标准库提供的对字符串进行操作的各种函数</span>。
+            </p>
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-21-4.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-22.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++
+                    <small>(Windows)</small>
+                </a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++
+                    <small>(Windows)</small>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/sprintf.js"></script>
+<script src="js/page_init.js"></script>

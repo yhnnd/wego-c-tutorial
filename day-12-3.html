@@ -1,0 +1,259 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-12-3.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-12-2.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 12 <small class="ml-3 text-primary">其他赋值运算符</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-13.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 12 <small class="ml-3 text-primary">其他赋值运算符</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <p class="card-text">
+                    <b>C</b>语言提供了一些特殊的赋值运算符，如 <b>+=</b> <b>-=</b> <b>*=</b> <b>/=</b> <b>%=</b> <b>&gt;&gt;=</b> <b>&lt;&lt;=</b> <b>&amp;=</b> <b>^=</b> <b>|=</b>。
+                </p>
+                <p class="card-text d-flex align-items-center">
+                    <span class="mr-3">加法赋值运算符</span>
+                    <i class="fa fa-2x fa-plus"></i>
+                    <span style="font-size: 3rem;font-weight:800;margin-top:-.85rem;">=</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int n = 1;
+        n += 1;
+        printf("%d\n", n);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>2
+
+--------------------------------
+Process exited after 0.00833 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            
+            <div class="card-body">
+                <p class="card-text d-flex align-items-center">
+                    <span class="mr-3">减法赋值运算符</span>
+                    <i class="fa fa-2x fa-minus"></i>
+                    <span style="font-size: 3rem;font-weight:800;margin-top:-.85rem;">=</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int n = 1;
+        n -= 1;
+        printf("%d\n", n);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>0
+
+--------------------------------
+Process exited after 0.008242 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            
+
+
+            <div class="card-body">
+                <p class="card-text d-flex align-items-center">
+                    <span class="mr-3">乘法赋值运算符</span>
+                    <i class="fa fa-2x fa-asterisk"></i>
+                    <span style="font-size: 3rem;font-weight:800;margin-top:-.85rem;">=</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int n = 1;
+        n *= 2;
+        printf("%d\n", n);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-3">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-3">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>2
+
+--------------------------------
+Process exited after 0.00689 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            
+            <div class="card-body">
+                <p class="card-text d-flex align-items-center">
+                    <span class="mr-3">除法赋值运算符</span>
+                    <span class="mr-2" style="font-weight:800;transform:scale(2.5,2);margin-top:-.4rem;margin-left:.6rem;">/</span>
+                    <span style="font-size: 3rem;font-weight:800;margin-top:-.75rem;">=</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+                
+    int main() {
+        int n = 2;
+        n /= 2;
+        printf("%d\n", n);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-4">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-4">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>1
+
+--------------------------------
+Process exited after 0.009443 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            
+            <div class="card-body">
+                <p class="card-text d-flex align-items-center">
+                    <span class="mr-3">取模赋值运算符</span>
+                    <i class="fa fa-2x fa-percent"></i>
+                    <span style="font-size: 3rem;font-weight:800;margin-top:-.85rem;">=</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+                
+    int main() {
+        int n = 3;
+        n %= 2;
+        printf("%d\n", n);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-5">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-5">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>1
+
+--------------------------------
+Process exited after 0.009419 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-12-2.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-13.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

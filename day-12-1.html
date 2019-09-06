@@ -1,0 +1,557 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-12-1.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-12.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 12 <small class="ml-3 text-primary">其他运算符</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-12-2.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 12 <small class="ml-3 text-primary">其他运算符</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">取模运算符</span>
+                <i class="fa fa-lg fa-percent"></i>
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    
+    int main()
+    {
+        int a = 41, b = 3;
+        printf("%d mod %d is %d \n", a, b, a % b);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>41 mod 3 is 2
+
+--------------------------------
+Process exited after 0.01021 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+            <p class="p-3 bg-dark text-white">
+                <b>a % b</b> 的含义是 <b>a</b> 除 <b>b</b> 的余数。<br>
+                <span class="badge badge-primary">Question</span> <b>a</b> 的类型可以是 <b>float</b> 吗？<br>
+                <span class="badge badge-primary">Question</span> <b>b</b> 的类型可以是 <b>float</b> 吗？
+            </p>
+
+
+
+
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">自增运算符</span>
+                <i class="fa fa-lg fa-plus mr-1"></i>
+                <i class="fa fa-lg fa-plus"></i>
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    
+    int main()
+    {
+        int a = 1;
+        printf("a is %d \n", ++a);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>a is 2
+
+--------------------------------
+Process exited after 0.009295 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+            <p class="p-3 mb-0 bg-dark text-white">
+                <b>++</b> 是一元运算符，即只对一个数进行操作。<wbr>这里的 <b>++a</b> 是 <b>a = a + 1</b> 的简写。<br>
+                <span class="badge badge-primary">Question</span> 如果把 <b>++a</b> 改成 <b>a++</b>，程序执行结果会有变化吗？
+            </p>
+            <p class="p-3 bg-secondary text-white">
+                <span class="badge badge-primary">操作数(operand)</span> 是运算符操作的变量。有一个操作数的运算符叫做一元运算符，有两个操作数的运算符叫做二元运算符，有三个操作数的运算符叫做三目运算符。
+            </p>
+
+
+
+
+
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">自减运算符</span>
+                <i class="fa fa-lg fa-minus mr-1"></i>
+                <i class="fa fa-lg fa-minus"></i>
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int a = 1;
+        printf("%d", --a);
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-3">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-3">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>0
+--------------------------------
+Process exited after 0.007695 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+            <p class="p-3 bg-dark text-white">
+                这里的 <b>--a</b> 是 <b>a = a - 1</b> 的简写。<br>
+                <span class="badge badge-primary">Question</span> 如果把 <b>--a</b> 改成 <b>a--</b>，程序执行结果会有变化吗？
+            </p>
+
+
+
+
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">相等运算符</span>
+                <span style="font-size: 2rem;font-weight:700;margin-top:-.5rem;">=</span>
+                <span style="font-size: 2rem;font-weight:700;margin-top:-.5rem;">=</span>
+            </p>
+            <pre class="prettyprint mb-0">
+    float a = 1.5, b = 1.5;
+    printf("%f eq %f is %d \n", a, b, a == b);
+            </pre>
+            <p class="p-3 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> <b>==</b> 是比较运算符，是二元运算符。<br>
+                <span class="badge badge-warning">Tips</span> 如果 <b>a</b> 和 <b>b</b> 相等，则 <b>a == b</b> 的值为真，即 <b>1</b>，否则为假，即 <b>0</b>。
+            </p>
+
+
+
+
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">不相等运算符</span>
+                <i class="fa fa-2x fa-exclamation mr-1"></i>
+                <span style="font-size: 2.5rem;font-weight:700;margin-top:-.5rem;">=</span>
+            </p>
+            <pre class="prettyprint mb-0">
+    float a = 1.5, b = 1.5;
+    printf("%f neq %f is %d \n", a, b, a != b);
+            </pre>
+            <p class="p-3 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> <b>!=</b> 是比较运算符，是二元运算符。<br>
+                <span class="badge badge-warning">Tips</span> 如果 <b>a</b> 和 <b>b</b> 不相等，则 <b>a != b</b> 的值为真，即 <b>1</b>，否则为假，即 <b>0</b>。
+            </p>
+
+
+
+
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">逻辑且运算符</span>
+                <span style="font-size: 2rem;font-weight:700;margin-top:-.5rem;">&amp;&amp;</span>
+            </p>
+            <pre class="prettyprint mb-0">
+    int a = 1, b = 1;
+    float c = 6.25, d = 6.25;
+    int a_eq_b = a == b;
+    int c_eq_d = c == d;
+    printf("(%d eq %d) and (%f eq %f) is %d \n", a, b, c, d, a_eq_b &amp;&amp; c_eq_d);
+            </pre>
+            <p class="p-3 bg-dark text-white">
+                <span class="badge badge-primary">Question</span> 将上面的代码写入 <b>main</b> 函数中，程序执行后会输出什么结果？
+            </p>
+
+
+
+
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">逻辑或运算符</span>
+                <span style="font-size: 1.5rem;font-weight:800;margin-top:-.5rem;">||</span>
+            </p>
+            <pre class="prettyprint mb-0">
+    int a = 1, b = 1;
+    float c = 0.5, d = 1.5;
+    int a_eq_b = a == b;
+    int c_eq_d = c == d;
+    printf("(%d eq %d) or (%f eq %f) is %d \n", a, b, c, d, a_eq_b || c_eq_d);
+            </pre>
+            <p class="p-3 bg-dark text-white">
+                <span class="badge badge-primary">Question</span> 将上面的代码写入 <b>main</b> 函数中，程序执行后会输出什么结果？
+            </p>
+
+
+
+
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">逻辑非运算符</span>
+                <i class="fa fa-2x fa-exclamation"></i>
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+        
+    int main()
+    {
+        int a = 0, b = 1;
+        printf("a is %d \n", a);
+        printf("b is %d \n", b);
+        printf("not a is %d \n", !a);
+        printf("not b is %d \n", !b);
+        printf("not ( a eq b ) is %d \n", !(a == b));
+        printf("not ( a neq b ) is %d \n", !(a != b));
+        return 0;
+    }</pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-8">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-8">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>a is 0
+b is 1
+not a is 1
+not b is 0
+not ( a eq b ) is 1
+not ( a neq b ) is 0
+
+--------------------------------
+Process exited after 0.01189 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+            <p class="p-3 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> <b>!</b> 是一元运算符。<br>
+                <span class="badge badge-warning">Tips</span> <b>C</b> 语言中，<b>0</b> 为假，非 <b>0</b> 值都为真。<b>!0</b> 的值是 <b>1</b>，<b>!1</b> 的值是 <b>0</b>。<br>
+                <span class="badge badge-primary">Question</span> <b>!2</b> 的值是 <b>0</b> 吗？
+            </p>
+
+
+
+
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">小于运算符</span>
+                <i class="fa fa-2x fa-chevron-left"></i>
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+        
+    int main()
+    {
+        int a = 0, b = 1;
+        printf("a is %d \n", a);
+        printf("b is %d \n", b);
+        printf("a &lt; b is %d \n", a &lt; b);
+        return 0;
+    }</pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-less-than">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-less-than">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>a is 0
+b is 1
+a &lt; b is 1
+
+--------------------------------
+Process exited after 0.01268 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            <p class="p-3 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> <b>&lt;</b> 是比较运算符，是二元运算符。<br>
+                <span class="badge badge-warning">Tips</span> <b>a &lt; b &lt; c</b> 在数学中是合法的，但不符合 <b>C</b> 语言的语法，可以用 <b>a &lt; b &amp;&amp; b &lt; c</b> 来表示。<br>
+            </p>
+            
+            
+            
+
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">大于运算符</span>
+                <i class="fa fa-2x fa-chevron-right"></i>
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+        
+    int main()
+    {
+        int a = 0, b = 1;
+        printf("a is %d \n", a);
+        printf("b is %d \n", b);
+        printf("a &gt; b is %d \n", a &gt; b);
+        return 0;
+    }</pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-greater-than">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-greater-than">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>a is 0
+b is 1
+a > b is 0
+
+--------------------------------
+Process exited after 0.01824 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            <p class="p-3 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> <b>&gt;</b> 是比较运算符，是二元运算符。<br>
+                <span class="badge badge-warning">Tips</span> <b>a &gt; b &gt; c</b> 在数学中是合法的，但不符合 <b>C</b> 语言的语法，可以用 <b>a &gt; b &amp;&amp; b &gt; c</b> 来表示。<br>
+            </p>
+            
+            
+            
+            
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">小于等于运算符</span>
+                <i class="fa fa-2x fa-chevron-left"></i>
+                <span style="font-size: 3rem;font-weight:800;margin-top:-.85rem;">=</span>
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+        
+    int main()
+    {
+        int a = 0, b = 1;
+        printf("a is %d \n", a);
+        printf("b is %d \n", b);
+        printf("a &lt;= b is %d \n", a &lt;= b);
+        return 0;
+    }</pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-less-than-or-equal">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-less-than-or-equal">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>a is 0
+b is 1
+a &lt;= b is 1
+
+--------------------------------
+Process exited after 0.008576 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            <p class="p-3 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> <b>&lt;=</b> 是比较运算符，是二元运算符。<br>
+                <span class="badge badge-warning">Tips</span> 一般情况下，<b>a &lt;= b</b> 和 <b>!( a &gt; b)</b> 的值是相同的。<br>
+            </p>
+            
+            
+            
+            
+            <p class="p-3 mb-0 d-flex align-items-center">
+                <span class="mr-3">大于等于运算符</span>
+                <i class="fa fa-2x fa-chevron-right"></i>
+                <span style="font-size: 3rem;font-weight:800;margin-top:-.85rem;">=</span>
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+        
+    int main()
+    {
+        int a = 0, b = 1;
+        printf("a is %d \n", a);
+        printf("b is %d \n", b);
+        printf("a &gt;= b is %d \n", a &gt;= b);
+        return 0;
+    }</pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-greater-than-or-equal">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-greater-than-or-equal">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>a is 0
+b is 1
+a &gt;= b is 0
+
+--------------------------------
+Process exited after 0.007405 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            <p class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> <b>&gt;=</b> 是比较运算符，是二元运算符。<br>
+                <span class="badge badge-warning">Tips</span> 一般情况下，<b>a &gt;= b</b> 和 <b>!( a &lt; b)</b> 的值是相同的。<br>
+            </p>
+
+
+            
+
+            <p class="pt-3 px-3 mb-0 alert-danger">
+                <i class="fa fa-exclamation-triangle fa-lg"></i>
+                请注意数学中的表达式和 <b>C</b> 语言中的表达式的区别。
+                <br>
+                例如：
+                <br>
+                <span class="d-inline-block px-2 py-1 mx-3 border border-danger">
+                    数学中 <b>1</b> <b>&lt;=</b> <b>a</b> <b>&lt;=</b> <b>10</b> 虽然也是合法的 <b>C</b> 表达式，但是表达的含义不同。
+                    <br>
+                    当 <b>a</b> 等于 <b>20</b> 时，<b>1</b> <b>&lt;=</b> <b>a</b> 为 <b>1</b>，
+                    所以 <b>1</b> <b>&lt;=</b> <b>a</b> <b>&lt;=</b> <b>10</b> 即 <b>1</b> <b>&lt;=</b> <b>10</b> 也为真。
+                </span>
+                <br>
+                数学中的 <b>1</b> <b>&lt;=</b> <b>a</b> <b>&lt;=</b> <b>10</b> 用 <b>C</b> 语言表达应为：
+                <b>1</b> <b>&lt;=</b> <b>a</b> <b>&amp;&amp;</b> <b>a</b> <b>&lt;=</b> <b>10</b>。
+                <br>
+                <span class="d-inline-block w-100 mt-1">
+                    <small class="float-right text-dark">2017年11月23日更新</small>
+                </span>
+            </p>
+
+
+
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 我们在本文介绍了<b>C</b>语言中常用的运算符。
+                <wbr>其中包括 <b>%</b> <b>++</b> <b>--</b> <b>==</b> <b>!=</b> <b>&amp;&amp;</b> <b>||</b> <b>!</b> <b>&lt;</b> <b>&gt;</b> <b>&lt;=</b> <b>&gt;=</b>。<br>
+                <span class="badge badge-dark">P.S.</span> <b>C</b>语言还提供了一些其他的运算符，
+                <wbr>包括表示数值正负的一元运算符 <b>+</b> 和 <b>-</b>，
+                <wbr>获取数组元素的运算符 <b>[]</b>，
+                <wbr>取地址运算符 <b>&amp;</b>，
+                <wbr>解引用运算符 <b>*</b> <small>(没错，和乘法运算符是同一个字符)</small>，
+                <wbr>访问指针指向的对象的成员的箭头运算符 <b>-&gt;</b>，
+                <wbr>用于改变默认优先级的括号运算符 <b>()</b>，
+                <wbr>用于位运算的运算符 <b>^</b> <b>|</b> <b>&amp;</b> <b>&lt;&lt;</b> <b>&gt;&gt;</b>，
+                <wbr>以及扩充的赋值运算符 <b>+=</b> <b>-=</b> <b>*=</b> <b>/=</b> <b>%=</b> <b>&gt;&gt;=</b> <b>&lt;&lt;=</b> <b>&amp;=</b> <b>^=</b> <b>|=</b>。
+                <br>
+                <span class="badge badge-dark">P.S.</span> 事实上，逗号 <b>,</b> 也是<b>C</b>语言的运算符之一，
+                <wbr>由于篇幅有限，我们会在以后介绍这些运算符。
+            </p>
+
+
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-12.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-12-2.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

@@ -1,0 +1,76 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-5.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-4.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 5 <small class="ml-3 text-primary">C 语言注释(comment)</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-6.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 5 <small class="ml-3 text-primary">C 语言注释(comment)</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <pre class="prettyprint">
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        /* 若要使用 printf 函数，必须引入 stdio.h 库文件 */
+        printf("Hello, World! \n");
+        return 0;
+    }
+            </pre>
+            <p class="pl-3"><strong>/* ... */</strong> 用于注释代码，其内容不会被编译。</p>
+        </div>
+        <div class="card-block">
+            <div class="bg-dark text-white pt-3 pl-3">
+                <span class="badge badge-warning">Tips</span>
+                <small><b>stdio.h</b> 中的 <b>stdio</b> 是 <em>standard input and output</em> 的缩写，<b>h</b> 是 <em>header file</em> 的缩写。 <var>- yhn</var></small>
+            </div>
+            <div class="bg-dark text-white pt-1 pl-3">
+                <span class="badge badge-warning">Tips</span>
+                <small>给源代码加注释是一个良好的习惯，有助于代码的维护和修改。 <var>- yhn</var></small>
+            </div>
+            <div class="bg-dark text-white pt-1 pl-3 pb-3">
+                <span class="badge badge-warning">Tips</span>
+                <small><b>//</b> 是 C++ 风格的注释，也可用于 C 语言。<b>//</b> 只能注释单行。 <var>- yhn</var></small>
+            </div>
+        </div>
+        <div class="card-footer p-0">
+            <div class="btn-group w-100">
+                <div class="btn btn-outline-primary w-50" onclick="loadPage('day-4.html')">
+                    上一页
+                </div>
+                <div class="btn btn-outline-primary w-50" onclick="loadPage('day-6.html')">
+                    下一页
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

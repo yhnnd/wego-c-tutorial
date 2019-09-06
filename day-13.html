@@ -1,0 +1,141 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-13.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-12-3.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 13 <small class="ml-3 text-primary">表达式和语句</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-14.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 13 <small class="ml-3 text-primary">表达式和语句</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-3">表达式</h4>
+                <p class="card-text">
+                    <b>C</b>语言中的表达式一种有值的语法结构，它由运算符将<a href="#variables">变量</a>、<a href="#constants">常量</a>、<a href="#functions">函数调用</a>返回值结合而成。
+                </p>
+                <p class="card-text">实例</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    /* 变量常量表达式 */
+    a
+    sum
+    1
+    0.5
+    PI
+                    
+    /* 算术表达式 */
+    a + b
+    a - b + c
+    a * b + 'A'
+    a / b - c + 10
+    i++ + i++ + ++i
+                    
+    /* 赋值表达式 */
+    a = b
+    a *= b += 20
+    a = b = c = 10
+    a = (b = 4) / (c = 2)
+                    
+    /* 逗号表达式 */
+    1 + 2, 3 + 4
+    (10, a * 5), a + 10
+    
+    /* 关系表达式 */
+    x == y
+    x &lt;= y
+    x != y
+                    
+    /* 逻辑表达式 */
+    10 &amp;&amp; 20
+    0 || 1
+    (a > b) &amp;&amp; (!0)
+                    
+    /* 复合表达式 */
+    x = ( y = (a + b), z = 10)
+            </pre>
+            <div class="card-body">
+                <h4 class="card-text mb-3">语句</h4>
+                <p class="card-text">
+                    语句指的是当程序运行时执行某个动作的语法结构。<br>
+                    表达式语句是最简单的一种语句，在表达式的末尾加分号就形成了一个表达式语句。
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    x = 10;
+    y = 20;
+    x *= 10;    
+    
+    1;
+    x + y; //这些语句也是合法的。语句被执行时，表达式求值，但不保存结果。
+    getchar(); //读取输入中的下一个字符，但不保存结果。
+    
+    x++;
+    printf("hello, world\n");
+            </pre>
+            <div class="card-body">
+                <p class="card-text">
+                    在<b>C</b>语言中，一个语句的最后面要有分号 <b>;</b>，如果没有分号，就不是语句。<br>
+                    表达式后面再加上分号，就成了表达式语句。
+                </p>
+            </div>
+            <div class="bg-dark text-white pt-3 pl-3 pb-1">
+                <a name="variables">
+                    <span class="badge badge-primary">变量</span>
+                    <small>变量名本身是一个表达式，表达式的值是变量当前的值。</small>
+                </a>
+                <br>
+                <a name="constants">
+                    <span class="badge badge-primary">常量</span>
+                    <small>常量名本身是一个表达式，字面常量也是表达式。表达式的值是常量当前的值。</small>
+                </a>
+                <br>
+                <a name="functions">
+                    <span class="badge badge-primary">函数调用</span>
+                    <small>对于返回值不为<b>void</b>的函数，对它的正确调用也是表达式。表达式的值为函数的返回值。</small>
+                </a>
+            </div>
+            <div class="bg-dark text-white pt-1 pl-3 pb-3">
+                <span class="badge badge-warning">Tips</span>
+                <small>复合语句(<var>compound-statement</var>)也是语句的一种，其一般形式为：<b>{block-item-list}</b>。复合语句不是以分号结束，而是很多语句组成的。</small>
+            </div>
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-12-3.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-14.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

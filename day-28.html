@@ -1,0 +1,606 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-28.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-27.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 28 <small class="ml-3 text-primary"><b>typedef</b> (类型定义)</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-29.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 28 <small class="ml-3 text-primary"><b>typedef</b> (类型定义)</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <span><b>typeof</b> 关键字允许我们获取一个变量的类型以声明新的变量。</span>
+                    <span>类似 <b>C++</b> 中的 <code>decltype</code> 关键字。</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int a = 1;
+        typeof(a)* pa = &a;// typeof(a)* => int*
+        typeof(a) b = a * 4;// typeof(a) => int
+        typeof(b)* pb = &b;// typeof(b)* => int*
+        printf("val(%p) = %d\n", &amp;a, a);
+        printf("val(%p) = %d\n", pa, *pa);
+        printf("val(%p) = %d\n", &amp;b, b);
+        printf("val(%p) = %d\n", pb, *pb);
+        return 0;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-0">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-0">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" data-min-height="10rem">
+                    <pre>
+val(000000000024FE3C) = 1
+val(000000000024FE3C) = 1
+val(000000000024FE38) = 4
+val(000000000024FE38) = 4
+
+--------------------------------
+Process exited after 0.003139 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <b>typedef</b> 允许我们给一个 <b>C</b> 语言中已有的数据类型起一个别名。类似 <b>Swift</b> 语言的 <code>typealias</code> 关键字。
+                </p>
+                <p class="card-text">
+                    <span><b>typedef</b> 可以应用于各种数据类型。可以是基本数据类型</span>
+                    <span>(e.g. <code>int</code>, <code>char</code>)，</span>
+                    <span>也可以是复合数据类型</span>
+                    <span>(e.g. <code>struct</code>, <code>union</code>, <code>enum</code>, <code>functions</code>)。</span>
+                    <span>由于篇幅有限，我们这里只介绍如何用 <code>typedef</code> 给 <code>int</code><small>(及<code>int</code>型数组)</small> 和<b>函数指针</b>起我们自定义的别名。</span>
+                    <span>我们并没有介绍 <code>typedef struct</code>，<code>typedef union</code> 和 <code>typedef enum</code> 等用法。</span>
+                    <span>如果想了解更多，可以在互联网上搜索它们。</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    typedef int Integer;
+
+    int main() {
+        Integer a = 1;
+        Integer * pa = &a;
+        Integer b = a * 4;
+        Integer * pb = &b;
+        printf("val(%p) = %d\n", &amp;a, a);
+        printf("val(%p) = %d\n", pa, *pa);
+        printf("val(%p) = %d\n", &amp;b, b);
+        printf("val(%p) = %d\n", pb, *pb);
+        return 0;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" data-min-height="10rem">
+                    <pre>
+val(000000000024FE3C) = 1
+val(000000000024FE3C) = 1
+val(000000000024FE38) = 4
+val(000000000024FE38) = 4
+
+--------------------------------
+Process exited after 0.003388 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    下面来看第二个例子，在这个例子的源代码中，我们定义了三个类型别名。
+                    <span class="badge badge-secondary">
+                        <i class="fa fa-exclamation-circle text-warning"></i>
+                        <span>编写未完成</span>
+                    </span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    #define size 2
+
+    typedef int Int;
+    typedef Int IntArr [size];
+    typedef IntArr IntArr2d [size];
+
+    int main() {
+        int c = 0;
+        IntArr2d a [size] = {
+            {
+                {1, 2},
+                {3, 4},
+            },
+            {
+                {5, 6},
+                {7, 8},
+            }
+        };
+        for (int i = 0; i &lt; 2; ++i) {
+            printf(" %s\n","------");
+            for (int j = 0; j &lt; 2; ++j) {
+                for (int k = 0; k &lt; 2; ++k) {
+                    printf("%3d", a[i][j][k]);
+                }
+                printf("\n");
+            }
+        }
+        return 0;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" data-min-height="10rem">
+                    <pre>
+ ------
+  1  2
+  3  4
+ ------
+  5  6
+  7  8
+
+--------------------------------
+Process exited after 0.003754 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <span>
+                        我们可以将上面的代码稍微改动，变成下面的代码。
+                    </span>
+                    <span>
+                        我们添加了一个类型别名 <code>IntArr3d</code> 表示三维整数数组。
+                    </span>
+                    <span class="badge badge-secondary">
+                        <i class="fa fa-exclamation-circle text-warning"></i>
+                        编写未完成
+                    </span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    #define size 2
+
+    typedef int Int;
+    typedef Int IntArr [size];
+    typedef IntArr IntArr2d [size];
+    typedef IntArr2d IntArr3d [size];
+
+    int main() {
+        int c = 0;
+        IntArr3d a = {
+            {
+                {1, 2},
+                {3, 4},
+            },
+            {
+                {5, 6},
+                {7, 8},
+            }
+        };
+        for (int i = 0; i &lt; 2; ++i) {
+            printf(" %s\n","------");
+            for (int j = 0; j &lt; 2; ++j) {
+                for (int k = 0; k &lt; 2; ++k) {
+                    printf("%3d", a[i][j][k]);
+                }
+                printf("\n");
+            }
+        }
+        return 0;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-3">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-3">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" data-min-height="10rem">
+                    <pre>
+ ------
+  1  2
+  3  4
+ ------
+  5  6
+  7  8
+
+--------------------------------
+Process exited after 0.003646 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <b>typeof</b> 声明函数指针
+                </p>
+                <p class="card-text">
+                    <span>
+                        函数 <code>swapAndReturnMax</code> 接受两个整数指针，交换两个指针对应的整数的值，返回这两个数中最大的数的地址。
+                    </span>
+                    <span class="badge badge-secondary">
+                        <i class="fa fa-exclamation-circle text-warning"></i>
+                        编写未完成
+                    </span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int * swapAndReturnMax (int * a, int * b) {
+        int t = *a;
+        *a = *b;
+        *b = t;
+        return (*a) > (*b) ? a : b;
+    }
+
+    int main() {
+        typeof(swapAndReturnMax) * fn = swapAndReturnMax;
+        int a = 1, b = 2, max;
+        max = *fn(&amp;a, &amp;b);
+        printf("a = %d\nb = %d\nmax = %d\n", a, b, max);
+        return 0;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-4">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-4">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" data-min-height="10rem">
+                    <pre>a = 2
+b = 1
+max = 2
+
+--------------------------------
+Process exited after 0.003435 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <b>typedef</b> 定义特定的函数指针类型。
+                </p>
+                <p class="card-text">
+                    因为我们定义的函数指针 <b>fn</b> 没有用 <code>const</code> 修饰，所以我们可以在该指针被赋值之后重新给该指针赋予新的值，即让它指向其他函数，前提是那个函数的类型符合该指针能够指向的函数类型。
+                </p>
+                <p class="card-text">
+                    在下面的代码中，我们先用 <b><code>typedef</code></b> 定义了一种函数指针类型 <code>funcType</code>，这种指针能指向的函数需要符合两个要求：参数是两个整数指针，返回值是一个整数指针。
+                </p>
+                <p class="card-text">
+                    <span>我们在主函数中声明了一个 <code>funcType</code> 类型的函数指针 <b>fn</b>，并初始化它的值为函数 <b>swapAndReturnMax</b> 的地址。</span>
+                    <span>因为函数名即为函数的存储地址，所以 <b>fn</b> 也就是函数 <b>swapAndReturnMax</b> 的别名。</span>
+                </p>
+                <p class="card-text">
+                    之后，我们重新给 <b>fn</b> 赋值为函数 <b>justReturnMax</b> 的地址。其后，我们可以像使用 <b>justReturnMax</b> 一样使用 <b>fn</b>。
+                </p>
+                <h3 class="card-text">
+                    总结
+                </h3>
+                <p class="card-text">
+                    <span>指针 <b>fn</b> 先指向了 <b>swapAndReturnMax</b>，后指向了 <b>justReturnMax</b>。之所以能够改变指针指向的函数，是因为该指针的类型没有用 <code>const</code> 修饰。</span>
+                    <span>之所以指针能指向这两个函数，是因为这两个函数的类型（参数类型和返回值类型）符合该指针的类型。</span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    typedef int * (* funcType) (int *, int *);
+
+    int * swapAndReturnMax (int * a, int * b) {
+        int t = *a;
+        *a = *b;
+        *b = t;
+        return (*a) > (*b) ? a : b;
+    }
+    
+    int * justReturnMax (int * a, int * b) {
+        return (*a) > (*b) ? a : b;
+    }
+    
+    int main() {
+        funcType fn = swapAndReturnMax;
+        int a = 1, b = 2, max;
+        max = *fn(&amp;a, &amp;b);
+        printf("a = %d\nb = %d\nmax = %d\n", a, b, max);
+        fn = justReturnMax;
+        printf("\na = %d\nb = %d\nmax = %d\n", a, b, max);
+        return 0;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-5">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-5">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" data-min-height="10rem">
+                    <pre>a = 2
+b = 1
+max = 2
+
+a = 2
+b = 1
+max = 2
+
+--------------------------------
+Process exited after 0.003739 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+            <blockquote class="mt-3">
+                <footer class="blockquote-footer text-right pr-3 pr-lg-4">
+                    <span class="text-dark">2018年5月28日发布</span>
+                </footer>
+            </blockquote>
+
+
+
+            <div class="alert mb-0 border-bottom-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center mx-auto">
+                        <button class="btn btn-sm btn-outline-secondary px-3 py-1" data-toggle="collapse" data-target="#just-fun">后记</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="just-fun">
+                <div class="card-body py-3 border border-secondary border-bottom-0 border-left-0 border-right-0">
+                    <h5 class="card-text">
+                        <span class="text-primary">
+                            <i>你真的懂 <b>C</b> 语言吗？</i>
+                        </span>
+                    </h5>
+                    <div class="card-text">
+                        <ul style="list-style-type: none;">
+                            <li><b><i>scanf</i></b> 函数的返回值是什么？</li>
+                            <li><b><i>printf</i></b> 函数的返回值是什么？</li>
+                            <li>多条语句，用大括号括起来，所形成的<b>块作用域</b>的值是什么？</li>
+                            <li>小括号有几种作用？</li>
+                            <li>逗号有几种作用？</li>
+                            <li>多条语句，之间用逗号隔开，将这些语句用小括号括起来，这个小括号的值是什么？</li>
+                            <li>中括号有几种作用？</li>
+                            <li>三目运算符后面能跟什么运算符？</li>
+                            <li>仅由一个表达式组成且不含其他任何元素的语句存在吗？</li>
+                            <li>什么叫左值？什么叫右值？</li>
+                            <li><em>to be continued ...</em></li>
+                        </ul>
+                    </div>
+                </div>
+                <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    #define size 2
+
+    typedef int Int;
+    typedef Int IntArr [size];
+    typedef IntArr IntArr2d [size];
+
+    #define defIntArr(a,n) Int a [n]
+    #define defIntArr2d(a,m,n) defIntArr(a,m) [n]
+
+    int main() {
+        int c = 0;
+        printf("c = %d\nd = %d\n", c, (
+        ({
+            (
+                c += printf("Do you "),
+                c += printf("really know ")
+            );
+        }),
+        ({
+            c += printf("C programming?\n");
+        }),
+        ({
+            IntArr2d a [size] = {
+                {
+                    {1, 2},
+                    {3, 4},
+                },
+                {
+                    {5, 6},
+                    {7, 8},
+                }
+            };
+            defIntArr2d(b,2,2)[2] = {
+                {
+                    {10, 20},
+                    {30, 40},
+                },
+                {
+                    {50, 60},
+                    {70, 80},
+                }
+            };
+            int sum = 0;
+            for (int r = 0; r &lt; 3; ++r) {
+                for (int i = 0; i &lt; 2; ++i) {
+                    printf(" %s\n","------");
+                    if (r == 2) break;
+                    for (int j = 0; j &lt; 2; ++j) {
+                        for (int k = 0; k &lt; 2; ++k) {
+                            Int t = (r == 0 ? a : b)[i][j][k];
+                            printf("%3d", t);
+                            sum += t;
+                        }
+                        printf("\n");
+                    }
+                }
+            }
+            sum;
+        })));
+        return 0;
+    }
+                </pre>
+
+                <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                            <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                                <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                            <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-6">执行结果</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse" id="result-6">
+                    <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" data-min-height="10rem">
+                        <pre>Do you really know C programming?
+ ------
+  1  2
+  3  4
+ ------
+  5  6
+  7  8
+ ------
+ 10 20
+ 30 40
+ ------
+ 50 60
+ 70 80
+ ------
+c = 34
+d = 396
+
+--------------------------------
+Process exited after 0.004221 seconds with return value 0
+Press any key to continue . . .</pre>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-27.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-29.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>
+<script src="js/sprintf.js"></script>
+<script>
+</script>

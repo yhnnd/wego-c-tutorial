@@ -1,0 +1,237 @@
+﻿<p class="mb-0 px-3 py-2 alert-primary text-center border border-bottom-0 border-secondary">
+    <button class="btn btn-sm btn-outline-primary" data-toggle="collapse" data-target="#comment-area-1" onclick="if($(this).html()=='显示评论'){$(this).html('隐藏评论')}else{$(this).html('显示评论')}">显示评论</button>
+</p>
+
+<div class="collapse" id="comment-area-1">
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-anuil.jpg">
+        <span class="badge badge-light">A.Nuil</span>
+        <br>
+        <span class="comment-bubble alert-primary">
+            学长，<br>
+            <pre class="d-inline-block w-100 mt-1 mb-0 pl-3 prettyprint bg-white">
+char * s;
+s = "abcd";</pre>
+            这种写法，严格来说，是不是不对的？我百度了哈，啥都没有......<br>
+            我就觉得不是很不对，在 Visual Studio 上，就会出现 error<br>
+            <pre class="px-2 pt-1 mb-0 bg-white text-dark"><big>无法把 <b>const char *</b> 转变为 <b>char *</b></big></pre>
+            这种错误是因为那个 <b>"abcd"</b> 字符串存在静态存储区的原因吗？<br>
+        </span>
+    </div>
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+        <span class="badge badge-primary">yhn</span>
+        <br>
+        <span class="comment-bubble alert-warning text-left">
+            这个代码是错的
+            <br>
+            因为 <b>s</b> 是指针，需要给指针分配内存
+            <br>
+            但是声明该指针时未初始化，也就没有为其分配内存
+            <br>
+            所以声明之后，不能用 <b>=</b> 将一个常量字符串赋值给它
+            <br>
+            而且 <b>const</b> 指针不能赋值给非 <b>const</b> 指针
+            <br>
+            可以改成
+            <pre class="d-inline-block w-100 mt-1 mb-0 pl-3 prettyprint bg-white">
+const char * s = "abcd";</pre>
+            或者
+            <pre class="d-inline-block w-100 mt-1 mb-0 pl-3 prettyprint bg-white">
+char s[] = "abcd";</pre>
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-anuil.jpg">
+        <span class="badge badge-light">A.Nuil</span>
+        <br>
+        <span class="comment-bubble alert-primary">
+            原来如此，谢谢啦
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+        <span class="badge badge-primary">yhn</span>
+        <br>
+        <span class="comment-bubble alert-warning text-left">
+            将来还会有给指针分配内存的方法
+            <br>
+            用 <b>malloc</b> 函数
+            <br>
+            给指针分配了内存，就能给它指向的内存区赋值了
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-anuil.jpg">
+        <span class="badge badge-light">A.Nuil</span>
+        <br>
+        <span class="comment-bubble alert-primary">
+            <b>malloc</b> 还是知道滴
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+        <span class="badge badge-primary">yhn</span>
+        <br>
+        <span class="comment-bubble alert-warning text-left">
+            还有 <b>free</b> 函数，用于释放内存
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-anuil.jpg">
+        <span class="badge badge-light">A.Nuil</span>
+        <br>
+        <span class="comment-bubble alert-primary">
+            谢谢学长啦
+            <br>
+            <img class="mt-1 img-fluid w-100" src="img/day-22-comment-7-1.gif" alt="">
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-anuil.jpg">
+        <span class="badge badge-light">A.Nuil</span>
+        <br>
+        <span class="comment-bubble alert-primary">
+            还有个问题
+            <br>
+            <img class="mt-1 img-fluid w-100" src="img/day-22-comment-8-1.jpg" alt="">
+            求解释
+            <br>
+            <img class="mt-1 img-fluid" src="img/day-22-comment-8-2.gif" alt="" style="width: 200px;">
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+        <span class="badge badge-primary">yhn</span>
+        <br>
+        <span class="comment-bubble alert-warning text-left">
+            这肯定内存溢出啊
+            <br>
+            <b>conj</b> 函数的作用和 <b>strcat</b> 一样
+            <br>
+            是把 <b>s2</b> 连到 <b>s1</b> 后面
+            <br>
+            因为 <b>s1</b> 字符串的长度是 <b>4</b>, <b>s2</b> 字符串的长度是 <b>4</b>, 要能拼接成功, <b>s1</b> 的真实长度至少得是 <b>9</b> 才行
+            <br>
+            所以你声明 <b>s1</b> 的时候必须显式指出它的长度：
+            <pre class="d-inline-block w-100 mt-1 mb-0 pl-3 prettyprint bg-white">char s1[9] = "1234";</pre>
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-anuil.jpg">
+        <span class="badge badge-light">A.Nuil</span>
+        <br>
+        <span class="comment-bubble alert-primary">
+            原来如此，谢啦
+            <br>
+            <img class="mt-1 img-fluid" src="img/day-22-comment-10-1.gif" alt="" style="width: 200px;">
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+        <span class="badge badge-primary">yhn</span>
+        <br>
+        <span class="comment-bubble alert-warning text-left">
+            你把所有在初始化时忘记设置长度的全都设置好长度
+            <pre class="d-inline-block w-100 mt-1 mb-0 pl-3 prettyprint bg-white">char s[] = "123";</pre>
+            这种代码很危险
+            <br>
+            在声明 <b>s</b> 的时候, 没有指明长度, <b>s</b> 的长度默认是 <b>4</b>, 因为字符串最后有一个 <b>'\0'</b>
+            <br>
+            如果用 <b>strcpy</b> 等方法给 <b>s</b> 赋值更长的字符串, 就会发生内存溢出错误
+            <br>
+            我们在写代码时候, <b>[]</b> 里面不指明长度也可以, 但是最好这样写
+            <pre class="d-inline-block w-100 mt-1 mb-0 pl-3 prettyprint bg-white">const char s[] = "123";</pre>
+            这样字符串初始化之后就不能被修改了
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-anuil.jpg">
+        <span class="badge badge-light">A.Nuil</span>
+        <br>
+        <span class="comment-bubble alert-primary">
+            哦，原来如此
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+        <span class="badge badge-primary">yhn</span>
+        <br>
+        <span class="comment-bubble alert-warning text-left">
+            如果你希望字符串可以被修改长度，就得给它一些空余存储空间：
+            <pre class="d-inline-block w-100 mt-1 mb-0 pl-3 prettyprint bg-white">char s[30] = "123";</pre>
+            这个字符串最多能存 <b>29</b> 个字符
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-anuil.jpg">
+        <span class="badge badge-light">A.Nuil</span>
+        <br>
+        <span class="comment-bubble alert-primary">
+            哦，这样啊
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+        <span class="badge badge-primary">yhn</span>
+        <br>
+        <span class="comment-bubble alert-warning text-left">
+            注意，字符串末尾必须要有一个 <b>'\0'</b> 字符，表示字符串结束，它不能被改成其它字符，否则将无法确定字符串在何处结束
+            <br>
+            <div class="d-flex align-items-center">
+                所以 <pre class="d-inline-block mx-2 my-1 px-2 prettyprint bg-white">char s[30]</pre> 其实只能存 <b>29</b> 个有用的字符
+            </div>
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+        <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-anuil.jpg">
+        <span class="badge badge-light">A.Nuil</span>
+        <br>
+        <span class="comment-bubble alert-primary">
+            我再去看看，谢谢啦
+        </span>
+    </div>
+
+
+    <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+        <p class="card-text text-dark text-center">
+            <small>powered by
+                <a target="_blank" href="http://www.impte.com/chatroom/">ChatRoom</a>
+            </small>
+        </p>
+    </div>
+</div>
+
+
+<script>
+    prettyPrint();
+</script>

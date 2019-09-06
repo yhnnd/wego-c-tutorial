@@ -1,0 +1,227 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-17.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-16-1.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 17 <small class="ml-3 text-primary">continue break 循环控制</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-18.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 17 <small class="ml-3 text-primary">continue break 循环控制</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-3"><b>break</b> 语句</h4>
+                <p class="card-text">在<span class="text-primary" onclick="loadPage('day-16-1.html')">前一篇文章</span>中，有如下的代码：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int a, b;
+        for (a = 1; a &lt; 26; ++a) {
+            for (b = 1; b &lt; 26; ++b) {
+                if (a * b % 26 == 1) {
+                    printf("%2d 的逆为 %2d，\t%2d 可以被选作密匙。\n", a, b, a);
+                }
+            }
+        }
+        return 0;
+    }       </pre>
+
+            <div class="card-body">
+                <p class="card-text">
+                    上面的代码有一个循环嵌套另一个循环。
+                    外层循环从 <b>1</b> 到 <b>25</b> 的范围中依次选取作为 <b>a</b> 的值。
+                    内层循环从 <b>1</b> 到 <b>25</b> 的范围中依次选取作为 <b>b</b> 的值。
+                    在执行内层循环时，如果 <b>a * b % 26 == 1</b> 成立，那么 <b>a</b> 和 <b>b</b> 互为 <b>26</b> 下的逆，则 <b>a</b> 可以作为密匙。
+                    这时，就不需要继续执行内层循环了。
+                </p>
+                <p class="card-text">在执行当前循环时，有没有方法中途跳出循环呢？有两种方法：<b>goto</b> 和 <b>break</b>。</p>
+                <p class="card-text">运用 <b>break</b>，可以在适当的时候跳出当前循环，提高程序执行效率。</p>
+                <p class="card-text">用 <b>break</b> 语句优化后的代码如下：</p>
+            </div>
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int a, b;
+        for (a = 1; a &lt; 26; ++a) {
+            for (b = 1; b &lt; 26; ++b) {
+                if (a * b % 26 == 1) {
+                    printf("%2d 的逆为 %2d，\t%2d 可以被选作密匙。\n", a, b, a);
+                    break;
+                }
+            }
+        }
+        return 0;
+    }       </pre>
+
+
+            <div class="card-body">
+                <h4 class="card-text mb-3"><b>continue</b> 语句</h4>
+                <p class="card-text">在执行循环体时，如果执行到 <b>continue</b> 语句，会停止执行循环体的内容，继续下一轮循环。</p>
+                <p class="card-text">
+                    有一个游戏叫做<a target="_blank" href="https://zhidao.baidu.com/question/2116451088799080227.html">敲7</a>
+                    (或<a target="_blank" href="http://jingyan.baidu.com/article/466506586f620af549e5f8ab.html">逢7敲</a>)。
+                    游戏规则是：<b>n</b> 个人轮流报数，第一个人从 <b>10</b> 以内任意一个数 <b>a</b> 开始，每个数是前一个数加 <b>1</b>。
+                    如果数字含有 <b>7</b> 或者是 <b>7</b> 的倍数，就以敲桌子 (或者说“过”) 代替。
+                </p>
+                <p class="card-text">
+                    编写程序，模拟<a target="_blank" href="https://zhidao.baidu.com/question/2116451088799080227.html">敲7</a>游戏。
+                    要求数字从 <b>1</b> 开始，到 <b>100</b> 结束。
+                    如果数中含有 <b>7</b> 或是 <b>7</b> 的倍数，就输出 <b>#</b> 号，否则输出该数字。
+                </p>
+                <p class="card-text">程序源代码如下：</p>
+            </div>
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int n = 10, a;
+        for (a = 1; a &lt;= 100; ++a) {
+            if (a / 10 == 7 || a % 10 == 7 || a % 7 == 0) {
+                printf("%4s", "#");
+                if (a % n == 0) printf("\n");
+                continue;
+            }
+            printf("%4d", a);
+            if (a % n == 0) printf("\n");
+        }
+        return 0;
+    }</pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-3">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-3">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+<pre>   1   2   3   4   5   6   #   8   9  10
+  11  12  13   #  15  16   #  18  19  20
+   #  22  23  24  25  26   #   #  29  30
+  31  32  33  34   #  36   #  38  39  40
+  41   #  43  44  45  46   #  48   #  50
+  51  52  53  54  55   #   #  58  59  60
+  61  62   #  64  65  66   #  68  69   #
+   #   #   #   #   #   #   #   #   #  80
+  81  82  83   #  85  86   #  88  89  90
+   #  92  93  94  95  96   #   #  99 100
+
+--------------------------------
+Process exited after 0.01339 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <p class="card-text">我们也可以不使用 <b>continue</b>。上面的代码用 <b>if else</b> 改写如下：</p>
+            </div>
+
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int n = 10, a;
+        for (a = 1; a &lt;= 100; ++a) {
+            if (a / 10 == 7 || a % 10 == 7 || a % 7 == 0) {
+                printf("%4s", "#");
+            } else {
+                printf("%4d", a);
+            }
+            if (a % n == 0) printf("\n");
+        }
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-4">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-4">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+<pre>   1   2   3   4   5   6   #   8   9  10
+  11  12  13   #  15  16   #  18  19  20
+   #  22  23  24  25  26   #   #  29  30
+  31  32  33  34   #  36   #  38  39  40
+  41   #  43  44  45  46   #  48   #  50
+  51  52  53  54  55   #   #  58  59  60
+  61  62   #  64  65  66   #  68  69   #
+   #   #   #   #   #   #   #   #   #  80
+  81  82  83   #  85  86   #  88  89  90
+   #  92  93  94  95  96   #   #  99 100
+
+--------------------------------
+Process exited after 0.01294 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 
+                我们在本文介绍了 <b>continue</b> 和 <b>break</b>，
+                在下一篇<span class="text-primary" onclick="loadPage('day-18.html')"><b>switch</b> <b>case</b> 选择</span>中，
+                我们会介绍 <b>if else</b> 之外的另一种选择结构：<b>switch case</b>。
+            </p>
+
+
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-16-1.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-18.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

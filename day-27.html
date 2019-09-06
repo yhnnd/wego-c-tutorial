@@ -1,0 +1,225 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-27.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-26.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 27 <small class="ml-3 text-primary">内存分配与释放</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-28.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 27 <small class="ml-3 text-primary">内存分配与释放</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body py-3">
+                <h4 class="card-text">
+                    内存分配与释放
+                </h4>
+                <p class="card-text">
+                    <span class="badge badge-secondary">
+                        <i class="fa fa-exclamation-circle text-warning"></i>
+                        <span>编写未完成</span>
+                    </span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+    #include &lt;string.h&gt;
+
+    int main() {
+        char * a;
+        a = (char *) malloc(sizeof(char) * 64);
+        strcpy(a, "All Men Are Created Equal.");
+        printf("%s\n", a);
+        free(a);
+        a = NULL;
+        return 0;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" data-min-height="10rem" onclick="$('#result-1-input').focus()">
+                    <pre>All Men Are Created Equal.
+
+--------------------------------
+Process exited after 0.003144 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    内存<b>再分配</b>与释放
+                    <span class="ml-2">
+                        <b>C++ vector</b> 的简单实现
+                    </span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+    #include &lt;string.h&gt;
+
+    struct array {
+        int * get;
+        int lengthPrev, length, size;
+    };
+    
+    int initArray(struct array ** a, int size) {
+        if(size &lt; 1) return 0;
+        *a = (struct array *) malloc(sizeof(int *) + sizeof(int) * 3);
+        (*a)->get = (int *) malloc(sizeof(int) * size);
+        return (*a)->size = size;
+    }
+    
+    int setArray(struct array * a, int pos, int val) {
+        while(pos + 1 > a->size) {
+            a->get = (int *) realloc(a->get, sizeof(int) * a->size * 2);
+            a->size *= 2;
+        }
+        if(a->length &lt; pos + 1) {
+            a->lengthPrev = a->length;
+            a->length = pos + 1;
+        }
+        return a->get[pos] = val;
+    }
+    
+    int delArray(struct array ** a) {
+        free((*a)->get);
+        (*a)->get = NULL;
+        free((*a));
+        *a = NULL;
+    }
+    
+    int shrink_to_fit(struct array *a) {
+        a->get = (int *) realloc(a->get, sizeof(int) * a->length);
+        return a->size = a->length;
+    }
+    
+    int main() {
+        struct array * a;
+        initArray(&amp;a, 1);
+        int i, n;
+        for(i = 0, n = 1; i &lt; 17; ++i) {
+            setArray(a, i, n);
+            n *= 2;
+            printf("size = %2d\tlength = %2d\tget[%2d] = %-5d\n", a->size, a->length, i, a->get[i]);
+        }
+        shrink_to_fit(a);
+        printf("size = %2d\tlength = %2d\t\n", a->size, a->length);
+        for(i = 1, n = 10000; i &lt; 8; ++i) {
+            setArray(a, i*n, i*n);
+            printf("size = %d\tlength = %d\tget[%d] = %-5d\n", a->size, a->length, i*n, a->get[i*n]);
+        }
+        delArray(&amp;a);
+        return 0;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" data-min-height="10rem" onclick="$('#result-2-input').focus()">
+                    <pre>size =  1       length =  1     get[ 0] = 1
+size =  2       length =  2     get[ 1] = 2
+size =  4       length =  3     get[ 2] = 4
+size =  4       length =  4     get[ 3] = 8
+size =  8       length =  5     get[ 4] = 16
+size =  8       length =  6     get[ 5] = 32
+size =  8       length =  7     get[ 6] = 64
+size =  8       length =  8     get[ 7] = 128
+size = 16       length =  9     get[ 8] = 256
+size = 16       length = 10     get[ 9] = 512
+size = 16       length = 11     get[10] = 1024
+size = 16       length = 12     get[11] = 2048
+size = 16       length = 13     get[12] = 4096
+size = 16       length = 14     get[13] = 8192
+size = 16       length = 15     get[14] = 16384
+size = 16       length = 16     get[15] = 32768
+size = 32       length = 17     get[16] = 65536
+size = 17       length = 17
+size = 17408    length = 10001  get[10000] = 10000
+size = 34816    length = 20001  get[20000] = 20000
+size = 34816    length = 30001  get[30000] = 30000
+size = 69632    length = 40001  get[40000] = 40000
+size = 69632    length = 50001  get[50000] = 50000
+size = 69632    length = 60001  get[60000] = 60000
+size = 139264   length = 70001  get[70000] = 70000
+
+--------------------------------
+Process exited after 0.005994 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <blockquote class="mt-3">
+                <footer class="blockquote-footer text-right pr-3 pr-lg-4">
+                    <span>yhn 编写</span>
+                    <span class="text-dark">2018年5月15日发布</span>
+                </footer>
+            </blockquote>
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-26.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-28.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

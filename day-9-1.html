@@ -1,0 +1,296 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-9-1.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-9.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 9 <small class="ml-3 text-primary">格式化输入</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-10.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 9 <small class="ml-3 text-primary">格式化输入</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <p class="card-text">C语言最常见的格式化输入函数是 <b>scanf</b></p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+        
+    int main() {
+        int a = 0;
+        short b = 0;
+        long c = 0;
+        float d = 0;
+        double e = 0;
+        scanf("%d %hd %ld %f %lf", &amp;a, &amp;b, &amp;c, &amp;d, &amp;e);
+        printf("%d %hd %ld %f %lf", a, b, c, d, e);
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>
+<span style="color: lightgreen;">1 2 3 4 5</span>
+1 2 3 4.000000 5.000000
+--------------------------------
+Process exited after 3.438 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+
+
+            <p class="mb-0 px-3 py-2 alert-primary text-center border border-top-0 border-secondary">
+                <button class="btn btn-sm btn-outline-primary" data-toggle="collapse" data-target="#comment-area-1" 
+                onclick="if($(this).html()=='显示评论'){$(this).html('隐藏评论')}else{$(this).html('显示评论')}">显示评论</button>
+            </p>
+    
+            <div class="collapse" id="comment-area-1">
+    
+                <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+                    <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-cgc186.jpg">
+                    <span class="badge badge-light">cgc186</span>
+                    <br>
+                    <span class="comment-bubble alert-info">
+                        <b>c</b> 是一个 <b>char</b> 型数据。<b>scanf("%c", &amp;c)</b> 如果不是第一条 <b>scanf</b> 语句，会被跳过。如何改正？
+                    </span>
+                </div>
+            
+                <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                    <span class="badge badge-primary">yhn</span>
+                    <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+                    <br>
+                    <span class="comment-bubble alert-primary text-left">
+                        这是由于之前输入数据之后按的回车被之后的 <b>scanf("%c", &amp;c);</b> 读入所导致的。
+                        <wbr>可以改成 <b>scanf(" %c", &amp;c);</b> 忽略输入缓冲区中的空格和回车。
+                        <wbr>也可以在 <b>scanf("%c", &amp;c);</b> 之前加上 <b>fflush(stdin);</b> 来刷新输入缓冲区。
+                    </span>
+                </div>
+    
+                <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                    <p class="card-text text-dark text-center">
+                        <small>powered by <a target="_blank" href="http://www.impte.com/chatroom/">ChatRoom</a></small>
+                    </p>
+                </div>
+            </div>
+
+            <p class="p-3 mb-0"><span>表四</span> ANSI C <span>中</span> <b>scanf()</b> <span>的转换说明符</span></p>
+            <table class="table table-sm">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="w-25">
+                            <span>转换说明符</span>
+                        </th>
+                        <th>
+                            <span>意 义</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            %c
+                        </td>
+                        <td>
+                            <span>把输入解释成一个字符</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %d
+                        </td>
+                        <td>
+                            <span>把输入解释成一个有符号十进制整数</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %e<span>，</span>%f<span>，</span>%g<span>，&nbsp;</span>%a
+                        </td>
+                        <td>
+                            <span>把输入解释成一个浮点数&nbsp;</span>(%a<span>是</span>C99<span>标准</span>)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %E<span>，</span>%F<span>，</span>%G<span>，</span>%A
+                        </td>
+                        <td>
+                            <span>把输入解释成一个浮点数&nbsp;</span>(%A<span>是</span>C99<span>标准</span>)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %i
+                        </td>
+                        <td>
+                            <span>把输入解释成一个有符号十进制整数</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %o
+                        </td>
+                        <td>
+                            <span>把输入解释成一个<strong>有符号</strong>八进制数</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %p
+                        </td>
+                        <td>
+                            <span>把输入解释成一个指针</span>(<span>地址</span>)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %s
+                        </td>
+                        <td>
+                            <span>把输入解释成一个字符串；输入的内容以一个非空白字符作为开始，并且包含知道下一个空白字符的全部字符</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %u
+                        </td>
+                        <td>
+                            <span>把输入解释成一个无符号十进制整数</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            %x<span>，</span>%X
+                        </td>
+                        <td>
+                            <span>把输入解释成一个<strong>有符号</strong>十六进制整数</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="p-3 mb-0"><span>表五</span> <b>scanf()</b> <span>的转换修饰符</span></p>
+            <table class="table table-sm">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="w-25">
+                            <span>修饰符</span>
+                        </th>
+                        <th>
+                            <span>意 义</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            *
+                        </td>
+                        <td>
+                            <span>滞后赋值。示例：“</span>%*d”
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            digit(s)
+                        </td>
+                        <td>
+                            <span>最大字段宽度；在达到最大字段宽度或者遇到第一个空白字符时</span>(<span>不管哪一个先发生都一样</span>)<span>停止对输入项的读取。示例：“</span>%10s”
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            hh
+                        </td>
+                        <td>
+                            <span>把整数读作</span>signed char&nbsp;<span>或&nbsp;</span>unsigned char&nbsp;<span>。示例：“</span>%hhd”“%hhu”
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ll
+                        </td>
+                        <td>
+                            <span>把整数读作</span>long long<span>或者&nbsp;</span>unsigned long long (C99)<span>。示例：“</span>%lld”“%llu”
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            h<span>，</span>l<span>或</span>L
+                        </td>
+                        <td>
+                            “%hd”<span>和“</span>hi”<span>指示该值将会存储在一个</span>short int<span>中。</span>
+                            “%ho”“%hx”<span>和“</span>%hu”<span>指示该值将会存储在一个</span>unsigned short int<span>中。</span>
+                           
+                            “%ld”<span>和“</span>%li”<span>指示该值将会存储在一个</span>long<span>中。</span>
+                            “%lo”“%lx”<span>和“</span>%lu”<span>指示该值将会存储在一个</span>unsigned long<span>中。</span>
+                           
+                            “%le”“%lf”<span>和“</span>%lg”<span>指示该值以</span>double<span>类型存储。将</span>L(<span>而非</span>l)<span>与</span>e<span>、</span>f<span>和</span>g<span>一起使用指示该值以</span>long
+                                double
+                                <span>类型存储。</span>
+                           
+                            <span>如果没有这些修饰符，</span>d<span>、</span>i<span>、</span>o<span>和</span>x<span>指示</span>int<span>类型，而</span>e<span>、</span>f<span>和</span>g<span>指示</span>float<span>类型。</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <blockquote>
+                <footer class="blockquote-footer text-right pr-3">摘自 <cite title="C Primer Plus">[(美) Stephen Prata] C Primer Plus (第五版)</cite></footer>
+            </blockquote>
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-9.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-10.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

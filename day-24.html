@@ -1,0 +1,157 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-24.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-23.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 24 <small class="ml-3 text-primary">结构体</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-24-1.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 24 <small class="ml-3 text-primary">结构体</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <b>C</b> 语言中的结构体用于表达用户自定义的数据类型。结构体的关键字是 <b>struct</b>。
+                </p>
+                <p class="card-text">
+                    一个结构体可以有多个属性，属性的数据类型可以不同。访问结构体的某个属性时，要用点运算符（<b>.</b>）。
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    #include &lt;string.h&gt;
+
+    struct book {
+        char title[64];
+        char author[32];
+        char press[32];
+    };
+    
+    int main() {
+        struct book Book;
+        strcpy(Book.title, "The Kite Runner");
+        strcpy(Book.press, "Bloomsbury Publishing PLC");
+        strcpy(Book.author, "Khaled Hosseini");
+        printf("%-20s %s\n", "book title:", Book.title);
+        printf("%-20s %s\n", "publishing house:", Book.press);
+        printf("%-20s %s\n", "author:", Book.author);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>book title:          The Kite Runner
+publishing house:    Bloomsbury Publishing PLC
+author:              Khaled Hosseini
+
+--------------------------------
+Process exited after 0.004429 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            <p class="p-3 mb-0">
+                运用
+                <span class="text-primary" onclick="loadPage('day-28.html')">typedef</span>
+                关键字，让用户可以自定义数据类型 <b>book</b>，这样在声明 <b>book</b> 类型的数据的时候，不需要写（也不能写） <b>struct</b> 关键字。
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    #include &lt;string.h&gt;
+    
+    typedef struct {
+        char title[64];
+        char author[32];
+        char press[32];
+    } book;
+    
+    int main() {
+        book Book;
+        strcpy(Book.title, "The Kite Runner");
+        strcpy(Book.press, "Bloomsbury Publishing PLC");
+        strcpy(Book.author, "Khaled Hosseini");
+        printf("%-20s %s\n", "book title:", Book.title);
+        printf("%-20s %s\n", "publishing house:", Book.press);
+        printf("%-20s %s\n", "author:", Book.author);
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>book title:          The Kite Runner
+publishing house:    Bloomsbury Publishing PLC
+author:              Khaled Hosseini
+
+--------------------------------
+Process exited after 0.00347 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            <blockquote class="mt-3">
+                <footer class="blockquote-footer text-right pr-3">
+                    2018年4月11日发布
+                </footer>
+            </blockquote>
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-23.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-24-1.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

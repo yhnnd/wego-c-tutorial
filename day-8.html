@@ -1,0 +1,125 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-8.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-7.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 8 <small class="ml-3 text-primary">C 语言常量(constants)</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-9.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 8 <small class="ml-3 text-primary">C 语言常量(constants)</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <blockquote>
+                <p class="p-3 mb-0">
+                    常量是固定值，在程序执行期间不会改变。这些固定的值，又叫做字面量。<br>
+                    常量可以是任何的基本数据类型，比如整数常量、浮点常量、字符常量，或字符串字面值，也有枚举常量。<br>
+                    常量就像是常规的变量，只不过常量的值在定义后不能进行修改。
+                </p>
+                <footer class="blockquote-footer text-right pr-3">
+                    摘自 
+                    <a target="_blank" href="http://www.runoob.com/cprogramming/c-constants.html">
+                        <cite title="http://www.runoob.com/cprogramming/c-constants.html">菜鸟教程</cite>
+                    </a>
+                </footer>
+            </blockquote>
+            <blockquote class="mb-0">
+                <p class="p-3 mb-0">
+                    在程序中使用 300、20 等类似的“幻数”并不是一个好习惯，它们几乎无法向以后阅读该程序的人提供什么信息，而且使程序的修改变得更加困难。处理这种幻数的一种方法是赋予它们有意义的名字。<wbr>
+                    <b>#define</b> 指令可以把符号名（或称为符号常量）定义为一个特定的字符串。在该定义之后，程序中出现的所有在 <b>#define</b> 中定义的名字（既没有用引号引起来，也不是其他名字的一部分）都将用相应的<em>替换文本</em>替换。<wbr>
+                    其中，名字与普通变量名的形式相同：它们都是以字母打头的字母和数字序列；<em>替换文本</em>可以是任何字符序列，而不仅限于数字。
+                </p>
+                <footer class="blockquote-footer text-right pr-3">摘自 <cite title="The C Programming Language (Second Edition)">[(美) B.W.K &amp; D.M.R] C 程序设计语言（第二版）</cite></footer>
+            </blockquote>
+            <p class="p-3 mb-0">运用常量定义，可以将 <span class="text-primary" style="cursor: pointer;" onclick="loadPage('day-6.html')">Day 6</span> 中的代码改写成：</p>
+            <pre class="prettyprint">
+    #include &lt;stdio.h&gt;
+    #define SPIDER_LEG  8
+    
+    int main()
+    {
+        int spider_num = 10;
+        printf("%d spiders have %d legs.\n", spider_num, spider_num * SPIDER_LEG);
+        return 0;
+    }
+            </pre>
+            <p class="p-3 mb-0">
+                另外，C 语言提供 <b>const</b> 类型修饰符，<b>const</b> 型变量初始化后不能被程序修改。<b>const</b> 型变量也是一种常量。<br>
+                运用 <b>const</b> 修饰符，可以将 <span class="text-primary" style="cursor: pointer;" onclick="loadPage('day-6.html')">Day 6</span> 中的代码改写成：
+            </p>
+            <pre class="prettyprint">
+    #include &lt;stdio.h&gt;
+    
+    int main()
+    {
+        int spider_num = 10;
+        const int SPIDER_LEG = 8;
+        printf("%d spiders have %d legs.\n", spider_num, spider_num * SPIDER_LEG);
+        return 0;
+    }
+            </pre>
+            <div class="card-body">
+                <p>
+                    <b>#define</b> 和 <b>const</b> 的区别
+                </p>
+                <p>
+                    1. <b>const</b> 常量可以有不同的作用域，而 <b>#define</b> 宏常量的作用域是整个源代码文件。
+                </p>
+                <p>
+                    2. <b>const</b> 常量是有数据类型的，而 <b>#define</b> 宏常量没有数据类型。编译器可以对 <b>const</b> 进行类型安全检查，而对后者只进行字符替换，没有类型安全检查，并且在字符替换中可能会产生意料不到的错误。
+                </p>
+                <p>
+                    3. 有些集成化的调试工具可以对 <b>const</b> 常量进行调试，但是不能对宏常量进行调试。
+                </p>
+            </div>
+            <div class="bg-dark text-white pt-3 pl-3 pb-1">
+                <span class="badge badge-primary">作用域(<var>scope</var>)</span>
+                <small>
+                    作用域是程序中定义的变量所存在的区域，超过该区域变量就不能被访问。
+                </small>
+            </div>
+            <div class="bg-dark text-white pt-1 pl-3 pb-3">
+                <span class="badge badge-warning">Tips</span>
+                <small>
+                    把常量定义为大写字母形式，是一个很好的编程习惯。
+                </small>
+            </div>
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-7.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-9.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

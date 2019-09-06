@@ -1,0 +1,231 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center">
+        <b class="text-dark">C</b> Language Tutorial
+    </h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-18.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-17.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 18 <small class="ml-3 text-primary">switch case 选择语句</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-19.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 18 <small class="ml-3 text-primary">switch case 选择语句</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-3"><b>switch case</b> 语句</h4>
+                <p class="card-text">
+                    <b>switch case</b> 结构是一种特殊的选择结构。
+                    用于判断一个变量等于多个值中的某个值。每个值称为一个 <b>case</b>。
+                </p>
+                <p class="card-text">语法如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    switch(expression){
+        case constant-expression  :
+            statement(s);
+            break; /* 可选的 */
+        case constant-expression  :
+            statement(s);
+            break; /* 可选的 */
+        
+        /* 您可以有任意数量的 case 语句 */
+        default : /* 可选的 */
+            statement(s);
+    }
+            </pre>
+            <div class="card-body py-0">
+                <div class="row pb-3 d-flex justify-content-center alert-info">
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-4 mt-3">
+                        <i class="fa fa-circle-o mr-1"></i>
+                        <b>switch</b> 语句中的 <b>expression</b> 必须是一个整型或枚举类型。
+                    </div>
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-4 mt-3">
+                        <i class="fa fa-circle-o mr-1"></i>
+                        在一个 <b>switch</b> 中可以有任意数量的 <b>case</b> 语句。
+                        每个 <b>case</b> 后跟一个要比较的值和一个冒号。
+                    </div>
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-4 mt-3">
+                        <i class="fa fa-circle-o mr-1"></i>
+                        <b>case</b> 的 <b>constant-expression</b> 必须与 <b>switch</b> 中的变量具有相同的数据类型，且必须是一个常量或字面量。
+                    </div>
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-4 mt-3">
+                        <i class="fa fa-circle-o mr-1"></i>
+                        当被测试的变量等于 <b>case</b> 中的常量时，<b>case</b> 后跟的语句将被执行，直到遇到 <b>break</b> 语句为止。
+                    </div>
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-4 mt-3">
+                        <i class="fa fa-circle-o mr-1"></i>
+                        当遇到 <b>break</b> 语句时，<b>switch</b> 终止，控制流将跳转到 <b>switch</b> 语句后的下一行。
+                    </div>
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-4 mt-3">
+                        <i class="fa fa-circle-o mr-1"></i>
+                        不是每一个 <b>case</b> 都需要包含 <b>break</b>。
+                        如果 <b>case</b> 语句不包含 <b>break</b>，控制流将会继续后续的 <b>case</b>，直到遇到 <b>break</b> 为止。
+                    </div>
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-4 mt-3 mr-md-auto mr-lg-auto">
+                        <i class="fa fa-circle-o mr-1"></i>
+                        一个 <b>switch</b> 语句可以有一个可选的 <b>default</b>，出现在 <b>switch</b> 的结尾。
+                        <b>default</b> 可用于在上面所有 <b>case</b> 都不为真时执行一个任务。
+                        <b>default</b> 中的 <b>break</b> 语句不是必需的。
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text">运用 <b>switch case</b>，输出星期一到星期日的中文名，英文名和日文名。源代码如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int n, i, j;
+        printf("输入 0 设置星期的第一天为星期日\n");
+        printf("输入 1 设置星期的第一天为星期一\n");
+        scanf("%d", &amp;n);
+        printf("中文      English    日本語\n");
+        for (i = n; i &lt; n + 7; ++i) {
+            j = i % 7;
+            if (j &lt; 0) j += 7;
+            switch (j) {
+                case 0:
+                    printf("星期日    Sunday     にちようび");
+                    break;
+                case 1:
+                    printf("星期一    Monday     げつようび");
+                    break;
+                case 2:
+                    printf("星期二    Tuesday    かようび");
+                    break;
+                case 3:
+                    printf("星期三    Wednesday  すいようび");
+                    break;
+                case 4:
+                    printf("星期四    Thursday   もくようび");
+                    break;
+                case 5:
+                    printf("星期五    Friday     きんようび");
+                    break;
+                case 6:
+                    printf("星期六    Saturday   どようび");
+                    break;
+                default:
+                    printf("error!");
+            }
+            printf("\n");
+        }
+        return 0;
+    }</pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" data-min-height="22rem">
+<pre></pre>
+                </div>
+                <div class="px-3 py-1 alert-dark text-center">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" id="result-1-input" class="d-inline" style="opacity: 0;">
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-1',console_1,program_1)">运行程序</button>
+                        </div>
+                        <div class="col-4 d-flex align-items-center" id="result-1-input-status">
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 
+                我们在本文介绍了 <b>switch case</b>，
+                在<span class="text-primary" onclick="loadPage('day-19.html')">下一篇</span>中，
+                我们会介绍<span class="text-primary" onclick="loadPage('day-19.html')">函数</span>的声明，定义和调用。
+            </p>
+
+
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-17.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-19.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>
+
+<script>
+    function program_1(input, printf) {
+        let n, i, j;
+        n = parseInt(input.val());
+        printf("中文      English    日本語\n");
+        for (i = n; i < n + 7; ++i) {
+            j = i % 7;
+            if (j < 0) j += 7;
+            switch (j) {
+                case 0: printf("星期日    Sunday     にちようび"); break;
+                case 1: printf("星期一    Monday     げつようび"); break;
+                case 2: printf("星期二    Tuesday    かようび");   break;
+                case 3: printf("星期三    Wednesday  すいようび"); break;
+                case 4: printf("星期四    Thursday   もくようび"); break;
+                case 5: printf("星期五    Friday     きんようび"); break;
+                case 6: printf("星期六    Saturday   どようび");   break;
+                default: printf("error!");
+            }
+            printf("\n");
+        }
+        return 0;
+    }
+
+    function console_1(_console) {
+        _console.html('<span data-type="output">输入 0 设置星期的第一天为星期日</span>\n' +
+            '<span data-type="output">输入 1 设置星期的第一天为星期一</span>\n' +
+            '<span data-type="input" style="color: lightgreen"></span>\n');
+    }
+</script>

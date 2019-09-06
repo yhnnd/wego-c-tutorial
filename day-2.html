@@ -1,0 +1,131 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-2.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-1.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 2 <small class="ml-3 text-primary">C 语言基本语法</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-3.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 2 <small class="ml-3 text-primary">C 语言基本语法</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        printf("Hello, World! \n");
+        return 0;
+    }
+                </pre>
+            <h4 class="mt-3 pl-4">知识点</h4>
+            <ul>
+                <li>在 C 程序中，分号是语句结束符。也就是说，每个语句必须以分号结束。</li>
+                <li>注释就像是 C 程序中的帮助文本，它们会被编译器忽略。它们以 <b>/*</b> 开始，以字符 <b>*/</b> 终止</li>
+                <li>
+                    C 标识符是用来标识变量、函数，或任何其他用户自定义项目的名称。一个标识符以字母 <b>A-Z</b> 或 <b>a-z</b> 或下划线 <b>_</b> 开始，后跟零个或多个字母、下划线和数字（<b>0-9</b>）。<br>
+                    C 标识符内不允许出现标点字符，比如<b>@</b>、<b>$</b> 和 <b>%</b>。<br>
+                    C 是区分大小写的编程语言。因此，在 C 中，Manpower 和 manpower 是两个不同的标识符。
+                </li>
+                <li>下表列出了 C 中的保留字。这些保留字不能作为常量名、变量名或其他标识符名称。<br>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="width:25%">auto</td>
+                                <td style="width:25%">else</td>
+                                <td style="width:25%">long</td>
+                                <td style="width:25%">switch</td>
+                            </tr>
+                            <tr>
+                                <td>break</td>
+                                <td>enum</td>
+                                <td>register</td>
+                                <td>typedef</td>
+                            </tr>
+                            <tr>
+                                <td>case</td>
+                                <td>extern</td>
+                                <td>return</td>
+                                <td>union</td>
+                            </tr>
+                            <tr>
+                                <td>char</td>
+                                <td>float</td>
+                                <td>short</td>
+                                <td>unsigned</td>
+                            </tr>
+                            <tr>
+                                <td>const</td>
+                                <td>for</td>
+                                <td>signed</td>
+                                <td>void</td>
+                            </tr>
+                            <tr>
+                                <td>continue</td>
+                                <td>goto</td>
+                                <td>sizeof</td>
+                                <td>volatile</td>
+                            </tr>
+                            <tr>
+                                <td>default</td>
+                                <td>if</td>
+                                <td>static</td>
+                                <td>while</td>
+                            </tr>
+                            <tr>
+                                <td>do</td>
+                                <td>int</td>
+                                <td>struct</td>
+                                <td>double</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>C语言程序由函数构成，每个函数可以实现一个或多个功能。</li>
+            </ul>
+        </div>
+        <div class="card-block">
+            <div class="bg-dark text-white p-3">
+                <span class="badge badge-warning">Tips</span>
+                <small>C 语言程序源代码文件的后缀为 .c</small>
+            </div>
+        </div>
+        <div class="card-footer p-0">
+            <div class="btn-group w-100">
+                <div class="btn btn-outline-primary w-50" onclick="loadPage('day-1.html')">
+                    上一页
+                </div>
+                <div class="btn btn-outline-primary w-50" onclick="loadPage('day-3.html')">
+                    下一页
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

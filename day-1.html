@@ -1,0 +1,245 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-1.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <a class="btn btn-outline-primary float-left mr-3" href="index.html">上一页</a>
+            <h2 class="d-inline mobile-hidden">Day 1 <small class="ml-3 text-primary">C 语言基本元素</small></h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-2.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 1 <small class="ml-3 text-primary">C 语言基本元素</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        printf("hello, world\n");
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>hello, world
+
+--------------------------------
+Process exited after 0.01389 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            <h4 class="mt-3 pl-4">知识点</h4>
+            <ul>
+                <li>所有的 C 语言程序都需要包含 <b>main()</b> 函数。 程序从 <b>main()</b> 函数开始执行。</li>
+                <li><strong>/* ... */</strong> 用于注释代码，其内容不会被编译。</li>
+                <li><b>printf()</b> 用于格式化输出到屏幕。<b>printf()</b> 函数在 <b>"stdio.h"</b> 头文件中声明。</li>
+                <li><b>stdio.h</b> 是一个头文件 (标准输入输出头文件) , <b>#include</b> 是一个预处理命令，用来引入头文件。 <br>当编译器遇到 <b>printf()</b> 函数时，如果没有找到
+                    <b>stdio.h</b> 头文件，会发生编译错误。</li>
+                <li><b>return 0;</b> 语句用于表示退出程序。</li>
+            </ul>
+        </div>
+        <div class="card-block">
+            <div class="bg-dark text-white p-3">
+                <span class="badge badge-primary">编译(compile)</span>
+                <small>就是把源代码翻译成目标程序</small>
+            </div>
+        </div>
+
+
+        <p class="mb-0 px-3 py-2 alert-primary text-center border border-top-0 border-bottom-0 border-secondary">
+            <button class="btn btn-sm btn-outline-primary" data-toggle="collapse" data-target="#comment-area-1" 
+            onclick="if($(this).html()=='显示评论'){$(this).html('隐藏评论')}else{$(this).html('显示评论')}">显示评论</button>
+        </p>
+
+        <div class="collapse" id="comment-area-1">
+            <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-rbro.jpg">
+                <span class="badge badge-danger">RBro</span>
+                <br>
+                <span class="comment-bubble alert-danger">
+                    <b>return 0;</b> 和 <b>system("pause");</b> 的作用都是防止程序闪退吗？
+                </span>
+            </div>
+
+            <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                <span class="badge badge-primary">yhn</span>
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+                <br>
+                <span class="comment-bubble alert-primary text-left">
+                    <b>return 0;</b> 不能防止程序闪退。<br>
+                    <b>return 0;</b> 是函数执行结束后返回给调用它的函数的值，
+                    <wbr>如果在 <b>main</b> 函数中写 <b>return 0;</b>，则是返回给系统 <b>0</b>。
+                    <wbr>一般情况下，返回 <b>0</b> 表示程序执行成功。
+                    <wbr>返回其它值（如 <b>-1</b>），则表示程序执行错误。
+                </span>
+            </div>
+        
+            <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                <span class="badge badge-primary">yhn</span>
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+                <br>
+                <span class="comment-bubble alert-primary text-left">
+                    <b>system("pause");</b> 加在 <b>return 0;</b> 之前可以防止程序闪退。
+                    <wbr>程序执行结束前会显示 <kbd class="d-inline-block">Press any key to continue . . .</kbd>。
+                    <wbr>这时，按任意键都可以结束程序。
+                    <wbr>使用 <b>system</b> 函数时需要引入头文件 <b>stdlib.h</b> 或 <b>windows.h</b> <small>(如果开发环境是 Windows 操作系统)</small>。
+                    <wbr>如下：
+                    <pre class="mt-1 d-inline-block w-100 mb-0 prettyprint bg-white">
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+
+    int main()
+    {
+        printf("hello, %s\n", "world");
+        system("pause");
+        return 0;
+    }</pre>
+                    <div class="d-inline-block w-100 alert mb-0 border-top-0 border-secondary rounded-0 console">
+                        <pre>hello, world
+Press any key to continue . . .</pre>
+                    </div>
+                </span>
+            </div>
+
+            <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-cgc186.jpg">
+                <span class="badge badge-light">cgc186</span>
+                <br>
+                <span class="comment-bubble alert-info">
+                    这不是 <b>C++</b> 吗？
+                </span>
+            </div>
+
+            <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                <span class="badge badge-primary">yhn</span>
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+                <br>
+                <span class="comment-bubble alert-primary text-left">
+                    这不是 <b>C++</b>，是纯 <b>C</b> 语言代码。<br>
+                    <img class="mt-1 img-fluid w-100" src="img/day-1-comment-5-1.gif" alt="">
+                </span>
+            </div>
+
+            <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-cgc186.jpg">
+                <span class="badge badge-light">cgc186</span>
+                <br>
+                <span class="comment-bubble alert-info">
+                    你这不是有返回值吗？
+                </span>
+            </div>
+
+            <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                <span class="badge badge-primary">yhn</span>
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+                <br>
+                <span class="comment-bubble alert-primary text-left">
+                    <b>C</b> 的主函数必须要有返回值。
+                </span>
+            </div>
+            
+            <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-cgc186.jpg">
+                <span class="badge badge-light">cgc186</span>
+                <br>
+                <span class="comment-bubble alert-info">
+                    是吗
+                </span>
+            </div>
+            
+            <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-cgc186.jpg">
+                <span class="badge badge-light">cgc186</span>
+                <br>
+                <span class="comment-bubble alert-info">
+                    平常是 <pre class="d-inline border-0 prettyprint">void main</pre>。我在网上看的教程是这样教的。
+                </span>
+            </div>
+            
+            <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                <span class="badge badge-primary">yhn</span>
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+                <br>
+                <span class="comment-bubble alert-primary text-left">
+                    <b>C</b> 语言规定 <b>main</b> 函数必须是 <b>int</b> 类型，<pre class="d-inline border-0 prettyprint">void main</pre> 不是合法的 <b>C</b> 语言语法。
+                </span>
+            </div>
+            
+            <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-cgc186.jpg">
+                <span class="badge badge-light">cgc186</span>
+                <br>
+                <span class="comment-bubble alert-info">
+                    那为什么 <pre class="d-inline border-0 prettyprint">void main</pre> 还能运行？
+                </span>
+            </div>
+
+            <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                <span class="badge badge-primary">yhn</span>
+                <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+                <br>
+                <span class="comment-bubble alert-primary text-left">
+                    如果主函数为 <b>void</b> 类型或者不写 <b>return</b> 语句，某些 <b>C</b> 语言编译器会自动给主函数添加默认返回值 <b>0</b>。
+                    在这种情况下，主函数返回值不规范，程序也能运行。<br>
+                    然而，如果使用的是最新版本的 GCC <b>C</b> 语言编译器，这种代码在编译时会报错：
+                    <pre class="p-1 mb-0 bg-white text-dark"><big>[Error] '::main' must return 'int'</big></pre>
+                    不合法的主函数返回类型会导致编译失败。所以，建议主函数是 <b>int</b> 类型。
+                </span>
+            </div>
+
+            <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                <p class="card-text text-dark text-center">
+                    <small>powered by <a target="_blank" href="http://www.impte.com/chatroom/">ChatRoom</a></small>
+                </p>
+            </div>
+        </div>
+
+
+        <div class="card-footer p-0">
+            <div class="btn-group w-100">
+                <a class="btn btn-outline-primary w-50" href="index.html">
+                    上一页
+                </a>
+                <div class="btn btn-outline-primary w-50" onclick="loadPage('day-2.html')">
+                    下一页
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

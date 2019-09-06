@@ -1,0 +1,410 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center">
+        <b class="text-dark">C</b> Language Tutorial
+    </h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-19-1.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-19.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 19 <small class="ml-3 text-primary">函数的递归调用</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-20.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 19 <small class="ml-3 text-primary">函数的递归调用</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-3">递归</h4>
+                <p class="card-text">递归调用即函数调用本身，递归会有一个终止条件。所以递归函数一定包含分支结构。</p>
+                <p class="card-text">利用递归求 <b>1</b> 到 <b>10</b> 的阶乘的代码如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int factory(int n) {
+        if (n == 1 || n == 0) return 1;
+        else return factory(n-1) * n;
+    }
+
+    int main() {
+        int n;
+        for (n = 1; n &lt;= 10; ++n) {
+            printf("%2d! = %8d\n", n, factory(n));
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-0">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-0">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre> 1! =        1
+ 2! =        2
+ 3! =        6
+ 4! =       24
+ 5! =      120
+ 6! =      720
+ 7! =     5040
+ 8! =    40320
+ 9! =   362880
+10! =  3628800
+
+--------------------------------
+Process exited after 0.006748 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+
+            
+            <div class="card-body">
+                <p class="card-text">利用递归求 <a target="_blank" href="https://baike.baidu.com/item/斐波那契数列">Fibonacci 数列</a> 前40个数的代码如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int Fibonacci(int n) {
+        if (n == 1 || n == 2) return 1;
+        else return Fibonacci(n - 1) + Fibonacci(n - 2);
+    }
+
+    int main() {
+        int n;
+        for (n = 1; n &lt;= 40; ++n) {
+            printf(" %10d", Fibonacci(n));
+            if (n % 10 == 0) printf("\n");
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle mr-1"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-danger mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 d-flex align-items-center">
+                        <span class="fa fa-lg fa-exclamation-triangle mr-1"></span> 本程序消耗大量内存，运行时间可达数秒。有可能造成浏览器崩溃。请慎重运行。
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" data-min-height="12rem">
+<pre></pre>
+                </div>
+                <div class="px-3 py-1 alert-dark text-center">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" id="result-1-input" class="d-inline" style="opacity: 0;">
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-1',program_1)">运行程序</button>
+                        </div>
+                        <div class="col-4 d-flex align-items-center" id="result-1-input-status">
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+
+
+
+
+            <div class="card-body">
+                <p class="card-text">可以看出，当递归层数很多时，程序的执行时间很长。利用动态规划的方法可以加快程序执行的时间：</p>
+            </div>
+            
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    #define SIZE 50
+
+    int fab(int n, int m[]) {
+        if (m[n]) {
+            return m[n];
+        } else {
+            m[n] = fab(n - 1, m) + fab(n - 2, m);
+            return m[n];
+        }
+    }
+
+    int memFab(int n) {
+        int m[SIZE];
+        int i;
+        m[0] = 1;
+        m[1] = 1;
+        for(i = 2; i &lt; SIZE; ++i) {
+            m[i] = 0;
+        }
+        return fab(n, m);
+    }
+
+    int main() {
+        int n;
+        for (n = 1; n &lt;= 40; ++n) {
+            printf(" %10d", memFab(n));
+            if (n % 10 == 0) printf("\n");
+        }
+        return 0;
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" data-min-height="12rem">
+<pre></pre>
+                </div>
+                <div class="px-3 py-1 alert-dark text-center">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" id="result-2-input" class="d-inline" style="opacity: 0;">
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-2',program_2)">运行程序</button>
+                        </div>
+                        <div class="col-4 d-flex align-items-center" id="result-2-input-status">
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+            <div class="alert mb-0 rounded-0 bg-success text-white">
+                <div class="row">
+                    <div class="col-12 d-flex align-items-center">
+                        <span class="fa fa-lg fa-flag mr-1"></span> 以上代码仍然有不必要的重复。请运用循环和数组的知识，优化以上代码。
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <p class="card-text">
+                    以上介绍的递归都是单递归，除单递归以外还有双递归。
+                    点此查看<a target="_blank" href="http://blog.csdn.net/carpenter_laoban/article/details/44205127">双递归实现 Ackermann 函数</a>。
+                </p>
+                <p class="card-text">值得一提的是，主函数也可以递归。</p>
+                <p class="card-text">下面的程序运用主函数递归输出<a target="_blank" href="https://baike.baidu.com/item/乘法表">九九乘法表</a>。</p>
+            </div>
+            
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main(int argc, char ** argv) {
+        if (argc == 10) {
+            printf("%28s","九九乘法表");
+        } else if (argc % 10 == 1 || argc &lt;= 11) {
+        } else {
+            if (argc % 10 == 2) printf("|");
+            if (argc &lt;= 20) {
+                printf("%4d|", (argc - 1) % 10);
+            } else {
+                if (argc % 10 == 0) {
+                    printf("%4d|", (argc/10 - 1) * ((argc-1) % 10));
+                } else {
+                    printf("%4d|", (argc/10) * ((argc-1) % 10));
+                }
+            }
+        }
+        if (argc % 10 == 0) {
+            printf("\n+----+----+----+----+----+----+----+----+----+\n");
+        }
+        if (argc == 100) {
+            return 0;
+        }
+        return main(++argc, argv);
+    }
+            </pre>
+
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-3">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-3">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" data-min-height="33rem">
+<pre></pre>
+                </div>
+                <div class="px-3 py-1 alert-dark text-center">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" id="result-3-input" class="d-inline" style="opacity: 0;">
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-3',program_3)">运行程序</button>
+                        </div>
+                        <div class="col-4 d-flex align-items-center" id="result-3-input-status">
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+            
+            <div class="p-3 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> <b>argc</b> 和 <b>argv</b> 是主函数的两个参数，分别表示变量个数和变量数组。<br>
+                <span class="badge badge-warning">Tips</span> 由上述代码可以看出，有些情况下，递归的可读性没有循环高。
+            </div>
+
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 
+                我们在本文介绍了函数的递归调用，
+                在<span class="text-primary" onclick="loadPage('day-20.html')">下一篇</span>中，
+                我们将介绍<span class="text-primary" onclick="loadPage('day-20.html')">数组</span>。
+            </p>
+
+
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-19.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-20.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/sprintf.js"></script>
+<script src="js/page_init.js"></script>
+
+<script>
+    function program_1(input, printf) {
+        function main() {
+            function Fibonacci(n) {
+                if (n == 1 || n == 2) return 1;
+                else return Fibonacci(n - 1) + Fibonacci(n - 2);
+            }
+            for (let n = 1; n <= 40; ++n) {
+                printf(sprintf("%10s", Fibonacci(n)));
+                if (n % 10 == 0) printf("\n");
+            }
+            return 0;
+        }
+        return main();
+    }
+
+    function program_2(input, printf) {
+        function fab(n, m) {
+            if (m[n]) {
+                return m[n];
+            } else {
+                m[n] = fab(n - 1, m) + fab(n - 2, m);
+                return m[n];
+            }
+        }
+        function memFab(n) {
+            let m = new Array(50);
+            m[0] = 1;
+            m[1] = 1;
+            for(let i = 2; i < 50; ++i) {
+                m[i] = 0;
+            }
+            return fab(n, m);
+        }
+        for (let n = 1; n <= 40; ++n) {
+            printf(sprintf("%10s", memFab(n)));
+            if (n % 10 == 0) printf("\n");
+        }
+        return 0;
+    }
+
+    function program_3(input, printf) {
+        printf("                  九九乘法表\n\
++----+----+----+----+----+----+----+----+----+\n\
+|   1|   2|   3|   4|   5|   6|   7|   8|   9|\n\
++----+----+----+----+----+----+----+----+----+\n\
+|   2|   4|   6|   8|  10|  12|  14|  16|  18|\n\
++----+----+----+----+----+----+----+----+----+\n\
+|   3|   6|   9|  12|  15|  18|  21|  24|  27|\n\
++----+----+----+----+----+----+----+----+----+\n\
+|   4|   8|  12|  16|  20|  24|  28|  32|  36|\n\
++----+----+----+----+----+----+----+----+----+\n\
+|   5|  10|  15|  20|  25|  30|  35|  40|  45|\n\
++----+----+----+----+----+----+----+----+----+\n\
+|   6|  12|  18|  24|  30|  36|  42|  48|  54|\n\
++----+----+----+----+----+----+----+----+----+\n\
+|   7|  14|  21|  28|  35|  42|  49|  56|  63|\n\
++----+----+----+----+----+----+----+----+----+\n\
+|   8|  16|  24|  32|  40|  48|  56|  64|  72|\n\
++----+----+----+----+----+----+----+----+----+\n\
+|   9|  18|  27|  36|  45|  54|  63|  72|  81|\n\
++----+----+----+----+----+----+----+----+----+\n");
+        return 0;
+    }
+</script>

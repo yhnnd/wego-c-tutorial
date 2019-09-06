@@ -1,0 +1,296 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-16.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-15.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 16 <small class="ml-3 text-primary">if else 条件判断</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-16-1.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 16 <small class="ml-3 text-primary">if else 条件判断</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <div class="card-body">
+                <h4 class="card-text mb-3">if else</h4>
+                <p class="card-text">一个 <b>if</b> 语句由一个布尔表达式后跟一个或多个语句组成。</p>
+                <p class="card-text">一个 <b>if</b> 语句后可跟一个可选的 <b>else</b> 语句。</p>
+                <p class="card-text">如果布尔表达式为 <b>true</b>，则执行 <b>if</b> 块内的代码。如果布尔表达式为 <b>false</b>，则执行 <b>else</b> 块内的代码。</p>
+                <p class="card-text">语法如下：</p>
+            </div>
+            <pre class="prettyprint mb-0">
+    if (expression) {
+        /* 如果表达式为真时执行的语句 */
+    } else {
+        /* 如果表达式为假时执行的语句 */
+    }</pre>
+            <p class="p-3 mb-0">
+                编写一个程序，判断用户输入的数是否能同时被 2，3 和 5 整除。
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int a = 2, b = 3, c = 5;
+        int n;
+        scanf("%d", &amp;n);
+        if (n % a == 0 &amp;&amp; n % b == 0 &amp;&amp; n % c == 0) {
+            printf("%d 可以同时被 %d，%d 和 %d 整除。\n", n, a, b, c);
+        } else {
+            printf("%d 不可以同时被 %d，%d 和 %d 整除。\n", n, a, b, c);
+        }
+        return 0;
+    }</pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" data-min-height="10rem" onclick="$('#result-1-input').focus()">
+<pre></pre>
+                </div>
+                <div class="px-3 py-1 alert-dark text-center">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" id="result-1-input" class="d-inline" style="opacity: 0;">
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-1',console_1,program_1)">运行程序</button>
+                        </div>
+                        <div class="col-4 d-flex align-items-center" id="result-1-input-status">
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <p class="card-text">另外，<b>if</b> 还可以配合 <b>else if</b> 使用。样例如下：</p>
+            </div>
+
+
+
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        int n;
+        scanf("%d", &amp;n);
+        if (n &lt; 0) {
+            printf("%d is negative.\n", n);
+        } else if (n == 0) {
+            printf("%d is zero.\n", n);
+        } else {
+            printf("%d is positive.\n", n);
+        }
+        return 0;
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" data-min-height="10rem" onclick="$('#result-2-input').focus()">
+<pre></pre>
+                </div>
+                <div class="px-3 py-1 alert-dark text-center">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" id="result-2-input" class="d-inline" style="opacity: 0;">
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-2',console_2,program_2)">运行程序</button>
+                        </div>
+                        <div class="col-4 d-flex align-items-center" id="result-2-input-status">
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3 py-1 alert-warning">
+                    <i class="fa fa-quote-left"></i>
+                    <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
+                    <i class="fa fa-quote-right"></i>
+                </div>
+            </div>
+
+
+
+            <p class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span> 
+                <small>一个 if 后可跟零个或一个 else，else 必须在所有 else if 之后。</small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small>一个 if 后可跟零个或多个 else if，else if 必须在 else 之前。</small>
+                <br>
+                <span class="badge badge-warning">Tips</span> 
+                <small>一旦某个 else if 匹配成功，其他的 else if 或 else 将不会被测试。</small>
+            </p>
+
+
+            <p class="mb-0 px-3 py-2 alert-primary text-center border border-top-0 border-secondary">
+                <button class="btn btn-sm btn-outline-primary" data-toggle="collapse" data-target="#comment-area-1" 
+                onclick="if($(this).html()=='显示评论'){$(this).html('隐藏评论')}else{$(this).html('显示评论')}">显示评论</button>
+            </p>
+    
+            <div class="collapse" id="comment-area-1">
+                <div class="mb-0 px-3 py-2" style="clear:both;background:rgb(181, 190, 200);">
+                    <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;" src="img/avatar-cgc186.jpg">
+                    <span class="badge badge-light">cgc186</span>
+                    <br>
+                    <span class="comment-bubble alert-info">
+                        <b>if</b> 后面一定要加 <b>else</b> 吗？
+                    </span>
+                </div>
+            
+                <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                    <span class="badge badge-primary">yhn</span>
+                    <img class="message-avatar" style="width:40px;height:40px;border-radius:20px;filter:brightness(1.4) grayscale(0.1);" src="img/avatar-yhn.jpg">
+                    <br>
+                    <span class="comment-bubble alert-primary text-left">
+                        不一定。如果 <b>else</b> 代码块的内容为空，就可以不写 <b>else</b> 语句。
+                        <wbr>如下：
+                        <pre class="mt-1 d-inline-block w-100 mb-0 prettyprint bg-white">
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        int i = 0;
+        if (i == 0) {
+            i = 1;
+        } else {
+        }
+        printf("%d\n", i);
+        return 0;
+    }</pre>
+                        <div class="d-inline-block w-100 alert mb-1 border-top-0 border-secondary rounded-0 console">
+                            <pre>1
+                            </pre>
+                        </div>
+                        不加 <b>else</b> 的代码如下：
+                        <pre class="mt-1 d-inline-block w-100 mb-0 prettyprint bg-white">
+    #include &lt;stdio.h&gt;
+
+    int main()
+    {
+        int i = 0;
+        if (i == 0) {
+            i = 1;
+        }
+        printf("%d\n", i);
+        return 0;
+    }</pre>
+                        <div class="d-inline-block w-100 alert mb-0 border-top-0 border-secondary rounded-0 console">
+                            <pre>1
+                            </pre>
+                        </div>
+                    </span>
+                </div>
+    
+                <div class="mb-0 px-3 py-2" style="clear:both;text-align:right;background:rgb(181, 190, 200);">
+                    <p class="card-text text-dark text-center">
+                        <small>powered by <a target="_blank" href="http://www.impte.com/chatroom/">ChatRoom</a></small>
+                    </p>
+                </div>
+            </div>
+
+
+            <p class="alert alert-success p-3 mb-0 rounded-0">
+                <span class="badge badge-success">Summary</span> 我们在本文介绍了 <b>if else</b> 条件判断，之后我们会介绍如何将循环和判断结合到一起。
+            </p>
+
+
+
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-15.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50" onclick="loadPage('day-16-1.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>
+
+<script>
+    function program_1(input, printf) {
+        let a = 2, b = 3, c = 5;
+        let n = parseInt(input.val());
+        if (n % a == 0 && n % b == 0 && n % c == 0) {
+            printf(n + " 可以同时被 " + a + "，" + b + " 和 " + c + " 整除。\n");
+        } else {
+            printf(n + " 不可以同时被 " + a + "，" + b + " 和 " + c + " 整除。\n");
+        }
+        return 0;
+    }
+
+    function console_1(_console) {
+        _console.html('<span data-type="input" style="color: lightgreen"></span>\n');
+    }
+
+    
+    function program_2(input, printf) {
+        let n = parseInt(input.val());
+        if (n < 0) {
+            printf(n + " is negative.\n");
+        } else if (n == 0) {
+            printf(n + " is zero.\n");
+        } else {
+            printf(n + " is positive.\n");
+        }
+        return 0;
+    }
+
+    function console_2(_console) {
+        _console.html('<span data-type="input" style="color: lightgreen"></span>\n');
+    }
+</script>

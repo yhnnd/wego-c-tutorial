@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>C Tutorial</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/prettify.min.css">
+    <link rel="stylesheet" href="css/comment.css">
+    <link rel="stylesheet" href="css/width.css">
+    <link rel="stylesheet" href="css/console.css">
+</head>
+
+<body>
+    <style>
+        [onclick],
+        [data-toggle] {
+            cursor: pointer;
+        }
+
+        .br-0 {
+            border-radius: 0;
+        }
+    </style>
+    <div></div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/prettify/prettify.js"></script>
+    <script src="js/console.js"></script>
+    <script>
+        function loadPage(filename) {
+            $("body > div").eq(0).load(filename);
+            $(window).scrollTop(0);
+        }
+
+        function highlight(filename) {
+            let link = $("[onclick=\"loadPage('" + filename + "')\"]");
+            if (link && link.length > 0) {
+                link.parent().attr("class", "list-group-item list-group-item-warning");
+                link.prepend("<i class='fa fa-circle' style='position: relative; left: -1rem;'></i>");
+                link.removeClass("text-primary");
+                let return_button = $(".button-return");
+                return_button.html("<i class='fa fa-lg fa-times'></i>").attr("onclick", "loadPage('" + filename + "')");
+            } else {
+                setTimeout(function () {
+                    highlight(filename);
+                }, 10);
+            }
+        }
+
+        window.onload = function () {
+            if (window.location.hash != "") {
+                $("body > div").eq(0).html("<h1 class='mt-5 py-5 display-3 text-center'>loading...</h1><div class='p-2 text-center'><a class='btn btn-outline-primary' href='index.html'>Home</a></div>");
+                loadPage(window.location.hash.substr(1));
+            } else {
+                loadPage("contents.html");
+            }
+        };
+    </script>
+</body>
+
+</html>

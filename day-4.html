@@ -1,0 +1,106 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-4.html');">
+            目录 <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-3.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 4 <small class="ml-3 text-primary">C 语言关键字</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-5.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 4 <small class="ml-3 text-primary">C 语言关键字</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <p class="p-3">
+                以下是 C 语言保留的关键字。这些关键字不能作为常量名、变量名或其他标识符。
+            </p>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td style="width:25%">auto</td>
+                        <td style="width:25%">else</td>
+                        <td style="width:25%">long</td>
+                        <td style="width:25%">switch</td>
+                    </tr>
+                    <tr>
+                        <td>break</td>
+                        <td>enum</td>
+                        <td>register</td>
+                        <td>typedef</td>
+                    </tr>
+                    <tr>
+                        <td>case</td>
+                        <td>extern</td>
+                        <td>return</td>
+                        <td>union</td>
+                    </tr>
+                    <tr>
+                        <td>char</td>
+                        <td>float</td>
+                        <td>short</td>
+                        <td>unsigned</td>
+                    </tr>
+                    <tr>
+                        <td>const</td>
+                        <td>for</td>
+                        <td>signed</td>
+                        <td>void</td>
+                    </tr>
+                    <tr>
+                        <td>continue</td>
+                        <td>goto</td>
+                        <td>sizeof</td>
+                        <td>volatile</td>
+                    </tr>
+                    <tr>
+                        <td>default</td>
+                        <td>if</td>
+                        <td>static</td>
+                        <td>while</td>
+                    </tr>
+                    <tr>
+                        <td>do</td>
+                        <td>int</td>
+                        <td>struct</td>
+                        <td>double</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer p-0">
+            <div class="btn-group w-100">
+                <div class="btn btn-outline-primary w-50" onclick="loadPage('day-3.html')">
+                    上一页
+                </div>
+                <div class="btn btn-outline-primary w-50" onclick="loadPage('day-5.html')">
+                    下一页
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++ <small>(Windows)</small></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>

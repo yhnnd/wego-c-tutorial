@@ -1,0 +1,488 @@
+﻿<div class="container">
+    <h1 class="display-4 m-lg-3 text-center">
+        <b class="text-dark">C</b> Language Tutorial</h1>
+    <h2 class="text-center">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html');highlight('day-23.html');">
+            目录
+            <var>contents</var>
+        </button>
+    </h2>
+    <hr/>
+    <div class="row mb-3 text-secondary">
+        <div class="col">
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-22.html')">上一页</span>
+            <h2 class="d-inline mobile-hidden">
+                Day 23
+                <small class="ml-3 text-primary">文件输入输出</small>
+            </h2>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-24.html')">下一页</span>
+        </div>
+    </div>
+    <h2 class="mb-3 text-secondary mobile-show">
+        Day 23
+        <small class="ml-3 text-primary">文件输入输出</small>
+    </h2>
+    <div class="card">
+        <div class="card-block">
+            <p class="px-3 pt-3 mb-0">我们知道
+                <b>C</b> 语言的
+                <span class="text-primary" onclick="loadPage('day-9-1.html')">标准输入</span>和
+                <span class="text-primary" onclick="loadPage('day-9.html')">输出</span>。 在编写程序时，如果不指明输入和输出设备，默认的输入设备是键盘，默认的输出设备是显示屏。
+            </p>
+            <p class="px-3 pt-3 mb-0">
+                如果我们想让程序读写文件，可以使用本文讲到的函数，使用这些函数之前，必须引入
+                <b>stdio.h</b> 头文件。
+            </p>
+
+
+            <h4 class="px-3 pt-3 mb-0">
+                <i class="fa fa-hashtag"></i>
+                <b>
+                    <var>fopen</var>
+                </b>
+                和
+                <b>
+                    <var>fclose</var>
+                </b>
+            </h4>
+            <p class="px-3 pt-3 mb-0">
+                <var>fopen</var> 用于打开文件，该函数有两个参数，第一个参数是 filename（文件名），第二个参数是 mode（模式）。
+            </p>
+            <p class="p-3 mb-0">
+                完成文件操作后，使用
+                <var>fclose</var> 关闭文件。
+            </p>
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        char s [101];
+        FILE * fp = fopen("temp.txt", "w");// 写文件(覆盖)
+        fclose(fp);
+        fp = fopen("temp.txt", "a");// 写文件(追加)
+        fclose(fp);
+        fp = fopen("temp.txt", "r");// 读文件
+        fclose(fp);
+        return 0;
+    }
+            </pre>
+        </div>
+
+
+        <div class="card-block">
+            <div class="bg-dark text-white pt-3 pl-3">
+                <span class="badge badge-warning">Tips</span>
+                <small><b>stdio.h</b> 中定义了 <b>stdin</b> 和 <b>stdout</b> 两个文件指针，分别指向标准输入 (<em>standard input</em>) 文件和标准输出 (<em>standard output</em>) 文件。 <var>- yhn</var></small>
+            </div>
+            <div class="bg-dark text-white pt-1 pl-3 pb-3">
+                <span class="badge badge-warning">Tips</span>
+                <small>如果 <b>fopen</b> 打开文件失败，就会返回空指针。 <var>- yhn</var></small>
+            </div>
+        </div>
+        
+
+        <div class="card-block">
+            <h4 class="px-3 pt-3 mb-0">
+                <i class="fa fa-hashtag"></i>
+                读文件的函数
+                <b>
+                    <var>fgetc(getc)</var>
+                    <var>fgets</var>
+                    <var>fscanf</var>
+                </b>
+            </h4>
+            
+            <p class="p-3 mb-0">
+                <i class="fa fa-file-o"></i>
+                文件
+                <var>day-23-1.txt</var>
+            </p>
+            <pre class="border border-secondary px-4 py-2 mb-0 alert-warning" style="font-family: sans-serif;font-style: italic;">
+From fairest creatures we desire increase,
+That thereby beauty's rose might never die,
+But as the riper should by time decease,
+His tender heir might bear his memory</pre>
+
+            <p class="p-3 mb-0">
+                <i class="fa fa-circle-o"></i>
+                用函数
+                <b>
+                    <var>fgets</var>
+                </b>
+                读取文件
+                <var>day-23-1.txt</var>
+            </p>
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        char s [101];
+        FILE * fp = fopen("day-23-1.txt", "r");
+        if (fp == NULL) {
+            puts("file does not exist.");
+        } else {
+            while (fgets(s, 100, fp) != NULL) {
+                printf(s);
+            }
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" style="min-height: 10rem;">
+                    <pre>From fairest creatures we desire increase,
+That thereby beauty's rose might never die,
+But as the riper should by time decease,
+His tender heir might bear his memory
+--------------------------------
+Process exited after 0.003593 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <p class="p-3 mb-0">
+                <i class="fa fa-circle-o"></i>
+                用函数
+                <b>
+                    <var>getc</var>
+                </b>
+                读取文件
+                <var>day-23-1.txt</var>
+            </p>
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        char c;
+        FILE * fp = fopen("day-23-1.txt", "r");
+        if (fp == NULL) {
+            puts("file does not exist.");
+        } else {
+            while ((c = fgetc(fp)) != EOF) {
+                putchar(c);
+            }
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" style="min-height: 10rem;">
+                    <pre>From fairest creatures we desire increase,
+That thereby beauty's rose might never die,
+But as the riper should by time decease,
+His tender heir might bear his memory
+--------------------------------
+Process exited after 0.01012 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+            <p class="p-3 mb-0">
+                <i class="fa fa-circle-o"></i>
+                用函数
+                <b>
+                    <var>fscanf</var>
+                </b>
+                读取文件
+                <var>day-23-1.txt</var>
+            </p>
+
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    #include &lt;string.h&gt;
+
+    int main() {
+        char s [101];
+        FILE * fp = fopen("day-23-1.txt", "r");
+        if (fp == NULL) {
+            puts("file does not exist.");
+        } else {
+            int letterCount = 0, lineCount = 0, lineCountPrev = 0;
+            while (fscanf(fp, "%s", s) == 1) {
+                printf("%s", s);
+                letterCount += strlen(s) + 1;
+                lineCount = letterCount / 42;
+                if (lineCount != lineCountPrev) {
+                    printf("\n");
+                    lineCountPrev = lineCount;
+                } else {
+                    printf(" ");
+                }
+            }
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-3">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-3">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" style="min-height: 10rem;">
+                    <pre>From fairest creatures we desire increase,
+That thereby beauty's rose might never die,
+But as the riper should by time decease,
+His tender heir might bear his memory
+--------------------------------
+Process exited after 0.005844 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+
+            <h4 class="px-3 pt-3 mb-0">
+                <i class="fa fa-hashtag"></i>
+                写文件的函数
+                <b>
+                    <var>fputc(putc)</var>
+                    <var>fputs</var>
+                    <var>fprintf</var>
+                </b>
+            </h4>
+
+            <p class="p-3 mb-0">
+                <i class="fa fa-circle-o"></i>
+                用函数
+                <b>
+                    <var>putc</var>
+                </b>
+                写文件
+                <small>（为了便于演示，这里的输出文件是标准输出，也就是显示器）</small>
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    #include &lt;string.h&gt;
+
+    int main() {
+        char s[] = "From fairest creatures we desire increase,\n\
+    That thereby beauty's rose might never die,\n\
+    But as the riper should by time decease,\n\
+    His tender heir might bear his memory";
+        FILE * fp = stdout;
+        if (fp == NULL) {
+            puts("file does not exist.");
+        } else {
+            for(int i = 0, len = strlen(s); i &lt; len; ++i) {
+                putc(s[i], fp);
+            }
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-4">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-4">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" style="min-height: 10rem;">
+                    <pre>From fairest creatures we desire increase,
+That thereby beauty's rose might never die,
+But as the riper should by time decease,
+His tender heir might bear his memory
+--------------------------------
+Process exited after 0.01166 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+            <p class="p-3 mb-0">
+                <i class="fa fa-circle-o"></i>
+                用函数
+                <b>
+                    <var>fputs</var>
+                </b>
+                写文件
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        char s[][64] = {
+            "From fairest creatures we desire increase,",
+            "That thereby beauty's rose might never die,",
+            "But as the riper should by time decease,",
+            "His tender heir might bear his memory"
+        };
+        FILE * fp = stdout;
+        if (fp == NULL) {
+            puts("file does not exist.");
+        } else {
+            for(int i = 0; i &lt; sizeof(s)/sizeof(s[0]); ++i) {
+                fputs(s[i], fp);
+                fputc('\n', fp);
+            }
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-5">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-5">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" style="min-height: 10rem;">
+                    <pre>From fairest creatures we desire increase,
+That thereby beauty's rose might never die,
+But as the riper should by time decease,
+His tender heir might bear his memory
+
+--------------------------------
+Process exited after 0.003415 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+
+
+
+            <p class="p-3 mb-0">
+                <i class="fa fa-circle-o"></i>
+                用函数
+                <b>
+                    <var>fprintf</var>
+                </b>
+                写文件
+            </p>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        char s[][64] = {
+            "From fairest creatures we desire increase,",
+            "That thereby beauty's rose might never die,",
+            "But as the riper should by time decease,",
+            "His tender heir might bear his memory"
+        };
+        FILE * fp = stdout;
+        if (fp == NULL) {
+            puts("file does not exist.");
+        } else {
+            for(int i = 0; i &lt; sizeof(s)/sizeof(s[0]); ++i) {
+                fprintf(fp, "%s\n", s[i]);
+            }
+        }
+        return 0;
+    }
+            </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-6">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-6">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console" style="min-height: 10rem;">
+                    <pre>From fairest creatures we desire increase,
+That thereby beauty's rose might never die,
+But as the riper should by time decease,
+His tender heir might bear his memory
+
+--------------------------------
+Process exited after 0.003219 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            
+
+
+            <blockquote class="mt-3">
+                <footer class="blockquote-footer text-right pr-3">
+                    <span class="text-dark">2018年4月8日发布</span>
+                </footer>
+            </blockquote>
+
+            <div class="card-footer p-0">
+                <div class="btn-group w-100">
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-22.html')">
+                        上一页
+                    </div>
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-24.html')">
+                        下一页
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-danger mr-3">电脑上还没有 C 语言编译器 ?</span>
+                <a class="btn btn-primary" target="_blank" href="resources/Dev-Cpp-Setup.exe" download="dev-cpp-setup.exe">下载 Dev C++
+                    <small>(Windows)</small>
+                </a>
+            </div>
+            <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-2 text-center">
+                <span class="text-primary mr-3">或者</span>
+                <a class="btn btn-secondary" target="_blank" href="https://sourceforge.net/projects/orwelldevcpp/files/latest/download">下载 Dev C++
+                    <small>(Windows)</small>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/is_mobile.js"></script>
+<script src="js/page_init.js"></script>
