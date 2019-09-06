@@ -1,0 +1,7 @@
+.console {
+    background: black;
+}
+.console pre {
+    color: white;
+    margin-bottom: 0;
+}
