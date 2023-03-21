@@ -3,7 +3,7 @@ function close_program(button, _console, input, input_status) {
     // 清空输出
     _console.empty();
     // 关闭窗口
-    _console.closest(".console").addClass("p-0").css("min-height", "0");
+    _console.closest(".console").addClass("p-0");
     // 清空输入
     input.val("");
     // 清空程序执行状态
@@ -55,7 +55,11 @@ function exit(controls, return_value) {
 // 运行 program 程序
 function operating_system(button, _console, input, input_status, begin_time, program) {
     // 定义标准输出函数
-    let printf = function (str) {
+    const printf = function (str) {
+        // Remove loading mark
+        if (_console.find(".loading-mark").length) {
+            _console.find(".loading-mark").remove();
+        }
         _console.append("<span>" + str + "</span>");
     };
     // 执行 program 程序
@@ -88,7 +92,7 @@ function start_program(button, console_id, program_console, program) {
     // 记录程序运行开始时刻
     let begin_time = new Date();
     // 开启控制台
-    console_container.removeClass("p-0").css("min-height", console_container.data("min-height"));
+    console_container.removeClass("p-0");
     if (program_console && _console) {
         // 运行控制台输出
         program_console(_console);
@@ -167,7 +171,7 @@ function loop(button, console_id, program_console, program, controls) {
     // 记录程序运行开始时刻
     let begin_time = new Date();
     // 开启控制台
-    console_container.removeClass("p-0").css("min-height", console_container.data("min-height"));
+    console_container.removeClass("p-0");
     // 定义标准输出函数
     let printf = function (str) {
         _console.append("<span>" + str + "</span>");
@@ -226,4 +230,25 @@ function loop(button, console_id, program_console, program, controls) {
             return program(controls, input, printf);
         }, 1);
     }
+}
+
+
+
+
+// Run program after printing the loading mark.
+function printLoadingMarkAndRun(button, console_id, program_console, program) {
+    // Print loading mark
+    const _console = $('#' + console_id + ' .console pre');
+    const loadingMark = $("<div class='loading-mark text-center w-100 bg-secondary' style='height: 12rem;padding-top: 4rem;'></div>");
+    loadingMark.append("<i class='fa fa-spinner fa-pulse fa-3x fa-fw' style='font-size: 4rem;'></i>");
+    _console.append(loadingMark);
+    setTimeout(() => {
+        $(button).next().off("click").on("click", function(e) {
+            setTimeout(() => {
+                // Run Program
+                run($(e.target).prev(), console_id, program_console, program);
+            }, 1);
+        });
+        $(button).next().click();
+    }, 1);
 }

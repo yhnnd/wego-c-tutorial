@@ -140,7 +140,7 @@ Press any key to continue . . .</pre>
                 </div>
             </div>
             <div class="collapse" id="result-1">
-                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" data-min-height="12rem">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" style="min-height: 12rem">
 <pre></pre>
                 </div>
                 <div class="px-3 py-1 alert-dark text-center">
@@ -149,7 +149,8 @@ Press any key to continue . . .</pre>
                             <input type="text" id="result-1-input" class="d-inline" style="opacity: 0;">
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-1',program_1)">运行程序</button>
+                            <button class="btn btn-sm btn-dark" onclick="printLoadingMarkAndRun(this,'result-1',program_1)">运行程序</button>
+                            <button class="invisible"></button>
                         </div>
                         <div class="col-4 d-flex align-items-center" id="result-1-input-status">
                         </div>
@@ -216,7 +217,7 @@ Press any key to continue . . .</pre>
                 </div>
             </div>
             <div class="collapse" id="result-2">
-                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" data-min-height="12rem">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" style="min-height: 12rem">
 <pre></pre>
                 </div>
                 <div class="px-3 py-1 alert-dark text-center">
@@ -296,7 +297,7 @@ Press any key to continue . . .</pre>
                 </div>
             </div>
             <div class="collapse" id="result-3">
-                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" data-min-height="33rem">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" style="min-height: 33rem">
 <pre></pre>
                 </div>
                 <div class="px-3 py-1 alert-dark text-center">
@@ -367,18 +368,15 @@ Press any key to continue . . .</pre>
 
 <script>
     function program_1(input, printf) {
-        function main() {
-            function Fibonacci(n) {
-                if (n == 1 || n == 2) return 1;
-                else return Fibonacci(n - 1) + Fibonacci(n - 2);
-            }
-            for (let n = 1; n <= 40; ++n) {
-                printf(sprintf("%10s", Fibonacci(n)));
-                if (n % 10 == 0) printf("\n");
-            }
-            return 0;
+        function Fibonacci(n) {
+            if (n == 1 || n == 2) return 1;
+            else return Fibonacci(n - 1) + Fibonacci(n - 2);
         }
-        return main();
+        for (let n = 1; n <= 40; ++n) {
+            printf(sprintf("%10s", Fibonacci(n)));
+            if (n % 10 == 0) printf("\n");
+        }
+        return 0;
     }
 
     function program_2(input, printf) {
