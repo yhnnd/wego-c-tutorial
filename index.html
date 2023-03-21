@@ -9,57 +9,94 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/prettify.min.css">
-    <link rel="stylesheet" href="css/comment.css">
-    <link rel="stylesheet" href="css/width.css">
-    <link rel="stylesheet" href="css/console.css">
-</head>
-
-<body>
-    <style>
-        [onclick],
-        [data-toggle] {
-            cursor: pointer;
-        }
-
-        .br-0 {
-            border-radius: 0;
-        }
-    </style>
-    <div></div>
+    <!-- <link rel="stylesheet" href="css/comment.css"> -->
+    <!-- <link rel="stylesheet" href="css/width.css"> -->
+    <!-- <link rel="stylesheet" href="css/console.css"> -->
+    <link rel="stylesheet" href="css/site.css">
+    
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/prettify/prettify.js"></script>
     <script src="js/console.js"></script>
+    <script src="js/site.js"></script>
+</head>
+
+<body>
+    <div>
+        <!-- <h1 class='mt-5 py-5 display-3 text-center'>loading...</h1> -->
+        <div class='p-2 text-center'>
+            <a class='btn btn-outline-primary' href='index.html'>Home</a>
+        </div>
+        
+        <div class="container py-4">
+            <ul class="list-group text-center">
+                <li class="list-group-item active">
+                    <div class="row">
+                        <div class="col-4">
+                            <small class="float-left" onclick="window.location.href='index.html'">
+                                <i class="fa fa-lg fa-home"></i>
+                            </small>
+                        </div>
+                        <div class="col-4">
+                            <b>目录</b>
+                        </div>
+                        <div class="col-4">
+                            <small class="float-right button-return"></small>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-1.html')">1 基本元素</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-2.html')">2 基本语法</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-3.html')">3 标识符</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-4.html')">4 关键字</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-5.html')">5 注释</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-6.html')">6 变量</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-7.html')">7 变量的存储</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-8.html')">8 常量</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-9.html')">9 格式化输出</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-9-1.html')">9.1 格式化输入</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-10.html')">10 转义字符</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-11.html')">11 字符串</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-12.html')">12 基本运算符</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-12-1.html')">12.1 其他运算符</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-12-2.html')">12.2 位运算符</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-12-3.html')">12.3 其他赋值运算符</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-13.html')">13 表达式和语句</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-14.html')">14 while 循环</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-14-1.html')">14.1 do while 循环</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-15.html')">15 for 循环</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-16.html')">16 if else 条件判断</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-16-1.html')">16.1 判断和循环的组合</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-17.html')">17 continue break 循环控制</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-18.html')">18 switch case 多重选择</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-19.html')">19 函数</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-19-1.html')">19.1 函数的递归调用</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-20.html')">20 数组</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-21.html')">21 指针</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-21-1.html')">21.1 指向数组的指针</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-21-2.html')">21.2 指向函数的指针</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-21-3.html')">21.3 向函数传递指针</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-21-4.html')">21.4 向函数传递数组指针</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-21-5.html')">21.5 向函数传递函数指针</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-22.html')">22 字符串函数</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-23.html')">23 文件输入输出</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-24.html')">24 struct (结构体)</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-24-1.html')">24.1 结构体数组</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-24-2.html')">24.2 结构体指针</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-25.html')">25 union (联合体)</span></li>
+                <li class="list-group-item"><span class="text-primary" onclick="loadPage('day-26.html')">26 enum (枚举)</span></li>
+                <li class="list-group-item list-group-item-primary"><span onclick="loadPage('day-27.html')">27 内存分配与释放</span></li>
+                <li class="list-group-item"><span class="text-primary unfinished" onclick="loadPage('day-28.html')">28 typedef</span></li>
+                <li class="list-group-item"><span class="text-primary unfinished" onclick="loadPage('day-29.html')">29 其他预处理指令</span></li>
+                <li class="list-group-item"><span class="text-primary unfinished" onclick="loadPage('day-30.html')">30 linked list (链表)</span></li>
+                <li class="list-group-item list-group-item-success"><span onclick="loadPage('appendix.html')"><b>附录</b></span></li>
+            </ul>
+        </div>
+    </div>
+
     <script>
-        function loadPage(filename) {
-            $("body > div").eq(0).load(filename);
-            $(window).scrollTop(0);
-        }
-
-        function highlight(filename) {
-            let link = $("[onclick=\"loadPage('" + filename + "')\"]");
-            if (link && link.length > 0) {
-                link.parent().attr("class", "list-group-item list-group-item-warning");
-                link.prepend("<i class='fa fa-circle' style='position: relative; left: -1rem;'></i>");
-                link.removeClass("text-primary");
-                let return_button = $(".button-return");
-                return_button.html("<i class='fa fa-lg fa-times'></i>").attr("onclick", "loadPage('" + filename + "')");
-            } else {
-                setTimeout(function () {
-                    highlight(filename);
-                }, 10);
-            }
-        }
-
-        window.onload = function () {
-            if (window.location.hash != "") {
-                $("body > div").eq(0).html("<h1 class='mt-5 py-5 display-3 text-center'>loading...</h1><div class='p-2 text-center'><a class='btn btn-outline-primary' href='index.html'>Home</a></div>");
-                loadPage(window.location.hash.substr(1));
-            } else {
-                loadPage("contents.html");
-            }
-        };
+        $(".unfinished").after('<span class="badge-wrapper"><span class="badge badge-secondary">未完成</span></span>');
     </script>
 </body>
 

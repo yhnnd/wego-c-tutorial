@@ -1,17 +1,31 @@
-<style>
-    .badge-wrapper {
-        position: absolute;
-        margin-top: -1.5px;
-        margin-left: .5rem;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>C Tutorial</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/prettify.min.css">
+    <link rel="stylesheet" href="css/site.css">
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/prettify/prettify.js"></script>
+    <script src="js/console.js"></script>
+    <script src="js/site.js"></script>
+</head>
+
+<body>
 <div class="container py-4">
     <ul class="list-group text-center">
         <li class="list-group-item active">
             <div class="row">
                 <div class="col-4">
-                    <small class="float-left" onclick="window.location.href='../index.html'">
+                    <small class="float-left" onclick="window.location.href='index.html'">
                         <i class="fa fa-lg fa-home"></i>
                     </small>
                 </div>
@@ -74,3 +88,5 @@
 <script>
     $(".unfinished").after('<span class="badge-wrapper"><span class="badge badge-secondary">未完成</span></span>');
 </script>
+</body>
+</html>
