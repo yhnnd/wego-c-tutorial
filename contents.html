@@ -30,7 +30,7 @@
                     </small>
                 </div>
                 <div class="col-4">
-                    <b>目录</b>
+                    <b onclick="loadPage('contents.html')">目录</b>
                 </div>
                 <div class="col-4">
                     <small class="float-right button-return"></small>
@@ -87,6 +87,11 @@
 
 <script>
     $(".unfinished").after('<span class="badge-wrapper"><span class="badge badge-secondary">未完成</span></span>');
+
+    if (window.location.search.startsWith("?highlight=")) {
+        const filename = window.location.search.split("?highlight=")[1].split("&")[0];
+        highlight(filename);
+    }
 </script>
 </body>
 </html>
