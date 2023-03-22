@@ -76,7 +76,7 @@
                 <div class="px-3 py-1 alert-dark text-center">
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" id="result-1-input" class="d-inline" style="opacity: 0;"/>
+                            <input type="text" id="result-1-input" class="hidden"/>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm btn-dark" onclick="run(this,'result-1',console_1,program_1)">运行程序</button>
@@ -131,7 +131,7 @@
                 <div class="px-3 py-1 alert-dark text-center">
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" id="result-2-input" class="d-inline" style="opacity: 0;"/>
+                            <input type="text" id="result-2-input" class="hidden"/>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm btn-dark" onclick="run(this,'result-2',console_2,program_2)">运行程序</button>
@@ -185,7 +185,7 @@
                 <div class="px-3 py-1 alert-dark text-center">
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" id="result-3-input" class="d-inline" style="opacity: 0;"/>
+                            <input type="text" id="result-3-input" class="hidden"/>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm btn-dark" onclick="run(this,'result-3',console_3,program_3)">运行程序</button>
@@ -238,7 +238,7 @@
                 <div class="px-3 py-1 alert-dark text-center">
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" id="result-4-input" class="d-inline" style="opacity: 0;"/>
+                            <input type="text" id="result-4-input" class="hidden"/>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm btn-dark" onclick="run(this,'result-4',console_4,program_4)">运行程序</button>
@@ -296,7 +296,7 @@
                 <div class="px-3 py-1 alert-dark text-center">
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" id="result-5-input" class="d-inline" style="opacity: 0;"/>
+                            <input type="text" id="result-5-input" class="hidden"/>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm btn-dark" onclick="run(this,'result-5',console_5,program_5)">运行程序</button>
@@ -355,7 +355,7 @@
                 <div class="px-3 py-1 alert-dark text-center">
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" id="result-6-input" class="d-inline" style="opacity: 0;"/>
+                            <input type="text" id="result-6-input" class="hidden"/>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm btn-dark" onclick="run(this,'result-6',console_6,program_6)">运行程序</button>
@@ -413,7 +413,7 @@
                 <div class="px-3 py-1 alert-dark text-center">
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" id="result-7-input" class="d-inline" style="opacity: 0;"/>
+                            <input type="text" id="result-7-input" class="hidden"/>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm btn-dark" onclick="run(this,'result-7',console_7,program_7)">运行程序</button>
@@ -713,28 +713,29 @@
 <script src="js/sprintf.js"></script>
 <script>
     function program_1(input, printf) {
-        let a = input.val();
+        const inputs = $("#result-1").find(".console").find("pre").find("[data-type='input']");
+        let a = inputs.eq(0).text();
         printf(sprintf("length of \"%s\" is %d.\n", a, a.length));
         return 0;
     }
 
     function console_1(_console) {
         _console.html('<span data-type="output">please input a string (no more than 100 chars)</span>\n' +
-            '<span data-type="input" style="color: lightgreen"></span>\n');
+            '<span data-type="input"></span>\n');
     }
 
 
     function program_2(input, printf) {
-        let a, b = "";
-        a = input.val();
-        b = a;
+        const inputs = $("#result-2").find(".console").find("pre").find("[data-type='input']");
+        let a = inputs.eq(0).text();
+        let b = a;
         printf(sprintf("b = %s\n", b));
         return 0;
     }
 
     function console_2(_console) {
         _console.html('<span data-type="output">please input a string (no more than 100 chars)</span>\n<span data-type="output">a = </span>' +
-            '<span data-type="input" style="color: lightgreen"></span>\n');
+            '<span data-type="input"></span>\n');
     }
 
 
@@ -750,8 +751,8 @@
 
     function console_3(_console) {
         _console.html('<span data-type="output">please input two strings</span>\n' +
-            '<span data-type="input" style="color: lightgreen"></span>' +
-            '<span data-type="input" style="color: lightgreen"></span>\n');
+            '<span data-type="input"></span>' +
+            '<span data-type="input"></span>\n');
     }
 
 
@@ -767,8 +768,8 @@
 
     function console_4(_console) {
         _console.html('<span data-type="output">please input two strings</span>\n' +
-            '<span data-type="input" style="color: lightgreen"></span>' +
-            '<span data-type="input" style="color: lightgreen"></span>\n');
+            '<span data-type="input"></span>' +
+            '<span data-type="input"></span>\n');
     }
 
 
@@ -789,8 +790,8 @@
 
     function console_5(_console) {
         _console.html('<span data-type="output">please input a string and a char</span>\n' +
-            '<span data-type="input" style="color: lightgreen"></span>' +
-            '<span data-type="input" style="color: lightgreen"></span>\n');
+            '<span data-type="input"></span>' +
+            '<span data-type="input"></span>\n');
     }
 
 
@@ -811,8 +812,8 @@
 
     function console_6(_console) {
         _console.html('<span data-type="output">please input a string and a substring</span>\n' +
-            '<span data-type="input" style="color: lightgreen"></span>' +
-            '<span data-type="input" style="color: lightgreen"></span>\n');
+            '<span data-type="input"></span>' +
+            '<span data-type="input"></span>\n');
     }
 
 
@@ -844,7 +845,7 @@
 
     function console_7(_console) {
         _console.html('<span data-type="output">please input two strings</span>\n' +
-            '<span data-type="input" style="color: lightgreen"></span>' +
-            '<span data-type="input" style="color: lightgreen"></span>\n');
+            '<span data-type="input"></span>' +
+            '<span data-type="input"></span>\n');
     }  
 </script>

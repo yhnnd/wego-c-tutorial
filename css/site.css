@@ -16,12 +16,66 @@
 }
 
 /* console.css */
+.hidden {
+    opacity: 0;
+}
+
 .console {
     background: black;
 }
+
 .console pre {
     color: white;
     margin-bottom: 0;
+}
+
+.console pre [data-type="input"] {
+    color: lightgreen;
+}
+
+.console pre [data-type="input-spaces"] {
+    color: lightgreen;
+}
+
+/* console input blinking cursor */
+.console pre .has-blinking-cursor {
+  position: relative;
+  display: inline-block;
+}
+
+.console pre .has-blinking-cursor::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -.75rem;
+  /* Remove display: inline-block if not required to be on the same line as text etc */
+  display: inline-block;
+  background-color: lightgray;
+  vertical-align: top;
+  width: 10px;
+  /* Set height to the line height of .text */
+  height: 24px;
+  /* 
+  Animation paramaters:
+  blink = animation-name, 
+  1s = animation-duration, 
+  step-end = animation-timing-function,
+  infinite = animation-iteration-count
+  */
+  -webkit-animation: blink 1s step-end infinite;
+  animation: blink 1s step-end infinite;
+}
+
+@-webkit-keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
 }
 
 /* width.css */

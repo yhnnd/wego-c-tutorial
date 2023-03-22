@@ -165,7 +165,7 @@
                 <div class="px-3 py-1 alert-dark text-center">
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" id="result-1-input" class="d-inline" style="opacity: 0;">
+                            <input type="text" id="result-1-input" class="hidden">
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm btn-dark" onclick="run(this,'result-1',console_1,program_1)">运行程序</button>
@@ -248,7 +248,7 @@
     function console_1(_console) {
         _console.html('<span data-type="output">输入 0 设置星期的第一天为星期日</span>\n' +
             '<span data-type="output">输入 1 设置星期的第一天为星期一</span>\n' +
-            '<span data-type="input" style="color: lightgreen"></span>\n');
+            '<span data-type="input"></span>\n');
     }
 </script>
 </body>
