@@ -292,9 +292,9 @@ Press any key to continue . . .</pre>
             </blockquote>
 
             <div class="card-body border-top border-secondary">
-                <p class="card-text">
-                    使用 <b>sscanf</b> 可以从字符串中读取数据
-                    <span class="float-right text-muted"><small>Added on March 23 2023</small></span>
+                <p class="card-text d-block d-md-flex justify-content-between">
+                    <span class="d-block w-100">使用 <b>sscanf</b> 可以从字符串中读取数据</span>
+                    <span class="d-block w-100 text-muted text-right"><small>Added on March 23 2023</small></span>
                 </p>
             </div>
             <pre class="prettyprint mb-0">
@@ -303,10 +303,10 @@ Press any key to continue . . .</pre>
     
     int main () {
         char s[32], weekday[32], rest[32];
-        strcpy( s, "Saturday March 25 1989" );
-        sscanf( s, "%s %32[^\n]", weekday, s);
-        printf("weekday = %s, rest = %s\n", weekday, s );
-        return (0);
+        strcpy(s, "Saturday March 25 1989");
+        sscanf(s, "%s %32[^\n]", weekday, rest);
+        printf("weekday = %s, rest = %s\n", weekday, rest);
+        return 0;
     }       </pre>
             <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
                 <div class="row">
@@ -329,19 +329,36 @@ Process exited after 0.008365 seconds with return value 0
 Press any key to continue . . .</pre>
                 </div>
             </div>
-            <p class="p-3 mb-0 bg-dark text-white">
-                <span class="badge badge-warning">Tips</span>
-                <small>
-                    <span>参考</span>
-                    <span><i>How do you allow spaces to be entered using scanf?</i></span>
-                    <br>
-                    <span class="d-inline-block w-100 text-right pr-2">
-                        <a href="https://stackoverflow.com/questions/1247989/how-do-you-allow-spaces-to-be-entered-using-scanf" target="_blank">
-                            <span>https://stackoverflow.com/questions/1247989/how-do-you-allow-spaces-to-be-entered-using-scanf</span>
-                        </a>
-                    </span>
-                </small>
-            </p>
+            <div class="p-3 mb-0 bg-dark text-white">
+                <div>
+                    <span class="badge badge-warning">Tips</span>
+                    <small>
+                        <span>参考材料</span>
+                    </small>
+                </div>
+                <ul class="d-block mt-1 mb-2 pl-0">
+                    <li class="d-block d-xl-flex justify-content-between">
+                        <small class="d-block">
+                            <i>How do you allow spaces to be entered using scanf?</i>
+                        </small>
+                        <small class="d-block">
+                            <a href="https://stackoverflow.com/questions/1247989/how-do-you-allow-spaces-to-be-entered-using-scanf" target="_blank">
+                                <span>https://stackoverflow.com/questions/1247989/how-do-you-allow-spaces-to-be-entered-using-scanf</span>
+                            </a>
+                        </small>
+                    </li>
+                    <li class="d-block d-xl-flex justify-content-between">
+                        <small class="d-block">
+                            <i>C library function - sscanf()</i>
+                        </small>
+                        <small class="d-block">
+                            <a href="https://www.tutorialspoint.com/c_standard_library/c_function_sscanf.htm" target="_blank">
+                                <span>https://www.tutorialspoint.com/c_standard_library/c_function_sscanf.htm</span>
+                            </a>
+                        </small>
+                    </li>
+                </ul>
+            </div>
 
             <div class="card-footer p-0">
                 <div class="btn-group w-100">
