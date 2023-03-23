@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>C Tutorial</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/4.6.2/bootstrap.min.css">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/prettify.min.css">
     <link rel="stylesheet" href="css/site.css">
@@ -216,7 +216,10 @@ Press any key to continue . . .</pre>
                     </tr>
                 </tbody>
             </table>
-            <p class="p-3 mb-0"><span>表五</span> <b>scanf()</b> <span>的转换修饰符</span></p>
+
+            <p class="p-3 mb-0 border-top border-secondary">
+                <span>表五</span> <b>scanf()</b> <span>的转换修饰符</span>
+            </p>
             <table class="table table-sm">
                 <thead class="thead-inverse">
                     <tr>
@@ -287,6 +290,59 @@ Press any key to continue . . .</pre>
             <blockquote>
                 <footer class="blockquote-footer text-right pr-3">摘自 <cite title="C Primer Plus">[(美) Stephen Prata] C Primer Plus (第五版)</cite></footer>
             </blockquote>
+
+            <div class="card-body border-top border-secondary">
+                <p class="card-text">
+                    使用 <b>sscanf</b> 可以从字符串中读取数据
+                    <span class="float-right text-muted"><small>Added on March 23 2023</small></span>
+                </p>
+            </div>
+            <pre class="prettyprint mb-0">
+    #include &lt;stdio.h&gt;
+    #include &lt;string.h&gt;
+    
+    int main () {
+        char s[32], weekday[32], rest[32];
+        strcpy( s, "Saturday March 25 1989" );
+        sscanf( s, "%s %32[^\n]", weekday, s);
+        printf("weekday = %s, rest = %s\n", weekday, s );
+        return (0);
+    }       </pre>
+            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
+                        <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
+                            <span class="fa fa-lg fa-question-circle"></span> 以上代码编译的程序执行后会输出什么结果？
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-2">执行结果</button>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="result-2">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console">
+                    <pre>
+weekday = Saturday, rest = March 25 1989
+--------------------------------
+Process exited after 0.008365 seconds with return value 0
+Press any key to continue . . .</pre>
+                </div>
+            </div>
+            <p class="p-3 mb-0 bg-dark text-white">
+                <span class="badge badge-warning">Tips</span>
+                <small>
+                    <span>参考</span>
+                    <span><i>How do you allow spaces to be entered using scanf?</i></span>
+                    <br>
+                    <span class="d-inline-block w-100 text-right pr-2">
+                        <a href="https://stackoverflow.com/questions/1247989/how-do-you-allow-spaces-to-be-entered-using-scanf" target="_blank">
+                            <span>https://stackoverflow.com/questions/1247989/how-do-you-allow-spaces-to-be-entered-using-scanf</span>
+                        </a>
+                    </span>
+                </small>
+            </p>
+
             <div class="card-footer p-0">
                 <div class="btn-group w-100">
                     <div class="btn btn-outline-primary w-50" onclick="loadPage('day-9.html')">
