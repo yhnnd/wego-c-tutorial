@@ -246,12 +246,12 @@ int main() {
                 hasError = true;
         }
         if (hasError) {
-            puts(br);
+            printf("%s", br);
             break;
         } else {
             disableBookTopBorder = true;
             printf("|%64s |\n", "Press [ENTER]");
-            puts(br);
+            printf("%s", br);
             char c = getchar();
             if (c != '\n') {
                 while ((c = getchar()) != '\n' && c != EOF) {
