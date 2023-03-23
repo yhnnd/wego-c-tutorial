@@ -14,10 +14,9 @@ struct book {
 
 int printPattern(const char mode, const char searchMode, const char * str, const char * pattern) {
     int j, pos;
-    char *substr;
     if (mode == searchMode && pattern != NULL) {
         printf("| %20s ", "");
-        substr = strcasestr(str, pattern);
+        char * substr = strcasestr(str, pattern);
         if (substr != NULL) {
             pos = (int) (substr - str);
         }
@@ -136,8 +135,8 @@ int main() {
                     break;
                 }
                 if (strlen(rest) > 0) {
-                    strncat(seg[2], " ", sizeof(seg[2]));
-                    strncat(seg[2], rest, sizeof(seg[2]));
+                    strcat(seg[2], " ");
+                    strncat(seg[2], rest, sizeof(rest));
                 }
                 if (mode == 'n') {
                     if (atoi(seg[2]) > 0 && atoi(seg[2]) <= max) {
@@ -171,8 +170,8 @@ int main() {
                             strncpy(seg[1], seg[2], sizeof(seg[1]));
                         }
                     } else if (strlen(seg[2]) > 0) {
-                        strncat(seg[1], " ", sizeof(seg[1]));
-                        strncat(seg[1], seg[2], sizeof(seg[1]));
+                        strcat(seg[1], " ");
+                        strncat(seg[1], seg[2], sizeof(seg[2]));
                     }
                     for (i = 0; i < max; ++i) {
                         if (strcasestr(Books[i].title, seg[1]) != NULL) {
@@ -218,8 +217,8 @@ int main() {
                 break;
             case 'a':
                 if (strlen(rest) > 0) {
-                    strncat(seg[2], " ", sizeof(seg[2]));
-                    strncat(seg[2], rest, sizeof(seg[2]));
+                    strcat(seg[2], " ");
+                    strncat(seg[2], rest, sizeof(rest));
                 }
                 Books = (struct book *) realloc(Books, ++max * sizeof(struct book));
                 ptr = Books + max - 1;
@@ -235,8 +234,8 @@ int main() {
                         break;
                     default:
                         if (strlen(seg[2]) > 0) {
-                            strncat(seg[1], " ", sizeof(seg[1]));
-                            strncat(seg[1], seg[2], sizeof(seg[1]));
+                            strcat(seg[1], " ");
+                            strncat(seg[1], seg[2], sizeof(seg[2]));
                         }
                         strncpy(ptr->title, seg[1], sizeof(ptr->title));
                 }
@@ -247,12 +246,12 @@ int main() {
                 hasError = true;
         }
         if (hasError) {
-            printf(br);
+            puts(br);
             break;
         } else {
             disableBookTopBorder = true;
             printf("|%64s |\n", "Press [ENTER]");
-            printf(br);
+            puts(br);
             char c = getchar();
             if (c != '\n') {
                 while ((c = getchar()) != '\n' && c != EOF) {
