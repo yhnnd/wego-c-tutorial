@@ -58,7 +58,7 @@
         printf("%d %hd %ld %f %lf", a, b, c, d, e);
         return 0;
     }       </pre>
-            <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
+            <div class="alert alert-secondary mb-0 border-top-0 border-bottom-0 border-secondary rounded-0">
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-8 d-flex align-items-center">
                         <div class="mb-2 mb-sm-2 mb-md-2 mb-lg-0">
@@ -87,9 +87,11 @@ Press any key to continue . . .</pre>
             </div>
 
 
-            <p class="mb-0 px-3 py-2 alert-primary text-center border border-top-0 border-secondary">
-                <button class="btn btn-sm btn-outline-primary" data-toggle="collapse" data-target="#comment-area-1" 
-                onclick="if($(this).html()=='显示评论'){$(this).html('隐藏评论')}else{$(this).html('显示评论')}">显示评论</button>
+            <p class="mb-0 px-3 py-2 alert-primary text-center border border-secondary">
+                <button class="btn btn-sm btn-outline-primary" data-toggle="collapse" data-target="#comment-area-1"
+                onclick="if($('#comment-area-1').hasClass('show')){$(this).find('span').html('显示评论')}else{$(this).find('span').html('隐藏评论')}">
+                    <span>显示评论</span>
+                </button>
             </p>
     
             <div class="collapse" id="comment-area-1">
