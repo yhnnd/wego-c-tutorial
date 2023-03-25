@@ -263,5 +263,6 @@ int main() {
             }
         }
     }
+    free(Books);
     return 0;
 }
