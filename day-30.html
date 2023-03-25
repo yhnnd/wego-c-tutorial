@@ -541,6 +541,7 @@ int main() {
             }
         }
     }
+    free(Books);
     return 0;
 }           </pre>
 
@@ -726,6 +727,7 @@ function /*/int/*/ main() {
             //}
         }
     }
+    delete Books;
     return 0;
 }
             </script>
@@ -757,7 +759,7 @@ function /*/int/*/ main() {
                             <input type="text" id="result-1-input" class="w-100 hidden"/>
                         </div>
                         <div class="col-3">
-                            <button class="btn btn-sm btn-dark" onclick="program_1_init();run(this,'result-1',console_1,program_1,undefined,'IsLoop|GetLine')" id="btn-run-1">运行程序</button>
+                            <button class="btn btn-sm btn-dark" onclick="program_1_init();run(this,'result-1',console_1,program_1,undefined,'IsLoop|GetLine',program_1_exit);" id="btn-run-1">运行程序</button>
                         </div>
                         <div class="col-3 px-0 d-flex align-items-center" id="result-1-input-status">
                         </div>
@@ -779,6 +781,12 @@ function program_1_init() {
     setBook(Books[4], "ナミヤ雑貨店の奇蹟", "東野 圭吾", "角川書店");
     setBook(Books[5], "Namiya Zakkaten no Kiseki", "Keigo Higashino", "Kadokawa Shoten");
     setBook(Books[6], "半落ち", "横山秀夫", "講談社");
+}
+
+function program_1_exit() {
+    delete ptr2DisableBookTopBorder;
+    delete max;
+    delete Books;
 }
 
 function program_1(controls, input, printf) {
@@ -809,9 +817,8 @@ function program_1(controls, input, printf) {
         cmd = ""/*/memset(cmd, 0, sizeof(cmd))/*/;
         /*/fgets(cmd, 128, stdin);/*/
         cmd = input.val();// This simulates the fgets function.
-// Inside The Main Loop
-(function() {
-    cmdtrim = ""/*/memset(cmdtrim, 0, sizeof(cmdtrim))/*/;
+        // Inside The Main Loop
+        cmdtrim = ""/*/memset(cmdtrim, 0, sizeof(cmdtrim))/*/;
         cmdtrim = cmd.trim();// sscanf(cmd, "%128[^\n]", cmdtrim);
         // memset(seg, 0, sizeof(seg));
         // memset(rest, 0, sizeof(rest));
@@ -990,8 +997,7 @@ function program_1(controls, input, printf) {
                 }
             });
         }
-})();
-    // }// The for loop ends here.
+    // }// The C for loop ends here.
     return 0;
 }
 

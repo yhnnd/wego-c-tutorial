@@ -1,5 +1,11 @@
-// 关闭程序
-function close_program(button, _console, input, input_status) {
+// 关闭控制台.
+// 运行中关闭程序, Mode 为 Abort.
+// 程序运行前初始化控制台, Mode 为 Start.
+function close_program(button, _console, input, input_status, program_exit, Mode) {
+    // 如果是程序运行中用户 kill 程序, 运行内存清理函数.
+    if (Mode && Mode.includes("Abort")) {
+        program_exit && program_exit();
+    }
     // 清空输出
     _console.empty();
     // 关闭窗口
@@ -13,8 +19,10 @@ function close_program(button, _console, input, input_status) {
 }
 
 
-// 结束 program 程序
-function end_program(button, _console, printf, input, input_status, begin_time, return_value) {
+// 结束 program 程序, 清理内存, 在控制台输出程序运行时间和返回值.
+function end_program(button, _console, printf, input, input_status, begin_time, program_exit, return_value) {
+    // 运行程序结束清理内存函数.
+    program_exit && program_exit();
     // 去掉程序执行时间小数有效位后的零
     let trim_back = function (a) {
         if (a[2] == '0') {
@@ -41,6 +49,8 @@ function end_program(button, _console, printf, input, input_status, begin_time, 
     input.blur().unbind().val("").addClass("hidden");
     // 修改程序执行状态为【运行已结束】
     input_status.find("span").first().html("<span>运行已结束</span>");
+    // 删除关闭程序 ✖️ 按钮
+    input_status.find(".fa-times-circle").remove();
     // Re-Enable 运行程序按钮
     reEnableButton(button, _console, input, input_status);
     return return_value;
@@ -51,7 +61,7 @@ function reEnableButton (button, _console, input, input_status) {
     const click = button.data("onclick");
     if (click) {
         button.unbind().on("click", function() {
-            close_program(button, _console, input, input_status);
+            close_program(button, _console, input, input_status, undefined, "Start");
             setTimeout(() => {
                 eval(click);
             }, 1);
@@ -64,14 +74,14 @@ function reEnableButton (button, _console, input, input_status) {
 }
 
 
-// 强制结束程序
+// 强制结束程序, 清理内存, 在控制台输出程序运行时间和返回值.
 function exit(controls, return_value) {
     return end_program(...controls, return_value);
 }
 
 
 // 运行 program 程序
-function operating_system(button, _console, input, input_status, begin_time, program) {
+function operating_system(button, _console, input, input_status, begin_time, program, program_exit) {
     // 定义标准输出函数
     const printf = function (str) {
         // Remove loading mark
@@ -83,7 +93,7 @@ function operating_system(button, _console, input, input_status, begin_time, pro
     // 执行 program 程序
     let return_value = program(input, printf);
     // 结束 program 程序
-    end_program(button, _console, printf, input, input_status, begin_time, return_value);
+    end_program(button, _console, printf, input, input_status, begin_time, program_exit, return_value);
 }
 
 
@@ -92,8 +102,8 @@ function operating_system(button, _console, input, input_status, begin_time, pro
 // if Mode.includes("IsLoop") == false 按回车调用 operating_system 运行 program 程序.
 // if Mode.includes("GetLine") == true 输入回车时停止输入, 运行程序.
 // if Mode.includes("GetLine") == false 输入回车次数达到 numOfInput 时, 运行程序.
-// Parameters: 1 button, 2 console_id, 3 program_console, 4 program, 5 controls, 6 Mode.
-function start_program(button, console_id, program_console, program, controls, Mode) {
+// Parameters: 1 button, 2 console_id, 3 program_console, 4 program, 5 controls, 6 Mode, 7 program_exit.
+function start_program(button, console_id, program_console, program, controls, Mode, program_exit) {
 
     // 获取运行程序按钮
     button = $(button);
@@ -124,7 +134,7 @@ function start_program(button, console_id, program_console, program, controls, M
 
     // Disable 运行程序按钮
     button.unbind().on("click", function() {
-        close_program(button, _console, input, input_status);
+        close_program(button, _console, input, input_status, program_exit, "Abort");
     }).html("停止程序");
 
     // 记录程序运行开始时刻
@@ -136,7 +146,7 @@ function start_program(button, console_id, program_console, program, controls, M
     };
     // 存储控制台各控制部件(用于递归模拟循环)
     if (!controls) {
-        controls = [button, _console, printf, input, input_status, begin_time];
+        controls = [button, _console, printf, input, input_status, begin_time, program_exit];
     }
     if (!Mode) {
         Mode = "";
@@ -148,7 +158,7 @@ function start_program(button, console_id, program_console, program, controls, M
     input_status.empty();
     // 添加关闭程序按钮
     $("<i class='fa fa-times-circle ml-2 text-danger' style='cursor:pointer;'></i>").on("click", function () {
-        close_program(button, _console, input, input_status);
+        close_program(button, _console, input, input_status, program_exit, "Abort");
     }).appendTo(input_status);
 
     if (program_console && _console) {
@@ -205,7 +215,7 @@ function start_program(button, console_id, program_console, program, controls, M
                         // 用递归模拟 C 语言的循环
                         return program(controls, input, printf);
                     } else {
-                        operating_system(button, _console, input, input_status, begin_time, program);
+                        operating_system(button, _console, input, input_status, begin_time, program, program_exit);
                     }
                 }
             });
@@ -278,7 +288,7 @@ function start_program(button, console_id, program_console, program, controls, M
                                 // 用递归模拟 C 语言的循环
                                 return program(controls, input, printf);
                             } else {
-                                operating_system(button, _console, input, input_status, begin_time, program);
+                                operating_system(button, _console, input, input_status, begin_time, program, program_exit);
                             }
                         }
                     } else {
@@ -335,7 +345,7 @@ function start_program(button, console_id, program_console, program, controls, M
                                 // 用递归模拟 C 语言的循环
                                 return program(controls, input, printf);
                             } else {
-                                operating_system(button, _console, input, input_status, begin_time, program);
+                                operating_system(button, _console, input, input_status, begin_time, program, program_exit);
                             }
                         }
                     } else {
@@ -378,7 +388,7 @@ function start_program(button, console_id, program_console, program, controls, M
             return program(controls, input, printf);
         } else {
             setTimeout(function () {
-                operating_system(button, _console, input, input_status, begin_time, program);
+                operating_system(button, _console, input, input_status, begin_time, program, program_exit);
             }, 1);
         }
     }
@@ -388,7 +398,7 @@ function start_program(button, console_id, program_console, program, controls, M
 
 
 // Run program after printing the loading mark.
-function printLoadingMarkAndRun(button, console_id, program_console, program, controls, Mode) {
+function printLoadingMarkAndRun(button, console_id, program_console, program, controls, Mode, program_exit) {
     // Print loading mark
     const _console = $('#' + console_id + ' .console pre');
     const loadingMark = $("<div class='loading-mark text-center w-100 bg-secondary' style='height: 12rem;padding-top: 4rem;'></div>");
@@ -396,7 +406,7 @@ function printLoadingMarkAndRun(button, console_id, program_console, program, co
     _console.append(loadingMark);
     setTimeout(() => {
         // Run the Program
-        start_program(button, console_id, program_console, program, controls, Mode);
+        start_program(button, console_id, program_console, program, controls, Mode, program_exit);
     }, 100);
 }
 
