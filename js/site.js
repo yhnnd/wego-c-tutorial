@@ -16,3 +16,35 @@ function highlight(filename) {
         }, 10);
     }
 }
+
+/* Standard C Library */
+function isalpha(ch) {
+    return /^[A-Z]$/i.test(ch);
+}
+
+function isdigit(ch) {
+    return /^[0-9]$/i.test(ch);
+}
+
+const NULL = null;
+
+function atoi(s) {
+    return parseInt(s);
+}
+
+function strlen(s) {
+    return parseInt(s.length);
+}
+
+function strcasestr(big, little) {
+    const i = big.toLowerCase().indexOf(little.toLowerCase());
+    return (i !== -1) ? i : NULL;
+}
+
+function strchr(str, char) {
+    if (typeof str == "string" && typeof char == "string" && char.length == 1) {
+        return str.indexOf(char);
+    } else {
+        return NULL;
+    }
+}

@@ -1,4 +1,5 @@
 /* index.html */
+button,
 [onclick],
 [data-toggle] {
     cursor: pointer;
@@ -157,5 +158,69 @@
 @media (min-width: 1200px) {
     .comment-bubble {
         max-width: 50%;
+    }
+}
+
+
+/* popover */
+.popover {
+    max-width: 400px!important;
+}
+
+@media (max-width: 1400px) {
+    .popover {
+        background: transparent;
+    }
+    .popover:hover {
+        background: white;
+    }
+    .popover .arrow::before {
+        border-top-color: transparent!important;
+        border-bottom-color: transparent!important;
+        border-left-color: transparent!important;
+        border-right-color: transparent!important;
+    }
+    .popover .arrow::after {
+        border-top-color: transparent!important;
+        border-bottom-color: transparent!important;
+        border-left-color: transparent!important;
+        border-right-color: transparent!important;
+    }
+    .popover.bs-popover-top:hover .arrow::before {
+        border-top-color: rgba(0,0,0,.25)!important;
+    }
+    .popover.bs-popover-top:hover .arrow::after {
+        border-top-color: #fff!important;
+    }
+    .popover.bs-popover-bottom:hover .arrow::before {
+        border-bottom-color: rgba(0,0,0,.25)!important;
+    }
+    .popover.bs-popover-bottom:hover .arrow::after {
+        border-bottom-color: #fff!important;
+    }
+    .popover.bs-popover-left:hover .arrow::before {
+        border-left-color: rgba(0,0,0,.25)!important;
+    }
+    .popover.bs-popover-left:hover .arrow::after {
+        border-left-color: #fff!important;
+    }
+    .popover.bs-popover-right:hover .arrow::before {
+        border-right-color: rgba(0,0,0,.25)!important;
+    }
+    .popover.bs-popover-right:hover .arrow::after {
+        border-right-color: #fff!important;
+    }
+    .popover .popover-header,
+    .popover .popover-body {
+        background: transparent;
+        opacity: 0!important;
+        transition: inherit;
+    }
+    .popover:hover .popover-header,
+    .popover:hover .popover-body {
+        opacity: 1!important;
+    }
+    .popover .popover-header {
+        background: transparent;
     }
 }

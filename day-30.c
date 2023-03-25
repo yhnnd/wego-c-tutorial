@@ -98,11 +98,11 @@ int main() {
     struct book *Books = (struct book *) calloc(max, sizeof(struct book));
     setBook(Books, "The Kite Runner", "Khaled Hosseini", "Bloomsbury Publishing PLC");
     setBook(Books + 1, "The Catcher in the Rye", "J. D. Salinger", "Little, Brown and Company");
-    setBook(Books+2, "C Primer Plus, 5th Edition", "Stephen Prata", "Pearson Education");
-    setBook(Books+3, "A Thousand Splendid Suns", "Khaled Hosseini", "Riverhead Books");
-    setBook(Books+4, "ナミヤ雑貨店の奇蹟", "東野 圭吾", "角川書店");
-    setBook(Books+5, "Namiya Zakkaten no Kiseki", "Keigo Higashino", "Kadokawa Shoten");
-    setBook(Books+6, "半落ち", "横山秀夫", "講談社");
+    setBook(Books + 2, "C Primer Plus, 5th Edition", "Stephen Prata", "Pearson Education");
+    setBook(Books + 3, "A Thousand Splendid Suns", "Khaled Hosseini", "Riverhead Books");
+    setBook(Books + 4, "ナミヤ雑貨店の奇蹟", "東野 圭吾", "角川書店");
+    setBook(Books + 5, "Namiya Zakkaten no Kiseki", "Keigo Higashino", "Kadokawa Shoten");
+    setBook(Books + 6, "半落ち", "横山秀夫", "講談社");
     struct book * ptr = NULL;
     int i;
     char cmd[128], seg[3][64], rest[64], mode, cmdtrim[128];
@@ -118,6 +118,7 @@ int main() {
         sscanf(cmdtrim, "%s %s %s %128[^\n]", seg[0], seg[1], seg[2], rest);
         disableBookTopBorder = false;
         switch (seg[0][0]) {
+            case '1':
             case 's':
                 mode = 0;
                 if (isalpha(seg[1][0])) {
@@ -190,6 +191,7 @@ int main() {
                     hasError = true;
                 }
                 break;
+            case '2':
             case 'm':
                 i = atoi(seg[1]);
                 if (i > 0 && i <= max) {
@@ -215,6 +217,7 @@ int main() {
                     printf("%s\n| %-64s|\n", br, "book number out of limit");
                 }
                 break;
+            case '3':
             case 'a':
                 if (strlen(rest) > 0) {
                     strcat(seg[2], " ");

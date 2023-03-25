@@ -23,64 +23,39 @@
 <div class="container">
     <h1 class="display-4 m-lg-3 text-center"><b class="text-dark">C</b> Language Tutorial</h1>
     <h2 class="text-center">
-        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html?highlight=day-24-1.html');">
+        <button class="btn btn-sm btn-outline-dark" onclick="loadPage('contents.html?highlight=day-31.html');">
             目录 <var>contents</var>
         </button>
     </h2>
     <hr/>
     <div class="row mb-3 text-secondary">
         <div class="col">
-            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-24.html')">上一页</span>
+            <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-30.html')">上一页</span>
             <h2 class="d-inline mobile-hidden">
-                Day 24 Page 2 <small class="ml-3 text-primary">结构体数组</small>
+                Day 31 <small class="ml-3 text-primary"><b>linked list</b> (链表)</small>
             </h2>
-            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-24-2.html')">下一页</span>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('appendix.html')">下一页</span>
         </div>
     </div>
     <h2 class="mb-3 text-secondary mobile-show">
-        Day 24 <small class="ml-3 text-primary">结构体数组</small>
+        Day 31 <small class="ml-3 text-primary"><b>linked list</b> (链表)</small>
     </h2>
     <div class="card">
         <div class="card-block">
             <div class="card-body py-3">
+                <h4 class="card-text">
+                    <span>链表</span>
+                </h4>
                 <p class="card-text">
-                    普通数据类型如 <b>int</b> 或 <b>float</b> 可以作为数组元素的类型，结构体也可以作为数组元素。在声明结构体数组的同时，我们还可以定义它的值。
-                </p>
-                <p class="card-text">
-                    如果结构体中有字符串属性，可以在定义的时候为其直接赋值，这样可以不用 <b>strcpy</b> 函数，定义结构体时，属性的顺序要和声明的顺序保持一致。
+                    <span class="badge badge-secondary">
+                        <i class="fa fa-exclamation-circle text-warning"></i>
+                        <span>编写未完成</span>
+                    </span>
                 </p>
             </div>
             <pre class="prettyprint mb-0">
     #include &lt;stdio.h&gt;
-    #include &lt;string.h&gt;
 
-    struct book {
-        char title[64];
-        char author[32];
-        char press[32];
-    };
-
-    int main() {
-        struct book Books[3] = {
-            {"The Kite Runner", "Khaled Hosseini", "Bloomsbury Publishing PLC"},
-            {"The Catcher in the Rye", "J. D. Salinger", "Little, Brown and Company"},
-            {"C Primer Plus, 5th Edition", "Stephen Prata", "Pearson Education"}
-        };
-        int i;
-        while (true) {
-            printf("book number(1-3): ");
-            scanf(" %d", &amp;i);
-            if (--i >= 0 &amp;&amp; i &lt; sizeof(Books)/sizeof(Books[0])) {
-                printf("%-20s %s\n", "book title:", Books[i].title);
-                printf("%-20s %s\n", "publishing house:", Books[i].press);
-                printf("%-20s %s\n", "author:", Books[i].author);
-            } else {
-                printf("out of limit\n");
-                break;
-            }
-        }
-        return 0;
-    }
             </pre>
 
             <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
@@ -110,22 +85,13 @@
                             <input type="text" id="result-1-input" class="hidden"/>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-1',console_1,program_1,undefined,'IsLoop|GetLine')" id="btn-run-1">运行程序</button>
+                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-1',console_1,program_1)">运行程序</button>
                         </div>
                         <div class="col-4 d-flex align-items-center" id="result-1-input-status">
                         </div>
                     </div>
                 </div>
             </div>
-
-            <p class="alert alert-success p-3 mb-0 rounded-0">
-                <span class="badge badge-success">Summary</span>
-                <span>以上是结构体数组的简单应用， 在</span>
-                <span class="text-primary" onclick="loadPage('day-30.html')">后面的内容</span>
-                <span>中， 我们将介绍</span>
-                <span class="text-primary" onclick="loadPage('day-30.html')">如何为复杂的数据动态分配内存</span>
-                <span>。</span>
-            </p>
 
             <blockquote class="mt-3">
                 <footer class="blockquote-footer text-right pr-3 pr-lg-4">
@@ -135,10 +101,10 @@
 
             <div class="card-footer p-0">
                 <div class="btn-group w-100">
-                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-24.html')">
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-30.html')">
                         上一页
                     </div>
-                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-24-2.html')">
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('appendix.html')">
                         下一页
                     </div>
                 </div>
@@ -164,44 +130,6 @@
 <script src="js/page_init.js"></script>
 <script src="js/sprintf.js"></script>
 <script>
-    function program_1(controls, input, printf) {
-        let Books = [
-            { title: "The Kite Runner", author: "Khaled Hosseini", press: "Bloomsbury Publishing PLC" },
-            { title: "The Catcher in the Rye", author: "J. D. Salinger", press: "Little, Brown and Company" },
-            { title: "C Primer Plus, 5th Edition", author: "Stephen Prata", press: "Pearson Education" }
-        ];
-        // "1    3".split(" ").filter(function(e){return e.length}) [ "1", "3" ]
-        const InputBuffer = input.val().split(" ").filter(function(e){return e.length});
-        // pop() remove and returns last element.
-        // shift() remove and returns first element.
-        for (let IsBuffer = false; (i = InputBuffer.shift()) !== undefined; IsBuffer = true) {
-            if (IsBuffer) {
-                console_1($('#result-1 > .console > pre'));
-            }
-            if (--i >= 0 && i < Books.length) {
-                printf(sprintf("%-20s %s\n", "book title:", Books[i].title));
-                printf(sprintf("%-20s %s\n", "publishing house:", Books[i].press));
-                printf(sprintf("%-20s %s\n", "author:", Books[i].author));
-                // Terminal Simulation.
-                if (InputBuffer.length) {
-                    // If input buffer is not empty, continue the loop.
-                    continue;
-                } else {
-                    // Recursive calling that simulates the C loop.
-                    return run('#btn-run-1', 'result-1', console_1, program_1, controls, 'IsLoop|GetLine');// continue;
-                }
-            } else {
-                printf(sprintf("out of limit\n"));
-                return exit(controls, 0);
-            }
-        }
-        return 0;
-    }
-
-    function console_1(_console) {
-        _console.append('<span data-type="output">book number(1-3):</span>&nbsp;' +
-            '<span data-type="input"></span>\n');
-    }
 </script>
 </body>
 </html>

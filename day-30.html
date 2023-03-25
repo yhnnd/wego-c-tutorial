@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -16,6 +16,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/prettify/prettify.js"></script>
     <script src="js/console.js"></script>
+    <script src="js/sprintf-1.1.2-sprintf.js"></script>
     <script src="js/site.js"></script>
 </head>
 
@@ -32,31 +33,702 @@
         <div class="col">
             <span class="btn btn-outline-primary float-left mr-3" onclick="loadPage('day-29.html')">上一页</span>
             <h2 class="d-inline mobile-hidden">
-                Day 30 <small class="ml-3 text-primary"><b>linked list</b> (链表)</small>
+                <span>Day 30</span>
+                <small class="ml-3 text-primary">动态内存分配</small>
             </h2>
-            <span class="btn btn-outline-primary float-right" onclick="loadPage('appendix.html')">下一页</span>
+            <span class="btn btn-outline-primary float-right" onclick="loadPage('day-31.html')">下一页</span>
         </div>
     </div>
     <h2 class="mb-3 text-secondary mobile-show">
-        Day 30 <small class="ml-3 text-primary"><b>linked list</b> (链表)</small>
+        <span>Day 30</span>
+        <small class="ml-3 text-primary">动态内存分配</small>
     </h2>
+
+    <p class="alert alert-success p-3 mb-0 rounded-0">
+        <span class="badge badge-success">Introduction</span>
+        <span>在</span>
+        <span class="text-primary" onclick="loadPage('day-24-1.html')">结构体数组</span>
+        <span>中， 我们介绍了</span>
+        <span class="text-primary" onclick="loadPage('day-24-1.html')">结构体数组的简单应用</span>
+        <span>。现在我们已经介绍过了</span>
+        <span class="text-primary" onclick="loadPage('day-24-2.html')">结构体指针</span>
+        <span>,</span>
+        <span class="text-primary" onclick="loadPage('day-26.html')">枚举</span>
+        <span>,</span>
+        <span class="text-primary" onclick="loadPage('day-27.html')">内存分配与释放</span>
+        <span>和</span>
+        <span class="text-primary" onclick="loadPage('day-29.html')">预编译</span>
+        <span>。在本文中，我们使用前面介绍的各项内容，实现一个更</span>
+        <span class="text-primary" onclick="loadPage('day-30.html')">复杂的应用实例</span>
+        <span>。</span>
+    </p>
+
     <div class="card">
         <div class="card-block">
             <div class="card-body py-3">
-                <h4 class="card-text">
-                    <span>链表</span>
-                </h4>
                 <p class="card-text">
-                    <span class="badge badge-secondary">
-                        <i class="fa fa-exclamation-circle text-warning"></i>
-                        <span>编写未完成</span>
-                    </span>
+                    <span>在</span>
+                    <span class="text-primary" onclick="loadPage('day-24-1.html')">结构体数组</span>
+                    <span>文中我们介绍了如何使用结构体数组实现简单的数据存储,</span>
+                    <span>在本文, 我们在该程序的基础上, 实现结构体数组的动态内存分配。</span>
+                    <span>添加新的功能, 实现添加新数据和修改已有数据。</span>
                 </p>
             </div>
-            <pre class="prettyprint mb-0">
-    #include &lt;stdio.h&gt;
+            <div class="card-body py-3" style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
+                <p class="card-text">
+                    <span>首先我们引入标准库, 并定义</span>
+                    <code>book</code>
+                    <span>数据类型。</span>
+                </p>
+            </div>
 
-            </pre>
+            <pre class="prettyprint mb-0 pl-4">
+#include &lt;stdio.h>
+#include &lt;stdlib.h>
+#include &lt;string.h>
+#include &lt;ctype.h>
+
+typedef enum { false, true } bool;
+
+struct book {
+    char title[64];
+    char author[64];
+    char press[64];
+};          </pre>
+
+            <script>
+class book {
+    title = "";
+    author = "";
+    press = "";
+    constructor(title, author, press) {
+        this.title = title && title.length ? title : "";
+        this.author = author && author.length ? author : "";
+        this.press = press && press.length ? press : "";
+    }
+}
+            </script>
+
+            <div class="card-body py-3" style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
+                <p class="card-text">
+                    <span>我们定义函数</span>
+                    <code>setBook</code>
+                    <span>,</span>
+                    <span>用于初始化</span>
+                    <code>book</code>
+                    <span>类型数据。</span>
+                </p>
+            </div>
+
+            <pre class="prettyprint mb-0 pl-4">
+int setBook(struct book * ptr, const char * title, const char * author, const char * press) {
+    memset(ptr, 0, sizeof(struct book));
+    strncpy(ptr->title, title, sizeof(ptr->title));
+    strncpy(ptr->author, author, sizeof(ptr->author));
+    strncpy(ptr->press, press, sizeof(ptr->press));
+    return 0;
+}           </pre>
+
+            <script>
+// This function simulates the setBook function in C.
+function setBook(ptr, title, author, press) {
+    ptr.title = title;
+    ptr.author = author;
+    ptr.press = press;
+    return 0;
+}
+            </script>
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <span>然后我们定义</span>
+                    <code>printBook</code>
+                    <span>函数。</span>
+                    <span>用来输出</span>
+                    <code>Books</code>
+                    <span>数组中指定的一个</span>
+                    <code>book</code>
+                    <span>类型数据的全部信息。</span>
+                </p>
+            </div>
+
+            <script>
+window.onload = function() {
+    const f = "console_1_printf";
+    (function(window, sprintf, fprintf) {
+        const stdout = $('#result-1 > .console > pre');
+        if (stdout && stdout.length && sprintf && fprintf) {
+            window[f] = function () {
+                return fprintf(stdout, ...arguments);
+            };
+            window["stdout"] = stdout;
+        }
+    })(window, sprintf, fprintf);
+    if (window[f] == undefined) {
+        console.error(f + " is undefined.");
+    }
+}
+// To use printf in functions, just define printf as window.console_1_printf
+// Example:
+// const printf = window.console_1_printf
+            </script>
+
+            <pre class="prettyprint mb-0 pl-4">
+int printBook(const struct book * Books, const int i, const int max, bool * disableTopBorder, const char searchMode, const char * pattern) {
+    const char * br = "+-----------------------------------------------------------------+";
+    if (i >= 0 && i < max) {
+        if (*disableTopBorder == false) {
+            printf("%s\n", br);
+            *disableTopBorder = true;
+        }
+        if (isalpha(Books[i].title[0]) || isdigit(Books[i].title[0])) {
+            printf("| %-20s %-43d|\n", "book number:", i + 1);
+            printf("| %-20s %-43s|\n", "book title:", Books[i].title);
+            printPattern('t', searchMode, Books[i].title, pattern);
+            printf("| %-20s %-43s|\n", "publishing house:", Books[i].press);
+            printPattern('p', searchMode, Books[i].press, pattern);
+            printf("| %-20s %-43s|\n", "author:", Books[i].author);
+            printPattern('a', searchMode, Books[i].author, pattern);
+        } else {
+            printf("| %-20s %d\n", "book number:", i + 1);
+            printf("| %-20s %s\n", "book title:", Books[i].title);
+            printf("| %-20s %s\n", "publishing house:", Books[i].press);
+            printf("| %-20s %s\n", "author:", Books[i].author);
+        }
+        printf("%s\n", br);
+    } else {
+        printf("book not found\n");
+    }
+    return i;
+}           </pre>
+
+            <script>
+function /*/int/*/ printBook(/*/const struct book * /*/Books,/*/ const int /*/i,/*/ const int /*/max,/*/ bool * /*/ptr2DisableTopBorder,/*/ const char /*/searchMode,/*/ const char * /*/pattern) {
+    const printf = window.console_1_printf;
+    const /*/const char * /*/br = "+-----------------------------------------------------------------+";
+    if (i >= 0 && i < max) {
+        if (ptr2DisableTopBorder.value == false) {
+            printf("%s\n", br);
+            ptr2DisableTopBorder.value = true;
+        }
+        if (isalpha(Books[i].title[0]) || isdigit(Books[i].title[0])) {
+            printf("| %-20s %-43d|\n", "book number:", i + 1);
+            printf("| %-20s %-43s|\n", "book title:", Books[i].title);
+            printPattern('t', searchMode, Books[i].title, pattern);
+            printf("| %-20s %-43s|\n", "publishing house:", Books[i].press);
+            printPattern('p', searchMode, Books[i].press, pattern);
+            printf("| %-20s %-43s|\n", "author:", Books[i].author);
+            printPattern('a', searchMode, Books[i].author, pattern);
+        } else {
+            printf("| %-20s %d\n", "book number:", i + 1);
+            printf("| %-20s %s\n", "book title:", Books[i].title);
+            printf("| %-20s %s\n", "publishing house:", Books[i].press);
+            printf("| %-20s %s\n", "author:", Books[i].author);
+        }
+        printf("%s\n", br);
+    } else {
+        printf("book not found\n");
+    }
+    return i;
+}
+            </script>
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <span>在使用</span>
+                    <code>printBook</code>
+                    <span>函数输出搜索结果的时候,</span>
+                    <span>要显示搜索匹配到的字符串的位置。</span>
+                    <code>printBook</code>
+                    <span>函数会调用</span>
+                    <code>printPattern</code>
+                    <span>函数,</span>
+                    <span>输出搜索结果匹配到的字符串位置的信息。</span>
+                </p>
+            </div>
+
+            <pre class="prettyprint mb-0 pl-4">
+int printPattern(const char mode, const char searchMode, const char * str, const char * pattern) {
+    int j, pos;
+    if (mode == searchMode && pattern != NULL) {
+        printf("| %20s ", "");
+        char * substr = strcasestr(str, pattern);
+        if (substr != NULL) {
+            pos = (int) (substr - str);
+        }
+        for (j = 0; j < 43; ++j) {
+            if (j >= pos && j < pos + strlen(pattern)) {
+                printf("^");
+            } else {
+                printf(" ");
+            }
+        }
+        printf("|\n");
+    }
+    return 0;
+}           </pre>
+
+            <script>
+function /*/int/*/ printPattern(/*/const char /*/mode,/*/ const char /*/searchMode,/*/ const char * /*/str,/*/ const char * /*/pattern) {
+    const printf = window.console_1_printf;
+    let /*/int/*/ j, pos = NaN;
+    if (mode == searchMode && pattern != NULL) {
+        printf("| %20s ", "");
+        let /*/char * /*/substr = strcasestr(str, pattern);
+        if (substr != NULL) {
+            pos = parseInt(substr);
+        }
+        for (j = 0; j < 43; ++j) {
+            if (j >= pos && j < pos + strlen(pattern)) {
+                printf("^");
+            } else {
+                printf(" ");
+            }
+        }
+        printf("|\n");
+    }
+    return 0;
+}
+            </script>
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <span>我们定义</span>
+                    <code>printMenu</code>
+                    <span>函数。输出菜单,</span>
+                    <span>列出程序的功能和使用方法。</span>
+                </p>
+            </div>
+
+            <pre class="prettyprint mb-0 pl-4">
+int printMenu(int max, const bool disableTopBorder) {
+    const char * br = "+-----------------------------------------------------------------+";
+    if (disableTopBorder == false) {
+        printf("%s\n", br);
+    }
+    printf("| Total Books: %-51d|\n", max);
+    printf("%s\n", br);
+    printf("| %-64s|\n", "1.[s] search book:");
+    printf("| %-64s|\n", "description: search book title/author/press/number");
+    printf("| %-64s|\n", "examples: [s title Kite]  [s author Khaled]  [s 1]");
+    printf("%s\n", br);
+    printf("| %-64s|\n", "2.[m] modify book:");
+    printf("| %-64s|\n", "description: modify book [number] title/author/press");
+    printf("| %-64s|\n", "examples:");
+    printf("| %-64s|\n", "[m 1 title A Thousand Splendid Suns]");
+    printf("| %-64s|\n", "[m 1 press Riverhead Books]");
+    printf("%s\n", br);
+    printf("| %-64s|\n", "3.[a] add book:");
+    printf("| %-64s|\n", "example: [a title A Thousand Splendid Suns]");
+    printf("%s\n", br);
+    return 0;
+}           </pre>
+
+            <script>
+// This Javascript function simulate to C function printMenu.
+function printMenu(max, disableTopBorder) {
+    const printf = window.console_1_printf;
+    const br = "+-----------------------------------------------------------------+";
+    if (disableTopBorder == false) {
+        printf("%s\n", br);
+    }
+    printf("| Total Books: %-51d|\n", max);
+    printf("%s\n", br);
+    printf("| %-64s|\n", "1.[s] search book:");
+    printf("| %-64s|\n", "description: search book title/author/press/number");
+    printf("| %-64s|\n", "examples: [s title Kite]  [s author Khaled]  [s 1]");
+    printf("%s\n", br);
+    printf("| %-64s|\n", "2.[m] modify book:");
+    printf("| %-64s|\n", "description: modify book [number] title/author/press");
+    printf("| %-64s|\n", "examples:");
+    printf("| %-64s|\n", "[m 1 title A Thousand Splendid Suns]");
+    printf("| %-64s|\n", "[m 1 press Riverhead Books]");
+    printf("%s\n", br);
+    printf("| %-64s|\n", "3.[a] add book:");
+    printf("| %-64s|\n", "example: [a title A Thousand Splendid Suns]");
+    printf("%s\n", br);
+    return 0;
+}
+            </script>
+
+            <div class="card-body py-3">
+                <p class="card-text">
+                    <span>最后我们定义</span>
+                    <code>main</code>
+                    <span>函数。</span>
+                    <span>初始化一组</span>
+                    <code>book</code>
+                    <span>数据,</span>
+                    <span>将主要逻辑</span>
+                    <span>(程序输出和用户输入)</span>
+                    <span>都放在一个死循环当中。</span>
+                    <span>以实现多次</span>
+                    <span>♻️</span>
+                    <span>交互操作。</span>
+                </p>
+            </div>
+
+            <pre class="prettyprint mb-0">
+int main() {
+    const char * br = "+-----------------------------------------------------------------+";
+    bool hasError = false, disableBookTopBorder = false;
+    int max = 7;
+    struct book *Books = (struct book *) calloc(max, sizeof(struct book));
+    setBook(Books, "The Kite Runner", "Khaled Hosseini", "Bloomsbury Publishing PLC");
+    setBook(Books + 1, "The Catcher in the Rye", "J. D. Salinger", "Little, Brown and Company");
+    setBook(Books + 2, "C Primer Plus, 5th Edition", "Stephen Prata", "Pearson Education");
+    setBook(Books + 3, "A Thousand Splendid Suns", "Khaled Hosseini", "Riverhead Books");
+    setBook(Books + 4, "ナミヤ雑貨店の奇蹟", "東野 圭吾", "角川書店");
+    setBook(Books + 5, "Namiya Zakkaten no Kiseki", "Keigo Higashino", "Kadokawa Shoten");
+    setBook(Books + 6, "半落ち", "横山秀夫", "講談社");
+    struct book * ptr = NULL;
+    int i;
+    char cmd[128], seg[3][64], rest[64], mode, cmdtrim[128];
+    for (;;) {
+        printMenu(max, disableBookTopBorder);
+        printf("command:");
+        memset(cmd, 0, sizeof(cmd));
+        fgets(cmd, 128, stdin);
+        memset(cmdtrim, 0, sizeof(cmdtrim));
+        sscanf(cmd, "%128[^\n]", cmdtrim);
+        memset(seg, 0, sizeof(seg));
+        memset(rest, 0, sizeof(rest));
+        sscanf(cmdtrim, "%s %s %s %128[^\n]", seg[0], seg[1], seg[2], rest);
+        disableBookTopBorder = false;
+        switch (seg[0][0]) {
+            case '1':
+            case 's':<span data-toggle="popover" title="功能1.搜索数据" data-content="当用户输入指令 <kbd>s</kbd> 时, 搜索数据。根据 <code>Books</code> 数组中 <code>book</code> 类型数据的三种属性 <code>title</code>, <code>author</code>, <code>press</code> 查找。<br>例如: <kbd>s a khaled</kbd> 可以查找 <code>author</code> 属性字符串包含 <span>khaled</span> 的 <code>book</code> 数据。" data-html="true" data-placement="right">
+                mode = 0;
+                if (isalpha(seg[1][0])) {
+                    mode = seg[1][0];
+                } else if (seg[1][0] == '*') {
+                    if (strlen(seg[2]) == 0) {
+                        for (i = 0; i &lt; max; ++i) {
+                            printBook(Books, i, max, &disableBookTopBorder, 0, NULL);
+                        }
+                        break;
+                    }</span>
+                } else if (!isdigit(seg[1][0])) {
+                    printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                    hasError = true;
+                    break;
+                }
+                if (strlen(rest) > 0) {
+                    strcat(seg[2], " ");
+                    strncat(seg[2], rest, sizeof(rest));
+                }
+                if (mode == 'n') {
+                    if (atoi(seg[2]) > 0 && atoi(seg[2]) &lt;= max) {
+                        printBook(Books, atoi(seg[2]) - 1, max, &disableBookTopBorder, 0, NULL);
+                    } else {
+                        printf("%s\n| %-64s|\n", br, "book number out of limit");
+                    }
+                } else if (atoi(seg[1]) > 0 && atoi(seg[1]) &lt;= max) {
+                    if (atoi(seg[1]) > 0 && atoi(seg[1]) &lt;= max) {
+                        printBook(Books, atoi(seg[1]) - 1, max, &disableBookTopBorder, 0, NULL);
+                    } else {
+                        printf("%s\n| %-64s|\n", br, "book number out of limit");
+                    }
+                } else if (mode != 0 && strlen(seg[2]) > 0 && strchr("tap", mode) != NULL) {
+                    for (i = 0; i &lt; max; ++i) {
+                        if (mode == 't' && strcasestr(Books[i].title, seg[2]) != NULL) {
+                            printBook(Books, i, max, &disableBookTopBorder, mode, seg[2]);
+                        } else if (mode == 'a' && strcasestr(Books[i].author, seg[2]) != NULL) {
+                            printBook(Books, i, max, &disableBookTopBorder, mode, seg[2]);
+                        } else if (mode == 'p' && strcasestr(Books[i].press, seg[2]) != NULL) {
+                            printBook(Books, i, max, &disableBookTopBorder, mode, seg[2]);
+                        }
+                    }
+                    if (disableBookTopBorder == false) {
+                        printf("%s\n| %-14s %s - %c, %s: %-30s|\n", br, "no result.", "mode", mode, "pattern", seg[2]);
+                    }
+                } else if (seg[1][0] == '*' || isalpha(mode)) {
+                    if (seg[1][0] == '*') {<span data-toggle="popover" title="模糊搜索" data-content="当用户输入指令 <kbd>s *</kbd> 时, 在 <code>Books</code> 数组中查找属性 <code>title</code>, <code>author</code>, <code>press</code> 的值可以匹配输入字符串值的 <code>book</code> 元素。<br>例如: <kbd>s * khaled</kbd> 可以在 <code>Books</code> 数组中查找属性包含字符串 <span>khaled</span> 的 <code>book</code> 类型数据。" data-html="true" data-placement="right">
+                        memset(seg[1], 0, sizeof(seg[1]));
+                        if (strlen(seg[2]) > 0) {
+                            strncpy(seg[1], seg[2], sizeof(seg[1]));
+                        }
+                    } else if (strlen(seg[2]) > 0) {
+                        strcat(seg[1], " ");
+                        strncat(seg[1], seg[2], sizeof(seg[2]));
+                    }</span>
+                    for (i = 0; i &lt; max; ++i) {
+                        if (strcasestr(Books[i].title, seg[1]) != NULL) {
+                            printBook(Books, i, max, &disableBookTopBorder, 't', seg[1]);
+                        } else if (strcasestr(Books[i].author, seg[1]) != NULL) {
+                            printBook(Books, i, max, &disableBookTopBorder, 'a', seg[1]);
+                        } else if (strcasestr(Books[i].press, seg[1]) != NULL) {
+                            printBook(Books, i, max, &disableBookTopBorder, 'p', seg[1]);
+                        }
+                    }
+                    if (disableBookTopBorder == false) {
+                        printf("%s\n| %-14s %s - %c, %s: %-30s|\n", br, "no result.", "mode", '*', "pattern", seg[1]);
+                    }
+                } else {
+                    printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                    hasError = true;
+                }
+                break;
+            case '2':
+            case 'm':<span data-toggle="popover" title="功能2.修改数据" data-content="当用户输入指令 <kbd>m</kbd> 时, 修改指定数据的属性 <code>title</code>, <code>author</code>, <code>press</code> 中的指定属性。<br>例如: <kbd>m 1 title A Thousand Splendid Suns</kbd> 可以修改 <code>Books</code> 数组中第一个元素的 <code>title</code> 属性。" data-html="true" data-placement="right">
+                i = atoi(seg[1]);
+                if (i > 0 && i &lt;= max) {
+                    ptr = Books + i - 1;
+                    switch (seg[2][0]) {
+                        case 't':
+                            strncpy(ptr->title, rest, sizeof(ptr->title));
+                            break;
+                        case 'a':
+                            strncpy(ptr->author, rest, sizeof(ptr->author));
+                            break;
+                        case 'p':
+                            strncpy(ptr->press, rest, sizeof(ptr->press));
+                            break;
+                        default:</span>
+                            printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                            hasError = true;
+                    }
+                    if (hasError == false) {
+                        printBook(Books, i - 1, max, &disableBookTopBorder, 0, NULL);
+                    }
+                } else {
+                    printf("%s\n| %-64s|\n", br, "book number out of limit");
+                }
+                break;
+            case '3':
+            case 'a':<span data-toggle="popover" title="功能3.添加数据" data-content="当用户输入指令 <kbd>s</kbd> 时, 搜索数据。根据 <code>Books</code> 数组中 <code>book</code> 类型数据的三种属性 <code>title</code>, <code>author</code>, <code>press</code> 查找。<br>例如: <kbd>s a khaled</kbd> 可以查找 <code>author</code> 属性字符串包含 <span>khaled</span> 的 <code>book</code> 数据。" data-html="true" data-placement="right">
+                if (strlen(rest) > 0) {
+                    strcat(seg[2], " ");
+                    strncat(seg[2], rest, sizeof(rest));
+                }
+                Books = (struct book *) realloc(Books, ++max * sizeof(struct book));
+                ptr = Books + max - 1;
+                switch (seg[1][0]) {
+                    case 't':
+                        strncpy(ptr->title, seg[2], sizeof(ptr->title));
+                        break;
+                    case 'a':
+                        strncpy(ptr->author, seg[2], sizeof(ptr->author));
+                        break;
+                    case 'p':
+                        strncpy(ptr->press, seg[2], sizeof(ptr->press));
+                        break;
+                    default:</span>
+                        if (strlen(seg[2]) > 0) {
+                            strcat(seg[1], " ");
+                            strncat(seg[1], seg[2], sizeof(seg[2]));
+                        }
+                        strncpy(ptr->title, seg[1], sizeof(ptr->title));
+                }
+                printBook(Books, max - 1, max, &disableBookTopBorder, 0, NULL);
+                break;
+            default:
+                printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                hasError = true;
+        }
+        if (hasError) {
+            printf("%s", br);
+            break;
+        } else {
+            disableBookTopBorder = true;
+            printf("|%64s |\n", "Press [ENTER]");
+            printf("%s", br);
+            char c = getchar();
+            if (c != '\n') {
+                while ((c = getchar()) != '\n' && c != EOF) {
+                    continue;// discard extra characters
+                }
+            }
+        }
+    }
+    return 0;
+}           </pre>
+
+            <script>
+// This main function is just a demo. Cannot be executed.
+function /*/int/*/ main() {
+    const /*/char * /*/br = "+-----------------------------------------------------------------+";
+    let /*/bool/*/ hasError = false;
+    let /*/bool * /*/ ptr2DisableBookTopBorder = {value: false};
+    let /*/int/*/ max = 7;
+    let /*/struct book * /*/Books = /*/(struct book *)/*/ (new Array(max)).fill(new book()) /*/calloc(max, sizeof(struct book))/*/;
+    setBook(Books[0], "The Kite Runner", "Khaled Hosseini", "Bloomsbury Publishing PLC");
+    setBook(Books[1], "The Catcher in the Rye", "J. D. Salinger", "Little, Brown and Company");
+    setBook(Books[2], "C Primer Plus, 5th Edition", "Stephen Prata", "Pearson Education");
+    setBook(Books[3], "A Thousand Splendid Suns", "Khaled Hosseini", "Riverhead Books");
+    setBook(Books[4], "ナミヤ雑貨店の奇蹟", "東野 圭吾", "角川書店");
+    setBook(Books[5], "Namiya Zakkaten no Kiseki", "Keigo Higashino", "Kadokawa Shoten");
+    setBook(Books[6], "半落ち", "横山秀夫", "講談社");
+    let /*/struct book * /*/ptr = NULL;
+    let /*/int/*/ i;
+    let /*/char/*/ cmd/*/[128]/*/, seg/*/[3][64]/*/ = (new Array(3)).fill(String("")), rest/*/[64]/*/, mode, cmdtrim/*/[128]/*/;
+    for (;;) {
+        printMenu(max, ptr2DisableBookTopBorder);
+        printf("command:");
+        cmd = ""/*/memset(cmd, 0, sizeof(cmd))/*/;
+        /*/fgets(cmd, 128, stdin);/*/
+        cmdtrim = ""/*/memset(cmdtrim, 0, sizeof(cmdtrim))/*/;
+        cmdtrim = cmd.trim();// sscanf(cmd, "%128[^\n]", cmdtrim);
+        // memset(seg, 0, sizeof(seg));
+        // memset(rest, 0, sizeof(rest));
+        // sscanf(cmdtrim, "%s %s %s %128[^\n]", seg[0], seg[1], seg[2], rest);
+        // "s  *    author name".replace(/[()\s]+/g, ' ').split(' ')
+        // Array(4) [ "s", "*", "author", "name" ]
+        // "s0  s1  s2   rest1  rest2".replace(/[()\s]+/g, ' ').split(' ').slice(3).join(" ")
+        // "rest1 rest2"
+        seg = cmdtrim.replace(/[()\s]+/g, ' ').split(' ');
+        rest = seg.slice(3).join(" ");
+        ptr2DisableBookTopBorder.value = false;
+        switch (seg[0][0]) {
+            case '1':
+            case 's':
+                mode = 0;
+                if (isalpha(seg[1][0])) {
+                    mode = seg[1][0];
+                } else if (seg[1][0] == '*') {
+                    if (strlen(seg[2]) == 0) {
+                        for (i = 0; i < max; ++i) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, 0, NULL);
+                        }
+                        break;
+                    }
+                } else if (!isdigit(seg[1][0])) {
+                    printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                    hasError = true;
+                    break;
+                }
+                if (strlen(rest) > 0) {
+                    seg[2] += " ";//strcat(seg[2], " ");
+                    seg[2] += rest;//strncat(seg[2], rest, sizeof(rest));
+                }
+                if (mode == 'n') {
+                    if (atoi(seg[2]) > 0 && atoi(seg[2]) <= max) {
+                        printBook(Books, atoi(seg[2]) - 1, max, ptr2DisableBookTopBorder, 0, NULL);
+                    } else {
+                        printf("%s\n| %-64s|\n", br, "book number out of limit");
+                    }
+                } else if (atoi(seg[1]) > 0 && atoi(seg[1]) <= max) {
+                    if (atoi(seg[1]) > 0 && atoi(seg[1]) <= max) {
+                        printBook(Books, atoi(seg[1]) - 1, max, ptr2DisableBookTopBorder, 0, NULL);
+                    } else {
+                        printf("%s\n| %-64s|\n", br, "book number out of limit");
+                    }
+                } else if (mode != 0 && strlen(seg[2]) > 0 && strchr("tap", mode) != NULL) {
+                    for (i = 0; i < max; ++i) {
+                        if (mode == 't' && strcasestr(Books[i].title, seg[2]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, mode, seg[2]);
+                        } else if (mode == 'a' && strcasestr(Books[i].author, seg[2]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, mode, seg[2]);
+                        } else if (mode == 'p' && strcasestr(Books[i].press, seg[2]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, mode, seg[2]);
+                        }
+                    }
+                    if (ptr2DisableBookTopBorder.value == false) {
+                        printf("%s\n| %-14s %s - %c, %s: %-30s|\n", br, "no result.", "mode", mode, "pattern", seg[2]);
+                    }
+                } else if (seg[1][0] == '*' || isalpha(mode)) {
+                    if (seg[1][0] == '*') {
+                        seg[1] = "";//memset(seg[1], 0, sizeof(seg[1]));
+                        if (strlen(seg[2]) > 0) {
+                            seg[1] = seg[2];//strncpy(seg[1], seg[2], sizeof(seg[1]));
+                        }
+                    } else if (strlen(seg[2]) > 0) {
+                        seg[1] += " ";//strcat(seg[1], " ");
+                        seg[1] += seg[2];//strncat(seg[1], seg[2], sizeof(seg[2]));
+                    }
+                    for (i = 0; i < max; ++i) {
+                        if (strcasestr(Books[i].title, seg[1]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, 't', seg[1]);
+                        } else if (strcasestr(Books[i].author, seg[1]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, 'a', seg[1]);
+                        } else if (strcasestr(Books[i].press, seg[1]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, 'p', seg[1]);
+                        }
+                    }
+                    if (ptr2DisableBookTopBorder.value == false) {
+                        printf("%s\n| %-14s %s - %c, %s: %-30s|\n", br, "no result.", "mode", '*', "pattern", seg[1]);
+                    }
+                } else {
+                    printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                    hasError = true;
+                }
+                break;
+            case '2':
+            case 'm':
+                i = atoi(seg[1]);
+                if (i > 0 && i <= max) {
+                    ptr = Books[i - 1];//Books + i - 1;
+                    switch (seg[2][0]) {
+                        case 't':
+                            ptr.title = rest;//strncpy(ptr->title, rest, sizeof(ptr->title));
+                            break;
+                        case 'a':
+                            ptr.author = rest;//strncpy(ptr->author, rest, sizeof(ptr->author));
+                            break;
+                        case 'p':
+                            ptr.press = rest;//strncpy(ptr->press, rest, sizeof(ptr->press));
+                            break;
+                        default:
+                            printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                            hasError = true;
+                    }
+                    if (hasError == false) {
+                        printBook(Books, i - 1, max, ptr2DisableBookTopBorder, 0, NULL);
+                    }
+                } else {
+                    printf("%s\n| %-64s|\n", br, "book number out of limit");
+                }
+                break;
+            case '3':
+            case 'a':
+                if (strlen(rest) > 0) {
+                    seg[2] += " ";//strcat(seg[2], " ");
+                    seg[2] += rest;//strncat(seg[2], rest, sizeof(rest));
+                }
+                //Books = (struct book *) realloc(Books, ++max * sizeof(struct book));
+                max = Books.push(new book());
+                ptr = Books[max - 1];//Books + max - 1;
+                switch (seg[1][0]) {
+                    case 't':
+                        ptr.title = seg[2];//strncpy(ptr->title, seg[2], sizeof(ptr->title));
+                        break;
+                    case 'a':
+                        ptr.author = seg[2];//strncpy(ptr->author, seg[2], sizeof(ptr->author));
+                        break;
+                    case 'p':
+                        ptr.press = seg[2];//strncpy(ptr->press, seg[2], sizeof(ptr->press));
+                        break;
+                    default:
+                        if (strlen(seg[2]) > 0) {
+                            seg[1] += " ";//strcat(seg[1], " ");
+                            seg[1] += seg[2];//strncat(seg[1], seg[2], sizeof(seg[2]));
+                        }
+                        ptr.title = seg[1];//strncpy(ptr->title, seg[1], sizeof(ptr->title));
+                }
+                printBook(Books, max - 1, max, ptr2DisableBookTopBorder, 0, NULL);
+                break;
+            default:
+                printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                hasError = true;
+        }
+        if (hasError) {
+            printf("%s", br);
+            break;
+        } else {
+            ptr2DisableBookTopBorder.value = true;
+            printf("|%64s |\n", "Press [ENTER]");
+            printf("%s", br);
+            //char c = getchar();
+            //if (c != '\n') {
+            //    while ((c = getchar()) != '\n' && c != EOF) {
+            //        continue;// discard extra characters
+            //    }
+            //}
+        }
+    }
+    return 0;
+}
+            </script>
 
             <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
                 <div class="row">
@@ -66,12 +738,12 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
-                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1">执行结果</button>
+                        <button class="btn btn-sm btn-outline-success px-3 py-1" data-toggle="collapse" data-target="#result-1" disabled>执行结果</button>
                     </div>
                 </div>
             </div>
-            <div class="collapse" id="result-1">
-                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" style="min-height: 10rem" onclick="$('#result-1-input').focus()">
+            <div class="collapse show" id="result-1">
+                <div class="alert mb-0 border-top-0 border-secondary rounded-0 console p-0" style="min-height: 30rem;" onclick="$('#result-1-input').focus()">
                     <pre></pre>
                 </div>
                 <div class="px-3 py-1 alert-warning">
@@ -79,23 +751,363 @@
                     <small><kbd style="color: lightgreen">绿色字符串</kbd> 为用户输入的字符串</small>
                     <i class="fa fa-quote-right"></i>
                 </div>
-                <div class="px-3 py-1 alert-dark text-center">
+                <div class="px-3 py-1 alert-dark">
                     <div class="row">
-                        <div class="col-4">
-                            <input type="text" id="result-1-input" class="hidden"/>
+                        <div class="col-6">
+                            <input type="text" id="result-1-input" class="w-100 hidden"/>
                         </div>
-                        <div class="col-4">
-                            <button class="btn btn-sm btn-dark" onclick="run(this,'result-1',console_1,program_1)">运行程序</button>
+                        <div class="col-3">
+                            <button class="btn btn-sm btn-dark" onclick="program_1_init();run(this,'result-1',console_1,program_1,undefined,'IsLoop|GetLine')" id="btn-run-1">运行程序</button>
                         </div>
-                        <div class="col-4 d-flex align-items-center" id="result-1-input-status">
+                        <div class="col-3 px-0 d-flex align-items-center" id="result-1-input-status">
                         </div>
                     </div>
                 </div>
             </div>
 
+            <script>
+function program_1_init() {
+    // var ptr2DisableBookTopBorder in the main function is made global because console_1 needs to visit it.
+    /*/bool * /*/window.ptr2DisableBookTopBorder = {value: false};
+    // var max in the main function is made global because console_1 needs to visit it.
+    window.max = 7;
+    /*/struct book * /*/window.Books = /*/(struct book *)/*/ Array.from(new Array(max),e=>new book()) /*/calloc(max, sizeof(struct book))/*/;
+    setBook(Books[0], "The Kite Runner", "Khaled Hosseini", "Bloomsbury Publishing PLC");
+    setBook(Books[1], "The Catcher in the Rye", "J. D. Salinger", "Little, Brown and Company");
+    setBook(Books[2], "C Primer Plus, 5th Edition", "Stephen Prata", "Pearson Education");
+    setBook(Books[3], "A Thousand Splendid Suns", "Khaled Hosseini", "Riverhead Books");
+    setBook(Books[4], "ナミヤ雑貨店の奇蹟", "東野 圭吾", "角川書店");
+    setBook(Books[5], "Namiya Zakkaten no Kiseki", "Keigo Higashino", "Kadokawa Shoten");
+    setBook(Books[6], "半落ち", "横山秀夫", "講談社");
+}
+
+function program_1(controls, input, printf) {
+    // The printf Console.js provides can print HTML element.
+    // It is not the real printf.
+    const printHtml = printf;
+    // The printf Console.js provides is not right. Override it.
+    printf = window.console_1_printf;
+    const /*/char * /*/br = "+-----------------------------------------------------------------+";
+    let /*/bool/*/ hasError = false;
+    // let /*/bool * /*/ ptr2DisableBookTopBorder = {value: false};
+    // let /*/int/*/ max = 7;
+    // The variable max shall be visited by console_1 thus should be global variable.
+    // let /*/struct book * /*/Books = /*/(struct book *)/*/ (new Array(max)).fill(new book()) /*/calloc(max, sizeof(struct book))/*/;
+    // setBook(Books[0], "The Kite Runner", "Khaled Hosseini", "Bloomsbury Publishing PLC");
+    // setBook(Books[1], "The Catcher in the Rye", "J. D. Salinger", "Little, Brown and Company");
+    // setBook(Books[2], "C Primer Plus, 5th Edition", "Stephen Prata", "Pearson Education");
+    // setBook(Books[3], "A Thousand Splendid Suns", "Khaled Hosseini", "Riverhead Books");
+    // setBook(Books[4], "ナミヤ雑貨店の奇蹟", "東野 圭吾", "角川書店");
+    // setBook(Books[5], "Namiya Zakkaten no Kiseki", "Keigo Higashino", "Kadokawa Shoten");
+    // setBook(Books[6], "半落ち", "横山秀夫", "講談社");
+    let /*/struct book * /*/ptr = NULL;
+    let /*/int/*/ i;
+    let /*/char/*/ cmd/*/[128]/*/, seg/*/[3][64]/*/ = (new Array(3)).fill(String("")), rest/*/[64]/*/, mode, cmdtrim/*/[128]/*/;
+    // for (;;) {
+        // printMenu(max, ptr2DisableBookTopBorder.value);
+        // printf("command:");
+        cmd = ""/*/memset(cmd, 0, sizeof(cmd))/*/;
+        /*/fgets(cmd, 128, stdin);/*/
+        cmd = input.val();// This simulates the fgets function.
+// Inside The Main Loop
+(function() {
+    cmdtrim = ""/*/memset(cmdtrim, 0, sizeof(cmdtrim))/*/;
+        cmdtrim = cmd.trim();// sscanf(cmd, "%128[^\n]", cmdtrim);
+        // memset(seg, 0, sizeof(seg));
+        // memset(rest, 0, sizeof(rest));
+        // sscanf(cmdtrim, "%s %s %s %128[^\n]", seg[0], seg[1], seg[2], rest);
+        // "s  *    author name".replace(/[()\s]+/g, ' ').split(' ')
+        // Array(4) [ "s", "*", "author", "name" ]
+        // "s0  s1  s2   rest1  rest2".replace(/[()\s]+/g, ' ').split(' ').slice(3).join(" ")
+        // "rest1 rest2"
+        Segs = cmdtrim.replace(/[()\s]+/g, ' ').split(' ');
+        seg = seg.map((el, i) => i < Segs.length ? Segs[i] : el);
+        rest = Segs.length > 3 ? Segs.slice(3).join(" ") : "";
+        ptr2DisableBookTopBorder.value = false;
+        switch (seg[0][0]) {
+            case '1':
+            case 's':
+                mode = 0;
+                if (isalpha(seg[1][0])) {
+                    mode = seg[1][0];
+                } else if (seg[1][0] == '*') {
+                    if (strlen(seg[2]) == 0) {
+                        for (i = 0; i < max; ++i) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, 0, NULL);
+                        }
+                        break;
+                    }
+                } else if (!isdigit(seg[1][0])) {
+                    printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                    hasError = true;
+                    break;
+                }
+                if (strlen(rest) > 0) {
+                    seg[2] += " ";//strcat(seg[2], " ");
+                    seg[2] += rest;//strncat(seg[2], rest, sizeof(rest));
+                }
+                if (mode == 'n') {
+                    if (atoi(seg[2]) > 0 && atoi(seg[2]) <= max) {
+                        printBook(Books, atoi(seg[2]) - 1, max, ptr2DisableBookTopBorder, 0, NULL);
+                    } else {
+                        printf("%s\n| %-64s|\n", br, "book number out of limit");
+                    }
+                } else if (atoi(seg[1]) > 0 && atoi(seg[1]) <= max) {
+                    if (atoi(seg[1]) > 0 && atoi(seg[1]) <= max) {
+                        printBook(Books, atoi(seg[1]) - 1, max, ptr2DisableBookTopBorder, 0, NULL);
+                    } else {
+                        printf("%s\n| %-64s|\n", br, "book number out of limit");
+                    }
+                } else if (mode != 0 && strlen(seg[2]) > 0 && strchr("tap", mode) != NULL) {
+                    for (i = 0; i < max; ++i) {
+                        if (mode == 't' && strcasestr(Books[i].title, seg[2]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, mode, seg[2]);
+                        } else if (mode == 'a' && strcasestr(Books[i].author, seg[2]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, mode, seg[2]);
+                        } else if (mode == 'p' && strcasestr(Books[i].press, seg[2]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, mode, seg[2]);
+                        }
+                    }
+                    if (ptr2DisableBookTopBorder.value == false) {
+                        printf("%s\n| %-14s %s - %c, %s: %-30s|\n", br, "no result.", "mode", mode.charCodeAt(0), "pattern", seg[2]);
+                    }
+                } else if (seg[1][0] == '*' || isalpha(mode)) {
+                    if (seg[1][0] == '*') {
+                        seg[1] = "";//memset(seg[1], 0, sizeof(seg[1]));
+                        if (strlen(seg[2]) > 0) {
+                            seg[1] = seg[2];//strncpy(seg[1], seg[2], sizeof(seg[1]));
+                        }
+                    } else if (strlen(seg[2]) > 0) {
+                        seg[1] += " ";//strcat(seg[1], " ");
+                        seg[1] += seg[2];//strncat(seg[1], seg[2], sizeof(seg[2]));
+                    }
+                    for (i = 0; i < max; ++i) {
+                        if (strcasestr(Books[i].title, seg[1]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, 't', seg[1]);
+                        } else if (strcasestr(Books[i].author, seg[1]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, 'a', seg[1]);
+                        } else if (strcasestr(Books[i].press, seg[1]) != NULL) {
+                            printBook(Books, i, max, ptr2DisableBookTopBorder, 'p', seg[1]);
+                        }
+                    }
+                    if (ptr2DisableBookTopBorder.value == false) {
+                        printf("%s\n| %-14s %s - %c, %s: %-30s|\n", br, "no result.", "mode", '*'.charCodeAt(0), "pattern", seg[1]);
+                    }
+                } else {
+                    printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                    hasError = true;
+                }
+                break;
+            case '2':
+            case 'm':
+                i = atoi(seg[1]);
+                if (i > 0 && i <= max) {
+                    ptr = Books[i - 1];//Books + i - 1;
+                    switch (seg[2][0]) {
+                        case 't':
+                            ptr.title = rest;//strncpy(ptr->title, rest, sizeof(ptr->title));
+                            break;
+                        case 'a':
+                            ptr.author = rest;//strncpy(ptr->author, rest, sizeof(ptr->author));
+                            break;
+                        case 'p':
+                            ptr.press = rest;//strncpy(ptr->press, rest, sizeof(ptr->press));
+                            break;
+                        default:
+                            printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                            hasError = true;
+                    }
+                    if (hasError == false) {
+                        printBook(Books, i - 1, max, ptr2DisableBookTopBorder, 0, NULL);
+                    }
+                } else {
+                    printf("%s\n| %-64s|\n", br, "book number out of limit");
+                }
+                break;
+            case '3':
+            case 'a':
+                if (strlen(rest) > 0) {
+                    seg[2] += " ";//strcat(seg[2], " ");
+                    seg[2] += rest;//strncat(seg[2], rest, sizeof(rest));
+                }
+                //Books = (struct book *) realloc(Books, ++max * sizeof(struct book));
+                max = Books.push(new book());
+                ptr = Books[max - 1];//Books + max - 1;
+                switch (seg[1][0]) {
+                    case 't':
+                        ptr.title = seg[2];//strncpy(ptr->title, seg[2], sizeof(ptr->title));
+                        break;
+                    case 'a':
+                        ptr.author = seg[2];//strncpy(ptr->author, seg[2], sizeof(ptr->author));
+                        break;
+                    case 'p':
+                        ptr.press = seg[2];//strncpy(ptr->press, seg[2], sizeof(ptr->press));
+                        break;
+                    default:
+                        if (strlen(seg[2]) > 0) {
+                            seg[1] += " ";//strcat(seg[1], " ");
+                            seg[1] += seg[2];//strncat(seg[1], seg[2], sizeof(seg[2]));
+                        }
+                        ptr.title = seg[1];//strncpy(ptr->title, seg[1], sizeof(ptr->title));
+                }
+                printBook(Books, max - 1, max, ptr2DisableBookTopBorder, 0, NULL);
+                break;
+            default:
+                printf("%s\n| %46s %-16s |\n", br, "unknown command", cmdtrim);
+                hasError = true;
+        }
+        if (hasError) {
+            printf("%s", br);
+            return exit(controls, 0);//break;
+        } else {
+            ptr2DisableBookTopBorder.value = true;
+            printf("|%64s |\n", "Press [ENTER]");
+            printf("%s", br);
+            //char c = getchar();
+            //if (c != '\n') {
+            //    while ((c = getchar()) != '\n' && c != EOF) {
+            //        continue;// discard extra characters
+            //    }
+            //}
+
+            stdout.append('<span data-type="input" class="has-blinking-cursor"></span>\n');
+            input.unbind().val("");
+            // Get one line (including whitespaces) and then run the program.
+            input.off("input propertychange").on("input propertychange", function () {
+                    // sync the value of the hidden input with the value of the current input.
+                    stdout.find("[data-type='input']").last().html(input.val());
+            });
+            // Only ENTER will terminate the current input.
+            // Whitespaces is allowed in the inputs and will not
+            // terminate the current input.
+            input.off('keydown').on('keydown', function (e) {
+                if ([13].includes(e.keyCode)) {
+                    // If input is ENTER
+                    // remove the blinking cursor for current input
+                    $(".has-blinking-cursor").removeClass("has-blinking-cursor");
+                    // Recursive calling that simulates the C loop.
+                    return run("#btn-run-1", 'result-1', console_1, program_1, controls, 'IsLoop|GetLine');
+                }
+            });
+        }
+})();
+    // }// The for loop ends here.
+    return 0;
+}
+
+function console_1(_console) {
+    const printf = window.console_1_printf;
+    printMenu(max, ptr2DisableBookTopBorder.value);
+    printf("command:");
+    _console.append('<span data-type="input"></span>\n');
+}
+            </script>
+
+            <div id="tips-1" class="p-3 mb-0 bg-dark text-white">
+                <div class="row">
+                    <div class="col col-12 col-md-2 pr-0">
+                        <div class="row">
+                            <div class="col col-1 col-md-12 col-lg-6 text-right text-md-left text-lg-right pl-md-4 pl-lg-3 pt-md-1 pt-lg-1">
+                                <span class="badge badge-info">Info</span>
+                            </div>
+                            <div class="col col-11 col-md-12 col-lg-6 pl-4 pl-lg-0 pt-md-1 pt-lg-1">
+                                <small>
+                                    <span>参考材料</span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-12 col-md-10">
+                        <ul class="d-block mt-1 mb-2 pl-0">
+                            <li class="d-block">
+                                <small class="d-block">
+                                    <i>Dynamic Memory Allocation in C using malloc(), calloc(), free() and realloc()</i>
+                                </small>
+                                <small class="d-block">
+                                    <a href="https://www.geeksforgeeks.org/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/" target="_blank">
+                                        <span>https://www.geeksforgeeks.org/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/</span>
+                                    </a>
+                                </small>
+                            </li>
+                            <li class="d-block">
+                                <small class="d-block">
+                                    <i>Proper way to empty a C-String</i>
+                                </small>
+                                <small class="d-block">
+                                    <a href="https://stackoverflow.com/questions/8107826/proper-way-to-empty-a-c-string" target="_blank">
+                                        <span>https://stackoverflow.com/questions/8107826/proper-way-to-empty-a-c-string</span>
+                                    </a>
+                                </small>
+                            </li>
+                            <li class="d-block">
+                                <small class="d-block">
+                                    <i>sscanf(3p) — Linux manual page</i>
+                                </small>
+                                <small class="d-block">
+                                    <a href="https://man7.org/linux/man-pages/man3/sscanf.3p.html" target="_blank">
+                                        <span>https://man7.org/linux/man-pages/man3/sscanf.3p.html</span>
+                                    </a>
+                                </small>
+                            </li>
+                            <li class="d-block">
+                                <small class="d-block">
+                                    <i>Is bool a native C type?</i>
+                                </small>
+                                <small class="d-block">
+                                    <a href="https://stackoverflow.com/questions/1608318/is-bool-a-native-c-type" target="_blank">
+                                        <span>https://stackoverflow.com/questions/1608318/is-bool-a-native-c-type</span>
+                                    </a>
+                                </small>
+                            </li>
+                            <li class="d-block">
+                                <small class="d-block">
+                                    <i>strstr(3) — Linux manual page</i>
+                                </small>
+                                <small class="d-block">
+                                    <a href="https://man7.org/linux/man-pages/man3/strstr.3.html" target="_blank">
+                                        <span>https://man7.org/linux/man-pages/man3/strstr.3.html</span>
+                                    </a>
+                                </small>
+                            </li>
+                            <li class="d-block">
+                                <small class="d-block">
+                                    <i>strcasestr(3)  [linux man page]</i>
+                                </small>
+                                <small class="d-block">
+                                    <a href="https://www.unix.com/man-page/linux/3/strcasestr/" target="_blank">
+                                        <span>https://www.unix.com/man-page/linux/3/strcasestr/</span>
+                                    </a>
+                                </small>
+                            </li>
+                            <li class="d-block">
+                                <small class="d-block">
+                                    <i>How do I use strcasestr()?</i>
+                                </small>
+                                <small class="d-block">
+                                    <a href="https://stackoverflow.com/questions/9935642/how-do-i-use-strcasestr" target="_blank">
+                                        <span>https://stackoverflow.com/questions/9935642/how-do-i-use-strcasestr</span>
+                                    </a>
+                                </small>
+                            </li>
+                            <li class="d-block">
+                                <small class="d-block">
+                                    <i>strchr(3) — Linux manual page</i>
+                                </small>
+                                <small class="d-block">
+                                    <a href="https://man7.org/linux/man-pages/man3/strchr.3.html" target="_blank">
+                                        <span>https://man7.org/linux/man-pages/man3/strchr.3.html</span>
+                                    </a>
+                                </small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
             <blockquote class="mt-3">
                 <footer class="blockquote-footer text-right pr-3 pr-lg-4">
-                    <span class="text-dark">2018年4月12日发布</span>
+                    <span class="text-dark">2023年3月24日发布</span>
                 </footer>
             </blockquote>
 
@@ -104,7 +1116,7 @@
                     <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-29.html')">
                         上一页
                     </div>
-                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('appendix.html')">
+                    <div class="btn btn-outline-primary w-50 br-0" onclick="loadPage('day-31.html')">
                         下一页
                     </div>
                 </div>
@@ -128,8 +1140,10 @@
 </footer>
 <script src="js/is_mobile.js"></script>
 <script src="js/page_init.js"></script>
-<script src="js/sprintf.js"></script>
 <script>
+    $(function () {
+        $('[data-toggle="popover"]').popover('show').unbind();
+    })
 </script>
 </body>
 </html>
