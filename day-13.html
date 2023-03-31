@@ -94,17 +94,17 @@
                     表达式语句是最简单的一种语句，在表达式的末尾加分号就形成了一个表达式语句。
                 </p>
             </div>
-            <pre class="prettyprint mb-0">
-    x = 10;
-    y = 20;
-    x *= 10;    
-    
-    1;
-    x + y; //这些语句也是合法的。语句被执行时，表达式求值，但不保存结果。
-    getchar(); //读取输入中的下一个字符，但不保存结果。
-    
-    x++;
-    printf("hello, world\n");
+            <pre class="prettyprint mb-0 pt-2 pl-4">
+x = 10;
+y = 20;
+x *= 10;    
+
+1;
+x + y; //这些语句也是合法的。语句被执行时，表达式求值，但不保存结果。
+getchar(); //读取输入中的下一个字符，但不保存结果。
+
+x++;
+printf("hello, world\n");
             </pre>
             <div class="card-body">
                 <p class="card-text">
@@ -112,7 +112,7 @@
                     表达式后面再加上分号，就成了表达式语句。
                 </p>
             </div>
-            <div class="bg-dark text-white pt-3 pl-3 pb-1">
+            <div class="bg-dark text-white py-3 pl-3">
                 <a name="variables">
                     <span class="badge badge-primary">变量</span>
                     <small>变量名本身是一个表达式，表达式的值是变量当前的值。</small>
@@ -127,11 +127,12 @@
                     <span class="badge badge-primary">函数调用</span>
                     <small>对于返回值不为<b>void</b>的函数，对它的正确调用也是表达式。表达式的值为函数的返回值。</small>
                 </a>
+                <div>
+                    <span class="badge badge-warning">Tips</span>
+                    <small>复合语句(<var>compound-statement</var>)也是语句的一种，其一般形式为：<b>{block-item-list}</b>。复合语句不是以分号结束，而是很多语句组成的。</small>
+                </div>
             </div>
-            <div class="bg-dark text-white pt-1 pl-3 pb-3">
-                <span class="badge badge-warning">Tips</span>
-                <small>复合语句(<var>compound-statement</var>)也是语句的一种，其一般形式为：<b>{block-item-list}</b>。复合语句不是以分号结束，而是很多语句组成的。</small>
-            </div>
+
             <div class="card-footer p-0">
                 <div class="btn-group w-100">
                     <div class="btn btn-outline-primary w-50" onclick="loadPage('day-12-3.html')">

@@ -41,33 +41,66 @@
         Day 5 <small class="ml-3 text-primary">C 语言注释(comment)</small>
     </h2>
     <div class="card">
+        <div class="card-body">
+            <p class="card-text">
+                <strong>/* ... */</strong>
+                <span>用于给代码加文字注释，被注释的文本不会被编译。</span>
+            </p>
+        </div>
         <div class="card-block">
-            <pre class="prettyprint">
-    #include &lt;stdio.h&gt;
+            <pre class="prettyprint mb-0 pt-2 pl-4">
+#include &lt;stdio.h&gt;
 
-    int main()
-    {
-        /* 若要使用 printf 函数，必须引入 stdio.h 库文件 */
-        printf("Hello, World! \n");
-        return 0;
-    }
+int main()
+{
+    /* 若要使用 printf 函数，必须引入 stdio.h 库文件 */
+    printf("Hello, World! \n");
+    return 0;
+}
             </pre>
-            <p class="pl-3"><strong>/* ... */</strong> 用于注释代码，其内容不会被编译。</p>
         </div>
         <div class="card-block">
             <div class="bg-dark text-white pt-3 pl-3">
                 <span class="badge badge-warning">Tips</span>
                 <small><b>stdio.h</b> 中的 <b>stdio</b> 是 <em>standard input and output</em> 的缩写，<b>h</b> 是 <em>header file</em> 的缩写。 <var>- yhn</var></small>
             </div>
-            <div class="bg-dark text-white pt-1 pl-3">
+            <div class="bg-dark text-white pt-1 pl-3 pb-3">
                 <span class="badge badge-warning">Tips</span>
                 <small>给源代码加注释是一个良好的习惯，有助于代码的维护和修改。 <var>- yhn</var></small>
             </div>
+        </div>
+
+        <div class="card-body">
+            <p class="card-text">
+                <strong>// ...</strong>
+                <span>也可用于给代码加注释，被注释的文本不会被编译。</span>
+            </p>
+        </div>
+
+        <div class="card-block">
+            <pre class="prettyprint mb-0 pt-2 pl-4">
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    // 若要使用 printf 函数，必须引入 stdio.h 库文件
+    printf("Hello, World! \n");
+    return 0;
+}
+            </pre>
+        </div>
+        <div class="card-block">
+            <div class="bg-dark text-white pt-3 pl-3">
+                <span class="badge badge-warning">Tips</span>
+                <small><b>//</b> 是 C++ 风格的注释，也可用于 C 语言。 <var>- yhn</var></small>
+            </div>
             <div class="bg-dark text-white pt-1 pl-3 pb-3">
                 <span class="badge badge-warning">Tips</span>
-                <small><b>//</b> 是 C++ 风格的注释，也可用于 C 语言。<b>//</b> 只能注释单行。 <var>- yhn</var></small>
+                <small><b>//</b> 只能注释单行。 <var>- yhn</var></small>
             </div>
         </div>
+
+
         <div class="card-footer p-0">
             <div class="btn-group w-100">
                 <div class="btn btn-outline-primary w-50" onclick="loadPage('day-4.html')">
