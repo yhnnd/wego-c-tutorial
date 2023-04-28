@@ -44,18 +44,284 @@
         <div class="card-block">
             <div class="card-body py-3">
                 <h4 class="card-text">
+                    <span>数组的缺陷</span>
+                </h4>
+                <p class="card-text">
+                    <span class="text-primary" onclick="loadPage('day-30.html')">上文</span><span>中我们使用数组存储一组数据,</span>
+                    <span>然而数组有很大的缺点:</span>
+                    <span>在插入和删除数据时,</span>
+                    <span>时间复杂度和空间复杂度均为常数级。</span>
+                </p>
+                <p class="card-text">
+                    <span>插入数据时, 该数据后面的所有数据都要向后移动, 这需要复制很大一段内存;</span>
+                </p>
+                <p class="card-text">
+                    如图所示, 我们要将数据 <code>H</code> 插入到数组中 <code>B</code> 和 <code>C</code> 之间:
+                </p>
+            </div>
+            <pre class="mx-auto mb-0 px-4 py-3" style="line-height: 1;width: 600px;overflow: visible;">
+    +-----------------+
+0   |        A        |
+    +-----------------+
+1   |        B        |    +-----------------+
+    +-----------------+ &lt;- |        H        |
+2   |        C        |    +-----------------+
+    +-----------------+
+3   |        D        |
+    +-----------------+
+4   |        E        |
+    +-----------------+
+5   |        F        |
+    +-----------------+
+6   |        G        |
+    +-----------------+
+            </pre>
+            <div class="figure-caption text-center">diagram 1-1</div>
+            <div class="card-body py-3">
+                <p class="card-text">
+                    常规方式是, 先在数组结束位置分配新的内存空间:
+                </p>
+            </div>
+            <pre class="mx-auto mb-0 px-4 py-3" style="line-height: 1;width: 600px;overflow: visible;">
+    +-----------------+
+0   |        A        |
+    +-----------------+
+1   |        B        |    +-----------------+
+    +-----------------+ &lt;- |        H        |
+2   |        C        |    +-----------------+
+    +-----------------+
+3   |        D        |
+    +-----------------+
+4   |        E        |
+    +-----------------+
+5   |        F        |
+    +-----------------+
+6   |        G        |
+    +-----------------+
+7   |                 |
+    +-----------------+
+            </pre>
+            <div class="figure-caption text-center">diagram 1-2</div>
+            <div class="card-body py-3">
+                <p class="card-text">
+                    再将插入位置之后的数组元素&nbsp;(从<code>C</code>到<code>G</code>)&nbsp;向后移动一位&nbsp;(一个数组元素的大小):
+                </p>
+            </div>
+            <pre class="mx-auto mb-0 px-4 py-3" style="line-height: 1;width: 600px;overflow: visible;">
+    +-----------------+
+0   |        A        |
+    +-----------------+
+1   |        B        |    +-----------------+
+    +-----------------+ &lt;- |        H        |
+2   |        C&darr;       |    +-----------------+
+    +-----------------+
+3   |        D&darr;       |
+    +-----------------+
+4   |        E&darr;       |
+    +-----------------+
+5   |        F&darr;       |
+    +-----------------+
+6   |        G&darr;       |
+    +-----------------+
+7   |                 |
+    +-----------------+
+            </pre>
+            <div class="figure-caption text-center">diagram 1-3</div>
+            <div class="card-body py-3">
+                <p class="card-text">
+                    最后将要插入的数据<code>H</code>写入<code>B</code>和<code>C</code>之间的内存中。
+                </p>
+            </div>
+            <pre class="mx-auto mb-0 px-4 py-3" style="line-height: 1;width: 600px;overflow: visible;">
+    +-----------------+
+0   |        A        |
+    +-----------------+
+1   |        B        |
+    +-----------------+    +-----------------+
+2   |                 | &lt;- |        H        |
+    +-----------------+    +-----------------+
+3   |        C        |
+    +-----------------+
+4   |        D        |
+    +-----------------+
+5   |        E        |
+    +-----------------+
+6   |        F        |
+    +-----------------+
+7   |        G        |
+    +-----------------+
+            </pre>
+            <div class="figure-caption text-center">diagram 1-4</div>
+            <div class="card-body py-3">
+                <p class="card-text">
+                    我们可以看出, 向数组插入数据非常不安全且低效, 因为插入操作需要在数组结束的位置分配内存, 但我们不能保证该区域的内存是可用的,
+                    <br>
+                    如果内存分配失败, 唯一的解决办法就是将整个数组移动到新的内存空间中, 这十分低效;
+                    <br>
+                    即使新内存分配成功, 在插入数据之前需要将插入点后面的所有数据向后移动一位, 这种方法的时间复杂度仍然是常数级的。
+                </p>
+                <p class="card-text">
+                    <span>同理, 删除数据时, 被删除数据后面的所有数据都要向前移动, 这也需要复制很大一段内存, 这种方法的时间复杂度和插入一样, 是常数级的。</span>
+                </p>
+                <p class="card-text">
+                    在此情况下, 我们有必要设计一种新的数据结构, 更有效率地实现插入和删除。
+                    <br>
+                    下面我们介绍一种解决方案: 链表。
+                </p>
+            </div>
+            <div class="card-body py-3">
+                <h4 class="card-text">
                     <span>链表</span>
                 </h4>
                 <p class="card-text">
-                    <span class="badge badge-secondary">
-                        <i class="fa fa-exclamation-circle text-warning"></i>
-                        <span>编写未完成</span>
-                    </span>
+                    链表是一类数据结构的统称, 它是一个概念, 在 <b>C</b> 语言中, 链表不是一种基本数据类型。
+                    <br>
+                    链表的基本理念是: 链表中的每一个元素的物理存储位置是离散的而不是连续的, 这样当我们对链表中任一位置执行插入、修改、删除的时候就不用像对数组那样需要对其后的数据进行内存操作。
                 </p>
             </div>
-            <pre class="prettyprint mb-0">
-    #include &lt;stdio.h&gt;
-
+            <pre class="mx-auto mb-0 px-4 py-3" style="line-height: 1;width: 600px;overflow: visible;">
+    +-----------------+
+    |        A        | ──┐
+    +-----------------+   │
+ ┌────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        B        | ──┐
+    +-----------------+   │    +-----------------+
+ ┌────────────────────────┘ &lt;- |        H        |
+ │  +-----------------+        +-----------------+
+ └&rarr; |        C        | ──┐
+    +-----------------+   │
+ ┌────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        D        | ──┐
+    +-----------------+   │
+ ┌────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        E        | ──┐
+    +-----------------+   │
+ ┌────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        F        | ──┐
+    +-----------------+   │
+ ┌────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        G        |
+    +-----------------+
+            </pre>
+            <div class="figure-caption text-center">diagram 2-1</div>
+            <pre class="mx-auto mb-0 px-4 py-3" style="line-height: 1;width: 600px;overflow: visible;">
+    +-----------------+
+    |        A        | ──┐
+    +-----------------+   │
+ ┌────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        B        | ──┐
+    +-----------------+   │    +-----------------+
+                          └──&rarr; |        H        | ──┐
+                               +-----------------+   │
+ ┌───────────────────────────────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        C        | ──┐
+    +-----------------+   │
+ ┌────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        D        | ──┐
+    +-----------------+   │
+ ┌────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        E        | ──┐
+    +-----------------+   │
+ ┌────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        F        | ──┐
+    +-----------------+   │
+ ┌────────────────────────┘
+ │  +-----------------+
+ └&rarr; |        G        |
+    +-----------------+
+            </pre>
+            <div class="figure-caption text-center">diagram 2-2</div>
+            <div class="card-body py-3">
+                <p class="card-text">
+                    我们可以用 <b>C</b> 语言的基本数据类型 "<b>指针</b>" 来实现链表。
+                </p>
+            </div>
+            <div class="card-body py-3">
+                <p class="card-text">
+                    首先我们定义一个结构体数据类型, 用于描述链表中每个元素&nbsp;(被称为"结点")&nbsp;所存储的数据。
+                </p>
+            </div>
+            <pre class="prettyprint mb-0 pl-4">
+struct book {
+    char title[64];
+    char author[64];
+    char press[64];
+};          </pre>
+            <div class="card-body py-3">
+                <p class="card-text">
+                    然后我们定义一个结构体数据类型, 用于描述结点的数据结构。
+                </p>
+            </div>
+            <pre class="prettyprint mb-0 pl-4">
+struct node {
+    struct book Book;
+    struct node * next;
+}           </pre>
+            <div class="card-body py-3">
+                <p class="card-text">
+                    其中 <code>Book</code> 即是结点所存储的数据, 其数据类型为 <code>struct book</code>。
+                    <br>
+                    结点中的 <code>next</code> 指针用于存储该结点的下一个结点在内存中的位置。
+                </p>
+                <p class="card-text">
+                    我们设计一个函数 <var>initLinkedList</var>, 用于初始化一个链表。该函数返回链表的头结点。
+                </p>
+            </div>
+            <pre class="prettyprint mb-0 pl-4">
+#include &lt;stdlib.h&gt;
+struct node * initLinkedList() {
+    struct node * head = NULL;
+    head = (struct node *) malloc(sizeof(struct node));
+    return head;
+}           </pre>
+            <div class="card-body py-3">
+                <p class="card-text">
+                    然后, 我们设计一个函数 <var>getLinkedListNode</var>, 用于访问链表&nbsp;(头结点为<code>head</code>)&nbsp;中的第 <code>n</code> 个结点。
+                </p>
+            </div>
+            <pre class="prettyprint mb-0 pl-4">
+struct node * getLinkedListNode(const struct node * head, const int n) {
+    int i = 0;
+    struct node * ptr = head;
+    while (i &lt; n && ptr != NULL) {
+        ptr = ptr-&gt;next;
+    }
+    return ptr;
+}           </pre>
+            <div class="card-body py-3">
+                <p class="card-text">
+                    现在, 我们就可以设计函数 <var>insertLinkedListNode</var>, 用于向链表&nbsp;(头结点为<code>head</code>)&nbsp;中插入新结点。
+                </p>
+            </div>
+            <pre class="prettyprint mb-0 pl-4">
+struct node * insertLinkedListNode(const struct node * head, const int n, const struct node * ptr) {
+    struct node * prev = head;
+    struct node * next = prev->next;
+    if (n == 0) {
+        struct node * temp = (struct node *) malloc(sizeof(struct node));
+        memcpy(temp, head, sizeof(struct node));
+        memcpy(head, ptr, sizeof(struct node));
+        memcpy(ptr, temp, sizeof(struct node));
+        free(temp);
+    } else if (n > 1) {
+        prev = getLinkedListNode(head, n - 1);
+    }
+    prev->next = ptr;
+    ptr->next = next;
+    return ptr;
+}           </pre>
+            <pre class="prettyprint mb-0 pl-4">
+#include &lt;stdio.h&gt;
             </pre>
 
             <div class="alert alert-secondary mb-0 border-top-0 border-secondary rounded-0">
@@ -93,9 +359,18 @@
                 </div>
             </div>
 
+            <div class="card-body pt-3 pb-0">
+                <p class="card-text">
+                    <span class="badge badge-secondary">
+                        <i class="fa fa-exclamation-circle text-warning"></i>
+                        <span>编写未完成</span>
+                    </span>
+                </p>
+            </div>
+
             <blockquote class="mt-3">
                 <footer class="blockquote-footer text-right pr-3 pr-lg-4">
-                    <span class="text-dark">2018年4月12日发布</span>
+                    <span class="text-dark">2018年4月12日发布, 2023年4月29日更新</span>
                 </footer>
             </blockquote>
 
